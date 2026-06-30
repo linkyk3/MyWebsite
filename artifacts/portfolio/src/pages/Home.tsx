@@ -102,16 +102,16 @@ export default function Home() {
       <div
         className="flex-grow grid bg-foreground"
         style={{
-          gridTemplateColumns: '2fr 1fr',
-          gridTemplateRows: '1fr 42% 1fr',
+          gridTemplateColumns: 'repeat(10, 1fr)',
+          gridTemplateRows: '1fr 1fr 44%',
           gap: '1px',
         }}
         data-testid="col-right"
       >
-        {/* PROJECTS — large top-left */}
+        {/* PROJECTS — top-left, 70% */}
         <Link
           href="/projects"
-          className="bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors"
+          className="col-span-7 bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors"
           data-testid="zone-projects"
         >
           <div className="absolute top-0 left-0 w-full h-[2px] bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
@@ -133,10 +133,10 @@ export default function Home() {
           </div>
         </Link>
 
-        {/* PHOTOGRAPHY — top-right */}
+        {/* PHOTOGRAPHY — top-right, 30% */}
         <Link
           href="/creations"
-          className="bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors border-l border-foreground"
+          className="col-span-3 bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors"
           data-testid="zone-photography"
         >
           <div className="absolute top-0 left-0 w-full h-[2px] bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
@@ -156,26 +156,10 @@ export default function Home() {
           </div>
         </Link>
 
-        {/* SVG ANIMATION — full width middle row */}
-        <div
-          className="bg-background col-span-2 relative flex items-center justify-center overflow-hidden group"
-          data-testid="zone-svg"
-        >
-          <span
-            className="absolute top-4 left-5 uppercase text-muted-foreground z-10 select-none"
-            style={{ fontFamily: "'ABC ROM'", fontWeight: 300, fontSize: '0.58rem', letterSpacing: '0.14em' }}
-          >
-            BE.INFRA — Diffused Urban Condition
-          </span>
-          <div className="absolute inset-0 flex items-center justify-center p-4 opacity-80 group-hover:opacity-100 transition-opacity">
-            <BelgianInfraSVG />
-          </div>
-        </div>
-
-        {/* MUSIC — bottom-left */}
+        {/* MUSIC — middle-left, 40% */}
         <Link
           href="/creations"
-          className="bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors"
+          className="col-span-4 bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors"
           data-testid="zone-music"
         >
           <div className="absolute top-0 left-0 w-full h-[2px] bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
@@ -195,10 +179,10 @@ export default function Home() {
           </div>
         </Link>
 
-        {/* BLOG — bottom-right */}
+        {/* BLOG — middle-right, 60% */}
         <Link
           href="/creations"
-          className="bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors border-l border-foreground"
+          className="col-span-6 bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors"
           data-testid="zone-blog"
         >
           <div className="absolute top-0 left-0 w-full h-[2px] bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
@@ -217,6 +201,22 @@ export default function Home() {
             Notes
           </div>
         </Link>
+
+        {/* SVG ANIMATION — full-width bottom row */}
+        <div
+          className="col-span-10 bg-background relative flex items-center justify-center overflow-hidden group"
+          data-testid="zone-svg"
+        >
+          <span
+            className="absolute top-4 left-5 uppercase text-muted-foreground z-10 select-none"
+            style={{ fontFamily: "'ABC ROM'", fontWeight: 300, fontSize: '0.58rem', letterSpacing: '0.14em' }}
+          >
+            BE.INFRA — Diffused Urban Condition
+          </span>
+          <div className="absolute inset-0 flex items-center justify-center p-4 opacity-80 group-hover:opacity-100 transition-opacity">
+            <BelgianInfraSVG />
+          </div>
+        </div>
       </div>
     </div>
   );
