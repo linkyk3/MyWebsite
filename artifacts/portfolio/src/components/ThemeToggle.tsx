@@ -27,7 +27,7 @@ export function ThemeToggle() {
         right: '24px',
         width: '28px',
         height: '28px',
-        border: '1px solid currentColor',
+        border: 'none',
         background: 'transparent',
         cursor: 'pointer',
         display: 'flex',
