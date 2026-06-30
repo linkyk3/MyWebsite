@@ -5,6 +5,9 @@ export function GlobalNav() {
   const [isHovered, setIsHovered] = useState(false);
   const [location] = useLocation();
 
+  // Home page handles its own navigation inline
+  if (location === '/') return null;
+
   const links = [
     { href: '/', label: 'HOME' },
     { href: '/cv', label: 'CV' },

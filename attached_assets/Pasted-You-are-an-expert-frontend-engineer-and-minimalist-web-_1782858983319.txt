@@ -1,0 +1,21 @@
+You are an expert frontend engineer and minimalist web designer specializing in brutalist, blueprint-inspired interactive portfolios. Completely refactor the current layout (shown in image_907580.png) to identically adopt the dark layout structure, exact line thickness, page proportions, and text alignments of the dark wireframe sample layout (shown in image_907579.png).
+
+### 1. COLOR PALETTE & GLOBAL TYPOGRAPHY
+- **Theme:** Change the entire site from light mode to an absolute dark theme. Set the background to pure solid black (`#000000`) and all technical layout line borders and typography to pure solid white (`#FFFFFF`).
+- **Typography Styles:** All body text, section labels, links, and footnotes must use 'ABC ROM Book' or 'ABC ROM Light'. Maintain crisp, medium-to-light tracking (letter-spacing) on micro-text to look perfectly integrated into a technical architectural diagram.
+
+### 2. COLUMN RATIOS & TEXT BLOCK PLACEMENT
+Reconstruct the master container to use a precise 2-column layout running edge-to-edge across the screen:
+- **Left Column (2/5 Viewport Width):** - Place your identity header "Seppe Goossens" at the absolute top left, immediately followed by the micro-navigation bar ("Projects", "Music", "Visualizations", "Blog", "About").
+  - Position your bio text block exactly where the main intro paragraph sits in the top left of image_907579.png.
+  - Position the "Whereabouts / Whatabouts" contact block halfway down on the left, matching the layout in image_907579.png.
+  - Push the "Contact" email section and copyright metadata line down to the absolute bottom margin of the left panel.
+- **Right Column (3/5 Viewport Width):** This region functions as an open canvas window dedicated entirely to your portfolio work and diagrams.
+
+### 3. MAIN CANVAS HORIZON LINES & WORK BLOCKS
+- **Full-Width Horizon Dividers:** Extend the horizontal line immediately below your top navigation row completely from the left margin to the right margin across 100% of the viewport width. Do the exact same for the thin horizon line running along the absolute bottom margin of the page.
+- **The Central Wireframe Perspective:** In the 3/5 right column canvas, replace the abstract corridor outline from image_907579.png with your modular infrastructure/spatial layout.
+- **The 4 Category Tiles & SVG Art:** Seamlessly map your 4 main navigation categories ("Selected Works", "Music", "Visualizations", "Blog") and your dynamic Belgian infrastructure SVG trace animation directly into this white-on-black wireframe grid. Treat the category titles as integrated geometric text elements within the spatial layout lines, allowing users to interactively click sections of the diagram to open up your portfolios.
+
+### 4. BORDER SPECIFICATIONS
+- Set all layout bounding boxes, column dividers, and interactive vector strokes to a hair-thin weight of exactly `1px solid #FFFFFF` (or `rgba(255, 255, 255, 0.4)` for subtle structural secondary guidelines), completely matching the sharp, clean structural density of image_907579.png.
