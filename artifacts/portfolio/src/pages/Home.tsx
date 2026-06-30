@@ -1,5 +1,5 @@
 import { Link } from 'wouter';
-import BelgianInfraSVG from '@/components/BelgianInfraSVG';
+import UrbanHistoryMap from '@/components/UrbanHistoryMap';
 
 export default function Home() {
   return (
@@ -156,20 +156,12 @@ export default function Home() {
           </div>
         </Link>
 
-        {/* SVG ANIMATION — full width middle row */}
+        {/* URBAN HISTORY MAP — full width middle row */}
         <div
-          className="bg-background col-span-2 relative flex items-center justify-center overflow-hidden group"
-          data-testid="zone-svg"
+          className="col-span-2 relative overflow-hidden"
+          data-testid="zone-map"
         >
-          <span
-            className="absolute top-4 left-5 uppercase text-muted-foreground z-10 select-none"
-            style={{ fontFamily: "'ABC ROM'", fontWeight: 300, fontSize: '0.58rem', letterSpacing: '0.14em' }}
-          >
-            BE.INFRA — Diffused Urban Condition
-          </span>
-          <div className="absolute inset-0 flex items-center justify-center p-4 opacity-80 group-hover:opacity-100 transition-opacity">
-            <BelgianInfraSVG />
-          </div>
+          <UrbanHistoryMap />
         </div>
 
         {/* MUSIC — bottom-left */}
