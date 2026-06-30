@@ -115,20 +115,12 @@ export default function Home() {
           data-testid="zone-projects"
         >
           <div className="absolute top-0 left-0 w-full h-[2px] bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-          <span
-            className="uppercase text-muted-foreground"
-            style={{ fontFamily: "'ABC ROM'", fontWeight: 350, fontSize: '0.6rem', letterSpacing: '0.14em' }}
-          >
-            Projects
-          </span>
           <div>
             <div
               className="text-foreground group-hover:text-accent transition-colors tracking-tight"
               style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.6rem, 3vw, 2.8rem)', lineHeight: 1 }}
             >
-              Selected
-              <br />
-              Works
+              Selected Works
             </div>
           </div>
         </Link>
@@ -140,19 +132,11 @@ export default function Home() {
           data-testid="zone-blog-top"
         >
           <div className="absolute top-0 left-0 w-full h-[2px] bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-          <span
-            className="uppercase text-muted-foreground"
-            style={{ fontFamily: "'ABC ROM'", fontWeight: 350, fontSize: '0.6rem', letterSpacing: '0.14em' }}
-          >
-            Blog
-          </span>
           <div
             className="text-foreground group-hover:text-accent transition-colors tracking-tight"
             style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.1rem, 2vw, 1.6rem)', lineHeight: 1.05 }}
           >
-            Writing &amp;
-            <br />
-            Notes
+            Blog
           </div>
         </Link>
 
@@ -163,19 +147,11 @@ export default function Home() {
           data-testid="zone-music"
         >
           <div className="absolute top-0 left-0 w-full h-[2px] bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-          <span
-            className="uppercase text-muted-foreground"
-            style={{ fontFamily: "'ABC ROM'", fontWeight: 350, fontSize: '0.6rem', letterSpacing: '0.14em' }}
-          >
-            Music
-          </span>
           <div
             className="text-foreground group-hover:text-accent transition-colors tracking-tight"
             style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.1rem, 2vw, 1.6rem)', lineHeight: 1.05 }}
           >
-            Recordings &amp;
-            <br />
-            Playlists
+            Music
           </div>
         </Link>
 
@@ -186,19 +162,11 @@ export default function Home() {
           data-testid="zone-photography"
         >
           <div className="absolute top-0 left-0 w-full h-[2px] bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-          <span
-            className="uppercase text-muted-foreground"
-            style={{ fontFamily: "'ABC ROM'", fontWeight: 350, fontSize: '0.6rem', letterSpacing: '0.14em' }}
-          >
-            Photography
-          </span>
           <div
             className="text-foreground group-hover:text-accent transition-colors tracking-tight"
             style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.1rem, 2vw, 1.6rem)', lineHeight: 1.05 }}
           >
-            Images &amp;
-            <br />
-            Field Notes
+            Visualizations
           </div>
         </Link>
 
