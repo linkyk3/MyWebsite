@@ -9,6 +9,7 @@ import CV from '@/pages/CV';
 import Projects from '@/pages/Projects';
 import Creations from '@/pages/Creations';
 import { GlobalNav } from '@/components/GlobalNav';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ function App() {
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
           <GlobalNav />
           <Router />
+          <ThemeToggle />
         </WouterRouter>
         <Toaster />
       </TooltipProvider>
