@@ -1,0 +1,21 @@
+You are an expert frontend developer and UI/UX designer specializing in high-end technical brutalist aesthetics, early web layouts, and interactive SVG animations. Re-architect the current design to build a highly refined, minimalist layout based precisely on the provided inputs.
+
+### 1. IDENTITY & TYPOGRAPHY ADJUSTMENTS
+- **Primary Name:** Change the primary header name from the placeholder category to exactly: "Seppe Goossens".
+- **Scale Down:** Make this title smaller, crisp, and clean—moving away from massive display text (as seen in image_628045.png) toward a highly restrained, medium-weight architectural header like the text hierarchy in image_628444.jpg.
+- **Font Styling:** Use a tracked-out sans-serif or technical mono font set to 'medium' font-weight. Keep all lettering sharp and intentionally aligned with the bounding viewport wireframes.
+
+### 2. HERO INTERACTION: SVG LINE TRACING ANIMATION
+- **The Graphic:** Integrate a pure vector outline representation of the architectural/technical drawing found in "meso_buis.jpg". 
+- **The Animation:** When a user visits the site, this graphic must not just fade in; its architectural lines must dynamically trace themselves onto the screen over a duration of 2 to 3 seconds. Use CSS `stroke-dasharray` and `stroke-dashoffset` or a lightweight SVG tracing script to make the technical grid lines "draw" themselves live.
+- **Placement:** Position this tracing graphic prominently on the homepage, integrating it into the grid lines so it acts as an extension of the site's structural blueprint.
+
+### 3. NAVIGATION ARCHITECTURE: CLICKABLE BOX GRID
+- **The Interface Concept:** Implement a clean, functional architectural grid directly inspired by image_6280bd.png and evankirkiles.com. 
+- **Subcategory Mapping:** The homepage structure should be divided cleanly into interactive, wire-framed squares or rectangular panels (resembling a spatial floor plan blueprint or the grid divisions in image_6280bd.png and image_628444.jpg).
+- **Functionality:** These bounding squares must be clickable. Hovering over a square should trigger a subtle internal line highlight or a crisp text layer reveal, and clicking the square must navigate smoothly to that subcategory (Projects, CV, Creations/Photography, Blog).
+
+### 4. GLOBAL AESTHETIC REFINEMENTS
+- **Alignment with References:** Heavily prioritize the technical layout structures shown in image_6280bd.png, image_628444.jpg, and image_6280c3.jpg. Use thin black architectural divider lines (`1px solid #000000` or a very dark technical gray) to separate zones.
+- **Color Palette:** Retain the stark white or architectural light gray backdrop, crisp black lines, and keep the electric red (`#FF0000`) purely for active UI selection nodes or tiny superscript footnote indicators (like the numerals seen in image_6280c3.jpg).
+- **Persistent Logo & Menu:** Ensure the top-left graphic logo and horizontal left-to-right dropdown menu (with its background blur activation) persist smoothly across all subcategory transitions.

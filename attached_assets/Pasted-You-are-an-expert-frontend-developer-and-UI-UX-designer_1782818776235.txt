@@ -1,0 +1,34 @@
+You are an expert frontend developer and UI/UX designer specializing in high-end brutalist, early web, and Y2K aesthetic revivals. Build a fully functional, highly interactive, modern portfolio website for a student double-majoring in Urban Planning and Industrial Engineering.
+
+### 1. CONCEPT & AESTHETIC PRINCIPLES
+- **Core Aesthetic:** A "Neo-Y2K Flash Revival." It must capture the structural frames, experimental layouts, and desktop-interface nostalgia of early 2000s Flash websites (inspired by classic sites like thinkmad-2002 and tom-nulens-2002), but execute it with sleek, ultra-modern CSS capabilities like backdrop-filters and high-end blur layers.
+- **Color Palette:** High-contrast Monochrome. Pure white, stark blacks, deep grays, and EXACTLY ONE vivid accent color: Electric Red (`#FF0000`). Use the red sparingly for hover states, active menu markers, typing carets, or specific text links.
+- **Typography:** Minimalist Y2K style. Use crisp, geometric sans-serifs or monospace web fonts (e.g., 'Courier New', 'JetBrains Mono', 'Space Grotesk', or standard system-ui sans-serif tracked out heavily). Keep font weights light to medium, utilizing massive title scales juxtaposed with tiny, neat footnotes (similar to the layout in "image_580135.jpg").
+
+### 2. GLOBAL NAVIGATION & HEADLESS MENU (Appears on every page)
+- **Top-Left Graphic Logo:** Design a clean, geometric, abstract black-and-white graphic logo (using pure CSS shapes or an inline SVG) positioned in the absolute top-left corner.
+- **Hover/Blur Interaction:** When a user hovers over this logo, it must trigger a site-wide background blur effect (`backdrop-filter: blur(10px)` applied to the main content container behind it).
+- **Horizontal Dropdown Menu:** Simultaneously, upon hovering over the logo, a horizontal navigation dropdown menu must animate smoothly from left to right across the top of the screen. This menu links to all the major site sections (Home, CV, Projects, Creations).
+
+### 3. HOMEPAGE SPECIFICS (Landing State)
+- **Typewriter Effect:** The homepage should feature a stark, clean, minimalistic layout where the hero text ("Urban Planning // Industrial Engineering // Portfolio") dynamically types itself out on screen using a smooth JavaScript or CSS animation, accompanied by a blinking electric red typing caret (`|`).
+- **Layout Minimalisms:** Aside from the typing text and the global logo, the homepage should remain incredibly spacious and bare, mimicking the sleek structural spacing of "image_58014f.jpg" and "image_58041e.png".
+
+### 4. VISUAL REFERENCES & INSPIRATIONS (Incorporate these concepts)
+- **"image_580135.jpg" & "image_58014f.jpg":** Emulate the large, stark, high-contrast typography, massive headlines, and heavily blurred imagery or colored backdrops bleeding through text blocks.
+- **"0a61e102e95515a205e8a282cc39bd76.jpg" & "image_58041e.png":** Draw inspiration from the retro-operating-system/browser frames, clean structured boxes, rigid grid borders, and minimal punctuation/iconography usage.
+- **"82c5d660b16acaa67f7fead569bd4ee5.jpg" & "40399af9ef1bae769ffe7516da80ea3c.jpg":** Utilize floating panels, abstract color focal points, or modular interface blocks that make the site feel like an interactive Flash desktop or application.
+- **"0269cc49e6a5fe28c73c4c51f7edc484.jpg" & "c29de08c7f8ba15ec0f2e2c24c5ccc3f.jpg":** Focus on precise line alignments, numbered index lists, and unconventional text placement (e.g., numbers acting as footnotes or superscript design cues like in "0269cc49e6a5fe28c73c4c51f7edc484.jpg").
+
+### 5. REQUIRED CONTENT SECTIONS (Accessible via the global menu)
+- **[CV / Resume]:** A beautifully structured timeline or grid detailing Education, Skills (e.g., CAD, GIS, optimization, design), and Experience. Use the superscript numbering aesthetic from "0269cc49e6a5fe28c73c4c51f7edc484.jpg".
+- **[Projects]:** Split into two distinct categories:
+  1. *Urban Planning:* Interactive card matrices or lists detailing spatial designs, transit mappings, or zoning concepts.
+  2. *Industrial Engineering:* Supply chain mockups, ergonomics, or product design workflows.
+- **[Personal / Creations]:** 
+  - *Photography:* A sleek, minimalist photo grid utilizing a lightbox mechanism. The images should appear blurred until hovered or clicked, revealing their sharp forms.
+  - *Blog:* A column-based text layout mimicking early index web directories (similar to the structure in "image_58014f.jpg") for short thought-pieces on design.
+
+### 6. INTERACTIVE & UX DETAILS
+- **Hover Effects:** Links and navigation items should transition sharply into the red accent color.
+- **Performance:** Ensure animations are purely CSS-driven or lightweight vanilla JS for extreme speed—capturing the instantaneous feel of lightweight early web vector assets.
