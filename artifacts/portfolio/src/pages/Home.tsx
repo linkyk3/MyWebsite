@@ -133,33 +133,33 @@ export default function Home() {
           </div>
         </Link>
 
-        {/* PHOTOGRAPHY — top-right, 30% */}
+        {/* BLOG — top-right, 30% */}
         <Link
           href="/creations"
           className="col-span-3 bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors"
-          data-testid="zone-photography"
+          data-testid="zone-blog-top"
         >
           <div className="absolute top-0 left-0 w-full h-[2px] bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
           <span
             className="uppercase text-muted-foreground"
             style={{ fontFamily: "'ABC ROM'", fontWeight: 350, fontSize: '0.6rem', letterSpacing: '0.14em' }}
           >
-            Photography
+            Blog
           </span>
           <div
             className="text-foreground group-hover:text-accent transition-colors tracking-tight"
             style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.1rem, 2vw, 1.6rem)', lineHeight: 1.05 }}
           >
-            Images &amp;
+            Writing &amp;
             <br />
-            Field Notes
+            Notes
           </div>
         </Link>
 
-        {/* MUSIC — middle-left, 40% */}
+        {/* MUSIC — middle-left, 50% */}
         <Link
           href="/creations"
-          className="col-span-4 bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors"
+          className="col-span-5 bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors"
           data-testid="zone-music"
         >
           <div className="absolute top-0 left-0 w-full h-[2px] bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
@@ -179,26 +179,26 @@ export default function Home() {
           </div>
         </Link>
 
-        {/* BLOG — middle-right, 60% */}
+        {/* PHOTOGRAPHY — middle-right, 50% */}
         <Link
           href="/creations"
-          className="col-span-6 bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors"
-          data-testid="zone-blog"
+          className="col-span-5 bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors"
+          data-testid="zone-photography"
         >
           <div className="absolute top-0 left-0 w-full h-[2px] bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
           <span
             className="uppercase text-muted-foreground"
             style={{ fontFamily: "'ABC ROM'", fontWeight: 350, fontSize: '0.6rem', letterSpacing: '0.14em' }}
           >
-            Blog
+            Photography
           </span>
           <div
             className="text-foreground group-hover:text-accent transition-colors tracking-tight"
             style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.1rem, 2vw, 1.6rem)', lineHeight: 1.05 }}
           >
-            Writing &amp;
+            Images &amp;
             <br />
-            Notes
+            Field Notes
           </div>
         </Link>
 
