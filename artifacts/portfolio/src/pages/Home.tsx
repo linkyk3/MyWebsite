@@ -1,5 +1,5 @@
 import { Link } from 'wouter';
-import AbstractLines from '@/components/AbstractLines';
+import BelgianInfraSVG from '@/components/BelgianInfraSVG';
 
 export default function Home() {
   return (
@@ -102,13 +102,13 @@ export default function Home() {
       <div
         className="flex-grow grid bg-foreground"
         style={{
-          gridTemplateColumns: '1fr 1fr',
-          gridTemplateRows: '1fr 1fr 28%',
+          gridTemplateColumns: '2fr 1fr',
+          gridTemplateRows: '1fr 42% 1fr',
           gap: '1px',
         }}
         data-testid="col-right"
       >
-        {/* PROJECTS — top-left */}
+        {/* PROJECTS — large top-left */}
         <Link
           href="/projects"
           className="bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors"
@@ -121,20 +121,22 @@ export default function Home() {
           >
             Projects
           </span>
-          <div
-            className="text-foreground group-hover:text-accent transition-colors tracking-tight"
-            style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.4rem, 2.4vw, 2.2rem)', lineHeight: 1 }}
-          >
-            Selected
-            <br />
-            Works
+          <div>
+            <div
+              className="text-foreground group-hover:text-accent transition-colors tracking-tight"
+              style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.6rem, 3vw, 2.8rem)', lineHeight: 1 }}
+            >
+              Selected
+              <br />
+              Works
+            </div>
           </div>
         </Link>
 
         {/* PHOTOGRAPHY — top-right */}
         <Link
           href="/creations"
-          className="bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors"
+          className="bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors border-l border-foreground"
           data-testid="zone-photography"
         >
           <div className="absolute top-0 left-0 w-full h-[2px] bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
@@ -146,7 +148,7 @@ export default function Home() {
           </span>
           <div
             className="text-foreground group-hover:text-accent transition-colors tracking-tight"
-            style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.4rem, 2.4vw, 2.2rem)', lineHeight: 1.05 }}
+            style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.1rem, 2vw, 1.6rem)', lineHeight: 1.05 }}
           >
             Images &amp;
             <br />
@@ -154,7 +156,23 @@ export default function Home() {
           </div>
         </Link>
 
-        {/* MUSIC — middle-left */}
+        {/* SVG ANIMATION — full width middle row */}
+        <div
+          className="bg-background col-span-2 relative flex items-center justify-center overflow-hidden group"
+          data-testid="zone-svg"
+        >
+          <span
+            className="absolute top-4 left-5 uppercase text-muted-foreground z-10 select-none"
+            style={{ fontFamily: "'ABC ROM'", fontWeight: 300, fontSize: '0.58rem', letterSpacing: '0.14em' }}
+          >
+            BE.INFRA — Diffused Urban Condition
+          </span>
+          <div className="absolute inset-0 flex items-center justify-center p-4 opacity-80 group-hover:opacity-100 transition-opacity">
+            <BelgianInfraSVG />
+          </div>
+        </div>
+
+        {/* MUSIC — bottom-left */}
         <Link
           href="/creations"
           className="bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors"
@@ -169,7 +187,7 @@ export default function Home() {
           </span>
           <div
             className="text-foreground group-hover:text-accent transition-colors tracking-tight"
-            style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.4rem, 2.4vw, 2.2rem)', lineHeight: 1.05 }}
+            style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.1rem, 2vw, 1.6rem)', lineHeight: 1.05 }}
           >
             Recordings &amp;
             <br />
@@ -177,10 +195,10 @@ export default function Home() {
           </div>
         </Link>
 
-        {/* BLOG — middle-right */}
+        {/* BLOG — bottom-right */}
         <Link
           href="/creations"
-          className="bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors"
+          className="bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors border-l border-foreground"
           data-testid="zone-blog"
         >
           <div className="absolute top-0 left-0 w-full h-[2px] bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
@@ -192,21 +210,13 @@ export default function Home() {
           </span>
           <div
             className="text-foreground group-hover:text-accent transition-colors tracking-tight"
-            style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.4rem, 2.4vw, 2.2rem)', lineHeight: 1.05 }}
+            style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.1rem, 2vw, 1.6rem)', lineHeight: 1.05 }}
           >
             Writing &amp;
             <br />
             Notes
           </div>
         </Link>
-
-        {/* ABSTRACT LINES — full-width bottom strip */}
-        <div
-          className="col-span-2 relative overflow-hidden"
-          data-testid="zone-lines"
-        >
-          <AbstractLines />
-        </div>
       </div>
     </div>
   );
