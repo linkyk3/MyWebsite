@@ -1,5 +1,5 @@
 import { Link } from 'wouter';
-import UrbanHistoryMap from '@/components/UrbanHistoryMap';
+import AbstractLines from '@/components/AbstractLines';
 
 export default function Home() {
   return (
@@ -102,13 +102,13 @@ export default function Home() {
       <div
         className="flex-grow grid bg-foreground"
         style={{
-          gridTemplateColumns: '2fr 1fr',
-          gridTemplateRows: '1fr 42% 1fr',
+          gridTemplateColumns: '1fr 1fr',
+          gridTemplateRows: '1fr 1fr 28%',
           gap: '1px',
         }}
         data-testid="col-right"
       >
-        {/* PROJECTS — large top-left */}
+        {/* PROJECTS — top-left */}
         <Link
           href="/projects"
           className="bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors"
@@ -121,22 +121,20 @@ export default function Home() {
           >
             Projects
           </span>
-          <div>
-            <div
-              className="text-foreground group-hover:text-accent transition-colors tracking-tight"
-              style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.6rem, 3vw, 2.8rem)', lineHeight: 1 }}
-            >
-              Selected
-              <br />
-              Works
-            </div>
+          <div
+            className="text-foreground group-hover:text-accent transition-colors tracking-tight"
+            style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.4rem, 2.4vw, 2.2rem)', lineHeight: 1 }}
+          >
+            Selected
+            <br />
+            Works
           </div>
         </Link>
 
         {/* PHOTOGRAPHY — top-right */}
         <Link
           href="/creations"
-          className="bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors border-l border-foreground"
+          className="bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors"
           data-testid="zone-photography"
         >
           <div className="absolute top-0 left-0 w-full h-[2px] bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
@@ -148,7 +146,7 @@ export default function Home() {
           </span>
           <div
             className="text-foreground group-hover:text-accent transition-colors tracking-tight"
-            style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.1rem, 2vw, 1.6rem)', lineHeight: 1.05 }}
+            style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.4rem, 2.4vw, 2.2rem)', lineHeight: 1.05 }}
           >
             Images &amp;
             <br />
@@ -156,15 +154,7 @@ export default function Home() {
           </div>
         </Link>
 
-        {/* URBAN HISTORY MAP — full width middle row */}
-        <div
-          className="col-span-2 relative overflow-hidden"
-          data-testid="zone-map"
-        >
-          <UrbanHistoryMap />
-        </div>
-
-        {/* MUSIC — bottom-left */}
+        {/* MUSIC — middle-left */}
         <Link
           href="/creations"
           className="bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors"
@@ -179,7 +169,7 @@ export default function Home() {
           </span>
           <div
             className="text-foreground group-hover:text-accent transition-colors tracking-tight"
-            style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.1rem, 2vw, 1.6rem)', lineHeight: 1.05 }}
+            style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.4rem, 2.4vw, 2.2rem)', lineHeight: 1.05 }}
           >
             Recordings &amp;
             <br />
@@ -187,10 +177,10 @@ export default function Home() {
           </div>
         </Link>
 
-        {/* BLOG — bottom-right */}
+        {/* BLOG — middle-right */}
         <Link
           href="/creations"
-          className="bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors border-l border-foreground"
+          className="bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors"
           data-testid="zone-blog"
         >
           <div className="absolute top-0 left-0 w-full h-[2px] bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
@@ -202,13 +192,21 @@ export default function Home() {
           </span>
           <div
             className="text-foreground group-hover:text-accent transition-colors tracking-tight"
-            style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.1rem, 2vw, 1.6rem)', lineHeight: 1.05 }}
+            style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.4rem, 2.4vw, 2.2rem)', lineHeight: 1.05 }}
           >
             Writing &amp;
             <br />
             Notes
           </div>
         </Link>
+
+        {/* ABSTRACT LINES — full-width bottom strip */}
+        <div
+          className="col-span-2 relative overflow-hidden"
+          data-testid="zone-lines"
+        >
+          <AbstractLines />
+        </div>
       </div>
     </div>
   );
