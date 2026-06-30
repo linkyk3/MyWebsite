@@ -1,30 +1,66 @@
-import { Link } from 'wouter';
-import AbstractLines from '@/components/AbstractLines';
+import ConstellationMap from '@/components/ConstellationMap';
 
 export default function Home() {
   return (
-    <div className="w-screen h-screen overflow-hidden bg-background flex" data-testid="home-root">
-      {/* ─── LEFT COLUMN: 2/5 ─── */}
+    <div
+      className="w-screen h-screen overflow-hidden bg-background flex"
+      data-testid="home-root"
+    >
+      {/* ─── LEFT COLUMN: 2/5 ───────────────────────────────────────────────── */}
+      {/*
+        overflow: visible so that the full-width horizon divider can escape
+        the column boundary and run edge-to-edge across the page.
+      */}
       <div
-        className="relative flex flex-col border-r border-foreground"
-        style={{ width: '40%', flexShrink: 0 }}
+        className="relative flex flex-col"
+        style={{ width: '40%', flexShrink: 0, overflow: 'visible', zIndex: 1 }}
         data-testid="col-left"
       >
-        {/* Logo space — GlobalNav overlays here at fixed top-8 left-8 */}
+        {/* Logo space — GlobalNav overlays here */}
         <div style={{ height: '72px', flexShrink: 0 }} />
 
-        {/* Name + bio */}
-        <div className="px-8 pt-6 flex flex-col gap-4">
+        {/* Name */}
+        <div className="px-8 pt-4 flex flex-col gap-3">
           <h1
             className="text-foreground tracking-tight"
-            style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.4rem, 2.2vw, 2rem)', lineHeight: 1.05 }}
+            style={{
+              fontFamily: "'ABC ROM'",
+              fontWeight: 500,
+              fontSize: 'clamp(1.4rem, 2.2vw, 2rem)',
+              lineHeight: 1.05,
+            }}
           >
             Seppe Goossens
           </h1>
-          <div className="w-full border-t border-foreground/20" />
+
+          {/*
+            FULL-WIDTH HORIZON LINE
+            width: 100vw + left: 0 breaks out of the 40% column and runs
+            across the entire page, exactly like the bottom divider in the
+            Evan Kirkiles reference (image_1782826026120.png).
+          */}
+          <div
+            style={{
+              position: 'absolute',
+              left: 0,
+              width: '100vw',
+              height: '1px',
+              background: 'rgba(0,0,0,0.18)',
+              // vertically placed just below the heading; approximated as
+              // 72px logo + 16px pt-4 + ~32px h1 ≈ 120px from top
+              top: 120,
+            }}
+            aria-hidden="true"
+          />
+
           <p
             className="text-foreground/70 leading-snug"
-            style={{ fontFamily: "'ABC ROM'", fontWeight: 350, fontSize: 'clamp(0.72rem, 1vw, 0.85rem)', letterSpacing: '0.01em' }}
+            style={{
+              fontFamily: "'ABC ROM'",
+              fontWeight: 350,
+              fontSize: 'clamp(0.72rem, 1vw, 0.85rem)',
+              letterSpacing: '0.01em',
+            }}
           >
             Student double-majoring in Urban Planning and Industrial Engineering.
             Interested in the spatial logic of cities, systemic flows, and the
@@ -32,16 +68,26 @@ export default function Home() {
           </p>
 
           {/* Discipline tags */}
-          <div className="flex flex-col gap-1 mt-2">
+          <div className="flex flex-col gap-1 mt-1">
             <span
               className="uppercase text-muted-foreground"
-              style={{ fontFamily: "'ABC ROM'", fontWeight: 350, fontSize: '0.62rem', letterSpacing: '0.12em' }}
+              style={{
+                fontFamily: "'ABC ROM'",
+                fontWeight: 350,
+                fontSize: '0.62rem',
+                letterSpacing: '0.12em',
+              }}
             >
               Urban Planning
             </span>
             <span
               className="uppercase text-muted-foreground"
-              style={{ fontFamily: "'ABC ROM'", fontWeight: 350, fontSize: '0.62rem', letterSpacing: '0.12em' }}
+              style={{
+                fontFamily: "'ABC ROM'",
+                fontWeight: 350,
+                fontSize: '0.62rem',
+                letterSpacing: '0.12em',
+              }}
             >
               × Industrial Engineering
             </span>
@@ -51,19 +97,46 @@ export default function Home() {
         {/* Spacer */}
         <div className="flex-grow" />
 
-        {/* Contact section — pinned to bottom */}
-        <div className="px-8 pb-8 border-t border-foreground/20 pt-6 flex flex-col gap-3">
+        {/* Contact — pinned to bottom */}
+        <div
+          className="px-8 pb-8 pt-6 flex flex-col gap-3"
+          style={{ position: 'relative' }}
+        >
+          {/* Full-width horizon line above contact */}
+          <div
+            style={{
+              position: 'absolute',
+              left: 0,
+              top: 0,
+              width: '100vw',
+              height: '1px',
+              background: 'rgba(0,0,0,0.12)',
+            }}
+            aria-hidden="true"
+          />
+
           <span
             className="uppercase text-muted-foreground"
-            style={{ fontFamily: "'ABC ROM'", fontWeight: 350, fontSize: '0.6rem', letterSpacing: '0.14em' }}
+            style={{
+              fontFamily: "'ABC ROM'",
+              fontWeight: 350,
+              fontSize: '0.6rem',
+              letterSpacing: '0.14em',
+            }}
           >
             Contact
           </span>
+
           <div className="flex flex-col gap-1.5">
             <a
               href="mailto:s.goossens@student.kuleuven.be"
               className="text-foreground hover:text-accent transition-colors"
-              style={{ fontFamily: "'ABC ROM'", fontWeight: 350, fontSize: '0.72rem', letterSpacing: '0.02em' }}
+              style={{
+                fontFamily: "'ABC ROM'",
+                fontWeight: 350,
+                fontSize: '0.72rem',
+                letterSpacing: '0.02em',
+              }}
               data-testid="contact-email"
             >
               s.goossens@student.kuleuven.be
@@ -73,7 +146,12 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-accent transition-colors"
-              style={{ fontFamily: "'ABC ROM'", fontWeight: 350, fontSize: '0.72rem', letterSpacing: '0.02em' }}
+              style={{
+                fontFamily: "'ABC ROM'",
+                fontWeight: 350,
+                fontSize: '0.72rem',
+                letterSpacing: '0.02em',
+              }}
               data-testid="contact-linkedin"
             >
               LinkedIn ↗
@@ -83,130 +161,43 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-accent transition-colors"
-              style={{ fontFamily: "'ABC ROM'", fontWeight: 350, fontSize: '0.72rem', letterSpacing: '0.02em' }}
+              style={{
+                fontFamily: "'ABC ROM'",
+                fontWeight: 350,
+                fontSize: '0.72rem',
+                letterSpacing: '0.02em',
+              }}
               data-testid="contact-github"
             >
               GitHub ↗
             </a>
           </div>
+
           <p
             className="text-foreground/30 mt-2"
-            style={{ fontFamily: "'ABC ROM'", fontWeight: 300, fontSize: '0.58rem', letterSpacing: '0.1em' }}
+            style={{
+              fontFamily: "'ABC ROM'",
+              fontWeight: 300,
+              fontSize: '0.58rem',
+              letterSpacing: '0.1em',
+            }}
           >
             ©2025 · SEPPE GOOSSENS · URBAN PLANNING × IND. ENG.
           </p>
         </div>
       </div>
 
-      {/* ─── RIGHT COLUMN: 3/5 ─── */}
+      {/* ─── RIGHT COLUMN: 3/5 — Constellation Canvas ──────────────────────── */}
+      {/*
+        No grid, no boxes. A free diagrammatic canvas bounded only by the
+        left vertical rule and the viewport edges.
+      */}
       <div
-        className="flex-grow grid bg-foreground"
-        style={{
-          gridTemplateColumns: '1fr 1fr',
-          gridTemplateRows: '1fr 1fr 28%',
-          gap: '1px',
-        }}
+        className="flex-grow relative"
+        style={{ borderLeft: '1px solid rgba(0,0,0,0.18)' }}
         data-testid="col-right"
       >
-        {/* PROJECTS — top-left */}
-        <Link
-          href="/projects"
-          className="bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors"
-          data-testid="zone-projects"
-        >
-          <div className="absolute top-0 left-0 w-full h-[2px] bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-          <span
-            className="uppercase text-muted-foreground"
-            style={{ fontFamily: "'ABC ROM'", fontWeight: 350, fontSize: '0.6rem', letterSpacing: '0.14em' }}
-          >
-            Projects
-          </span>
-          <div
-            className="text-foreground group-hover:text-accent transition-colors tracking-tight"
-            style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.4rem, 2.4vw, 2.2rem)', lineHeight: 1 }}
-          >
-            Selected
-            <br />
-            Works
-          </div>
-        </Link>
-
-        {/* PHOTOGRAPHY — top-right */}
-        <Link
-          href="/creations"
-          className="bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors"
-          data-testid="zone-photography"
-        >
-          <div className="absolute top-0 left-0 w-full h-[2px] bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-          <span
-            className="uppercase text-muted-foreground"
-            style={{ fontFamily: "'ABC ROM'", fontWeight: 350, fontSize: '0.6rem', letterSpacing: '0.14em' }}
-          >
-            Photography
-          </span>
-          <div
-            className="text-foreground group-hover:text-accent transition-colors tracking-tight"
-            style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.4rem, 2.4vw, 2.2rem)', lineHeight: 1.05 }}
-          >
-            Images &amp;
-            <br />
-            Field Notes
-          </div>
-        </Link>
-
-        {/* MUSIC — middle-left */}
-        <Link
-          href="/creations"
-          className="bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors"
-          data-testid="zone-music"
-        >
-          <div className="absolute top-0 left-0 w-full h-[2px] bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-          <span
-            className="uppercase text-muted-foreground"
-            style={{ fontFamily: "'ABC ROM'", fontWeight: 350, fontSize: '0.6rem', letterSpacing: '0.14em' }}
-          >
-            Music
-          </span>
-          <div
-            className="text-foreground group-hover:text-accent transition-colors tracking-tight"
-            style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.4rem, 2.4vw, 2.2rem)', lineHeight: 1.05 }}
-          >
-            Recordings &amp;
-            <br />
-            Playlists
-          </div>
-        </Link>
-
-        {/* BLOG — middle-right */}
-        <Link
-          href="/creations"
-          className="bg-background flex flex-col justify-between p-6 group relative overflow-hidden cursor-pointer hover:bg-[#f7f7f7] dark:hover:bg-white/5 transition-colors"
-          data-testid="zone-blog"
-        >
-          <div className="absolute top-0 left-0 w-full h-[2px] bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-          <span
-            className="uppercase text-muted-foreground"
-            style={{ fontFamily: "'ABC ROM'", fontWeight: 350, fontSize: '0.6rem', letterSpacing: '0.14em' }}
-          >
-            Blog
-          </span>
-          <div
-            className="text-foreground group-hover:text-accent transition-colors tracking-tight"
-            style={{ fontFamily: "'ABC ROM'", fontWeight: 500, fontSize: 'clamp(1.4rem, 2.4vw, 2.2rem)', lineHeight: 1.05 }}
-          >
-            Writing &amp;
-            <br />
-            Notes
-          </div>
-        </Link>
-
-        {/* ABSTRACT LINES — full-width bottom strip */}
-        <div
-          className="col-span-2 relative overflow-hidden"
-          data-testid="zone-lines"
-        >
-          <AbstractLines />
-        </div>
+        <ConstellationMap />
       </div>
     </div>
   );
