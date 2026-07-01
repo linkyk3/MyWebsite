@@ -33,6 +33,14 @@ export default function Home() {
   return (
     <div className="w-screen h-screen flex flex-col overflow-hidden bg-background text-foreground" data-testid="home-root">
 
+      {/* Full-page blur overlay — appears when any nav item is hovered */}
+      {hovered && (
+        <div
+          className="fixed inset-0 pointer-events-none"
+          style={{ backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', background: 'rgba(0,0,0,0.35)', zIndex: 5 }}
+        />
+      )}
+
       {/* ══════════════════════════════════════
           HEADER — name + logo/nav above upper line
       ══════════════════════════════════════ */}
@@ -111,6 +119,7 @@ export default function Home() {
         {/* RIGHT COLUMN: large typographic nav */}
         <div
           className="flex-grow flex flex-col justify-evenly overflow-hidden"
+          style={{ position: 'relative', zIndex: 10 }}
           style={{ paddingLeft: '3rem', paddingRight: TEXT_INDENT }}
           data-testid="col-right"
         >
@@ -127,7 +136,7 @@ export default function Home() {
                   display: 'block',
                   fontFamily: "'ABC ROM'",
                   fontWeight: 700,
-                  fontSize: 'clamp(2.8rem, 5.5vw, 5rem)',
+                  fontSize: 'clamp(3.8rem, 7.5vw, 7rem)',
                   letterSpacing: '-0.03em',
                   lineHeight: 1.1,
                   color: 'transparent',
