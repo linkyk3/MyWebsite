@@ -41,19 +41,22 @@ export default function Home() {
             Seppe Goossens
           </span>
 
-          {/* Logo + nav — one flex group; mouse can slide from logo into links */}
-          <div className="flex items-center gap-4 group" style={{ lineHeight: 0 }}>
+          {/* Logo + nav — group has extended right hit-area so mouse can slide into links */}
+          <div
+            className="relative group flex items-center"
+            style={{ lineHeight: 0, paddingRight: '320px', marginRight: '-320px' }}
+          >
             <div className="opacity-60 group-hover:opacity-100 transition-opacity" style={{ lineHeight: 0 }}>
               <LogoMark />
             </div>
 
             <nav
               aria-label="Primary navigation"
-              className="flex items-center gap-4
+              className="absolute flex items-center gap-4
                          opacity-0 pointer-events-none
                          group-hover:opacity-100 group-hover:pointer-events-auto
                          transition-opacity duration-150"
-              style={{ whiteSpace: 'nowrap' }}
+              style={{ left: '100%', top: '50%', transform: 'translateY(-50%)', marginLeft: '14px', whiteSpace: 'nowrap' }}
             >
               {[
                 { label: 'Projects',       href: '/projects'  },
@@ -78,8 +81,8 @@ export default function Home() {
         <div style={{ width: '60%' }} />
       </div>
 
-      {/* UPPER HORIZON LINE — 2px, starts where text starts */}
-      <div className="flex-shrink-0 bg-foreground" style={{ height: '2px', marginLeft: TEXT_INDENT }} />
+      {/* UPPER HORIZON LINE — 2px, inset left & right */}
+      <div className="flex-shrink-0 bg-foreground" style={{ height: '2px', marginLeft: TEXT_INDENT, marginRight: TEXT_INDENT }} />
 
       {/* ══════════════════════════════════════
           MAIN CONTENT
@@ -101,12 +104,6 @@ export default function Home() {
 
           <div className="flex-grow" />
 
-          {/* Contact label — above lower line */}
-          <div className="px-8 pb-2.5">
-            <span className="text-foreground/50" style={f(400, '1rem')}>
-              Contact
-            </span>
-          </div>
         </div>
 
         {/* RIGHT COLUMN: tiles */}
@@ -160,8 +157,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* LOWER HORIZON LINE — 2px, starts where text starts */}
-      <div className="flex-shrink-0 bg-foreground" style={{ height: '2px', marginLeft: TEXT_INDENT }} />
+      {/* LOWER HORIZON LINE — 2px, inset left & right */}
+      <div className="flex-shrink-0 bg-foreground" style={{ height: '2px', marginLeft: TEXT_INDENT, marginRight: TEXT_INDENT }} />
 
       {/* FOOTER — email + links + theme toggle */}
       <div className="flex flex-shrink-0 items-center gap-5 px-8 py-2.5">
@@ -175,7 +172,6 @@ export default function Home() {
         </a>
         {[
           { label: 'LinkedIn', href: 'https://linkedin.com', testId: 'contact-linkedin', internal: false },
-          { label: 'GitHub',   href: 'https://github.com',   testId: 'contact-github',   internal: false },
           { label: 'CV',       href: '/cv',                  testId: 'contact-cv',        internal: true  },
         ].map(({ label, href, testId, internal }) =>
           internal
