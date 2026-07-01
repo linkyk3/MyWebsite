@@ -112,8 +112,11 @@ export default function Home() {
           style={{ paddingRight: TEXT_INDENT }}
           data-testid="col-right"
         >
+        {/* Spacer above — half the blank space */}
+        <div className="bg-background" style={{ flexGrow: 22 }} />
+
         <div
-          className="grid bg-foreground border-x border-b border-foreground"
+          className="grid bg-foreground border border-foreground"
           style={{ gridTemplateColumns: 'repeat(10, 1fr)', gridTemplateRows: '1fr 1fr', gap: '1px', flexGrow: 56 }}
         >
           {/* SELECTED WORKS — top-left 70% */}
@@ -157,8 +160,8 @@ export default function Home() {
           </Link>
         </div>
 
-        {/* BLANK — plain space below the tile grid, no border */}
-        <div className="bg-background" style={{ flexGrow: 44 }} data-testid="zone-blank" />
+        {/* Spacer below — half the blank space */}
+        <div className="bg-background" style={{ flexGrow: 22 }} data-testid="zone-blank" />
         </div>
       </div>
 
