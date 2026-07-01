@@ -188,25 +188,6 @@ export default function BelgianInfraSVG() {
         <circle cx="750" cy="162" r="2" fill="currentColor" opacity="0.3" />
       </g>
 
-      {/* ── TECHNICAL ANNOTATIONS ── */}
-      <g
-        style={fade(1.8, 0.5)}
-        fontSize="7.5"
-        fontFamily="'JetBrains Mono', monospace"
-        fill="currentColor"
-        opacity="0.55"
-        letterSpacing="0.06em"
-      >
-        <text x="324" y="162">BXL</text>
-        <text x="146" y="162">GNT</text>
-        <text x="502" y="162">LVN</text>
-        <text x="324" y="18">ANT</text>
-        <text x="754" y="157">LGE</text>
-        <text x="30" y="127">E40</text>
-        <text x="30" y="105">L.32</text>
-        <text x="862" y="157">E40</text>
-        <text x="468" y="52">R0</text>
-      </g>
 
       {/* ── CROSS-HATCH DETAIL: dense urban parcel at Brussels ── */}
       <g style={fade(1.5, 0.7)} stroke="currentColor" strokeWidth="0.4" opacity="0.3">
