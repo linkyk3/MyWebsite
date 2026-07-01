@@ -113,7 +113,7 @@ export default function Home() {
           data-testid="col-right"
         >
         <div
-          className="grid bg-foreground h-full border-x border-b border-foreground"
+          className="grid bg-foreground h-full border-x border-foreground"
           style={{ gridTemplateColumns: 'repeat(10, 1fr)', gridTemplateRows: '1fr 1fr 44%', gap: '1px' }}
         >
           {/* SELECTED WORKS — top-left 70% */}
