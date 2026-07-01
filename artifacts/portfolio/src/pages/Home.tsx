@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'wouter';
 import { ThemeToggleInline } from '@/components/ThemeToggle';
 
@@ -17,17 +18,18 @@ const f = (weight: number, size: string, extra?: React.CSSProperties): React.CSS
   ...extra,
 });
 
-const tileLabel: React.CSSProperties = {
-  fontFamily: "'ABC ROM'",
-  fontWeight: 500,
-  letterSpacing: '-0.01em',
-  lineHeight: 1,
-};
-
 // Left-side text starts at px-8 = 2rem from left edge
 const TEXT_INDENT = '2rem';
 
+const NAV_ITEMS = [
+  { label: 'Selected Works', href: '/projects'  },
+  { label: 'Music',          href: '/creations' },
+  { label: 'Visualizations', href: '/creations' },
+  { label: 'Blog',           href: '/creations' },
+] as const;
+
 export default function Home() {
+  const [hovered, setHovered] = useState<string | null>(null);
   return (
     <div className="w-screen h-screen flex flex-col overflow-hidden bg-background text-foreground" data-testid="home-root">
 
@@ -106,62 +108,41 @@ export default function Home() {
 
         </div>
 
-        {/* RIGHT COLUMN: tiles — outer carries the right margin, inner is the grid */}
+        {/* RIGHT COLUMN: large typographic nav */}
         <div
-          className="flex-grow flex flex-col overflow-hidden bg-background"
-          style={{ paddingRight: TEXT_INDENT }}
+          className="flex-grow flex flex-col justify-center overflow-hidden"
+          style={{ paddingLeft: '3rem', paddingRight: TEXT_INDENT }}
           data-testid="col-right"
         >
-        {/* Spacer above — half the blank space */}
-        <div className="bg-background" style={{ flexGrow: 22 }} />
-
-        <div
-          className="grid bg-foreground border border-foreground"
-          style={{ gridTemplateColumns: 'repeat(10, 1fr)', gridTemplateRows: '1fr 1fr', gap: '1px', flexGrow: 56 }}
-        >
-          {/* SELECTED WORKS — top-left 70% */}
-          <Link href="/projects"
-            className="col-span-7 bg-background flex flex-col justify-end p-6 group relative overflow-hidden cursor-pointer transition-colors hover:bg-foreground/5"
-            data-testid="zone-projects">
-            <div className="absolute top-0 left-0 w-full h-px bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-            <div className="text-foreground group-hover:text-accent transition-colors" style={{ ...tileLabel, fontSize: 'clamp(1.5rem, 2.8vw, 2.6rem)' }}>
-              Selected Works
-            </div>
-          </Link>
-
-          {/* BLOG — top-right 30% */}
-          <Link href="/creations"
-            className="col-span-3 bg-background flex flex-col justify-end p-6 group relative overflow-hidden cursor-pointer transition-colors hover:bg-foreground/5"
-            data-testid="zone-blog">
-            <div className="absolute top-0 left-0 w-full h-px bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-            <div className="text-foreground group-hover:text-accent transition-colors" style={{ ...tileLabel, fontSize: 'clamp(1.1rem, 1.9vw, 1.7rem)' }}>
-              Blog
-            </div>
-          </Link>
-
-          {/* MUSIC — middle-left 50% */}
-          <Link href="/creations"
-            className="col-span-5 bg-background flex flex-col justify-end p-6 group relative overflow-hidden cursor-pointer transition-colors hover:bg-foreground/5"
-            data-testid="zone-music">
-            <div className="absolute top-0 left-0 w-full h-px bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-            <div className="text-foreground group-hover:text-accent transition-colors" style={{ ...tileLabel, fontSize: 'clamp(1.1rem, 1.9vw, 1.7rem)' }}>
-              Music
-            </div>
-          </Link>
-
-          {/* VISUALIZATIONS — middle-right 50% */}
-          <Link href="/creations"
-            className="col-span-5 bg-background flex flex-col justify-end p-6 group relative overflow-hidden cursor-pointer transition-colors hover:bg-foreground/5"
-            data-testid="zone-visualizations">
-            <div className="absolute top-0 left-0 w-full h-px bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-            <div className="text-foreground group-hover:text-accent transition-colors" style={{ ...tileLabel, fontSize: 'clamp(1.1rem, 1.9vw, 1.7rem)' }}>
-              Visualizations
-            </div>
-          </Link>
-        </div>
-
-        {/* Spacer below — half the blank space */}
-        <div className="bg-background" style={{ flexGrow: 22 }} data-testid="zone-blank" />
+          {NAV_ITEMS.map(({ label, href }) => {
+            const isHovered = hovered === label;
+            const isDimmed  = hovered !== null && !isHovered;
+            return (
+              <Link
+                key={label}
+                href={href}
+                onMouseEnter={() => setHovered(label)}
+                onMouseLeave={() => setHovered(null)}
+                style={{
+                  display: 'block',
+                  fontFamily: "'ABC ROM'",
+                  fontWeight: 700,
+                  fontSize: 'clamp(2.8rem, 5.5vw, 5rem)',
+                  letterSpacing: '-0.03em',
+                  lineHeight: 1.1,
+                  color: 'transparent',
+                  WebkitTextStroke: isHovered ? '1.5px #FF0000' : '1px var(--color-foreground)',
+                  filter: isDimmed ? 'blur(3px)' : 'none',
+                  opacity: isDimmed ? 0.25 : 1,
+                  transition: 'opacity 0.2s ease, filter 0.2s ease, -webkit-text-stroke 0.15s ease',
+                  cursor: 'pointer',
+                  userSelect: 'none',
+                }}
+              >
+                {label}
+              </Link>
+            );
+          })}
         </div>
       </div>
 
