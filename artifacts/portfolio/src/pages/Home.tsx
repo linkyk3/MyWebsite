@@ -150,7 +150,7 @@ export default function Home() {
         {/* ── RIGHT COLUMN: 3/5 canvas ── */}
         <div
           className="flex-grow grid bg-foreground"
-          style={{ gridTemplateColumns: 'repeat(10, 1fr)', gridTemplateRows: '1fr 1fr', gap: '1px' }}
+          style={{ gridTemplateColumns: 'repeat(10, 1fr)', gridTemplateRows: '1fr 1fr 44%', gap: '1px' }}
           data-testid="col-right"
         >
           {/* SELECTED WORKS — top-left 70% */}
@@ -192,6 +192,9 @@ export default function Home() {
               Visualizations
             </div>
           </Link>
+
+          {/* BLANK SPACE — bottom row */}
+          <div className="col-span-10 bg-background" data-testid="zone-blank" />
 
         </div>
       </div>
