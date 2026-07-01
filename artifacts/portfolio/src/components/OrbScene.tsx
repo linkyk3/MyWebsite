@@ -257,15 +257,19 @@ export default function OrbScene() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    // Rebind as non-nullable so TypeScript trusts them inside closures
+    const cv: HTMLCanvasElement = canvas;
+    const cx2d: CanvasRenderingContext2D = ctx;
+
     // Resize to container
     const resize = () => {
-      const p = canvas.parentElement;
+      const p = cv.parentElement;
       if (!p) return;
       const w = p.clientWidth, h = p.clientHeight;
-      if (w > 0 && h > 0) { canvas.width = w; canvas.height = h; }
+      if (w > 0 && h > 0) { cv.width = w; cv.height = h; }
     };
     const ro = new ResizeObserver(resize);
-    if (canvas.parentElement) ro.observe(canvas.parentElement);
+    if (cv.parentElement) ro.observe(cv.parentElement);
     resize();
 
     let animId: number;
@@ -286,8 +290,8 @@ export default function OrbScene() {
         const elapsed = now - startMs;
         const spd = MIN_SPD + (MAX_SPD - MIN_SPD) * Math.exp(-elapsed / DECAY);
         yaw += spd * dt;
-        if (canvas.width > 0 && canvas.height > 0) {
-          render(ctx, canvas.width, canvas.height, yaw, hitBoxes);
+        if (cv.width > 0 && cv.height > 0) {
+          render(cx2d, cv.width, cv.height, yaw, hitBoxes);
         }
       } catch (_) { /* ignore per-frame errors */ }
       animId = requestAnimationFrame(frame);
@@ -296,7 +300,7 @@ export default function OrbScene() {
 
     // Click → navigate
     const onClick = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
+      const rect = cv.getBoundingClientRect();
       const mx = e.clientX - rect.left;
       const my = e.clientY - rect.top;
       for (const hb of hitBoxes) {
@@ -307,22 +311,22 @@ export default function OrbScene() {
         }
       }
     };
-    canvas.addEventListener('click', onClick);
+    cv.addEventListener('click', onClick);
 
     // Cursor
     const onMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
+      const rect = cv.getBoundingClientRect();
       const mx = e.clientX - rect.left, my = e.clientY - rect.top;
       const hit = hitBoxes.some(hb => Math.hypot(mx - hb.x, my - hb.y) < hb.r);
-      canvas.style.cursor = hit ? 'pointer' : 'default';
+      cv.style.cursor = hit ? 'pointer' : 'default';
     };
-    canvas.addEventListener('mousemove', onMove);
+    cv.addEventListener('mousemove', onMove);
 
     return () => {
       cancelAnimationFrame(animId);
       ro.disconnect();
-      canvas.removeEventListener('click', onClick);
-      canvas.removeEventListener('mousemove', onMove);
+      cv.removeEventListener('click', onClick);
+      cv.removeEventListener('mousemove', onMove);
     };
   }, []);
 
