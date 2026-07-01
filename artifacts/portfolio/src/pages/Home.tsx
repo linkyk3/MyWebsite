@@ -46,7 +46,7 @@ export default function Home() {
             className="relative group flex items-center"
             style={{ lineHeight: 0, paddingRight: '320px', marginRight: '-320px' }}
           >
-            <div className="opacity-60 group-hover:opacity-100 group-hover:text-accent transition-all" style={{ lineHeight: 0 }}>
+            <div className="opacity-60 group-hover:opacity-100 hover:text-accent transition-all" style={{ lineHeight: 0 }}>
               <LogoMark />
             </div>
 
@@ -68,7 +68,7 @@ export default function Home() {
                 <Link
                   key={label}
                   href={href}
-                  className="text-foreground/50 group-hover:text-accent hover:text-accent transition-colors"
+                  className="text-foreground/50 hover:text-accent transition-colors"
                   style={f(300, '1rem', { letterSpacing: '0.01em' })}
                   data-testid={`link-${label.toLowerCase()}`}
                 >
