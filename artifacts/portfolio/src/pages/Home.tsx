@@ -1,12 +1,12 @@
 import { Link } from 'wouter';
 import { ThemeToggleInline } from '@/components/ThemeToggle';
 
+/* Adobe Pathfinder–style logo: three overlapping circles */
 const LogoMark = () => (
-  <svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" style={{ flexShrink: 0 }}>
-    <rect x="1" y="1" width="5" height="5" />
-    <rect x="8" y="1" width="5" height="5" />
-    <rect x="1" y="8" width="5" height="5" />
-    <rect x="8" y="8" width="5" height="5" />
+  <svg width="26" height="24" viewBox="0 0 26 24" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true" style={{ flexShrink: 0 }}>
+    <circle cx="9"  cy="9"  r="8" />
+    <circle cx="17" cy="9"  r="8" />
+    <circle cx="13" cy="16" r="8" />
   </svg>
 );
 
@@ -35,32 +35,46 @@ export default function Home() {
           HEADER — name + logo/nav above upper line
       ══════════════════════════════════════ */}
       <div className="flex flex-shrink-0">
-        <div className="flex flex-col gap-1 px-8 py-3" style={{ width: '40%' }}>
+        <div className="flex items-center gap-3 px-8 py-3" style={{ width: '40%' }}>
           {/* Name */}
-          <span style={f(500, '1.4rem', { letterSpacing: '-0.02em', lineHeight: 1.1 })}>
+          <span style={f(500, '1.4rem', { letterSpacing: '-0.02em', lineHeight: 1 })}>
             Seppe Goossens
           </span>
-          {/* Logo + nav */}
-          <nav className="flex items-center gap-3" aria-label="Primary navigation">
-            <LogoMark />
-            {[
-              { label: 'Projects',       href: '/projects'  },
-              { label: 'Music',          href: '/creations' },
-              { label: 'Visualizations', href: '/creations' },
-              { label: 'Blog',           href: '/creations' },
-              { label: 'About',          href: '/cv'        },
-            ].map(({ label, href }) => (
-              <Link
-                key={label}
-                href={href}
-                className="text-foreground/50 hover:text-foreground transition-colors"
-                style={f(300, '1rem', { letterSpacing: '0.01em' })}
-                data-testid={`link-${label.toLowerCase()}`}
-              >
-                {label}
-              </Link>
-            ))}
-          </nav>
+
+          {/* Logo — hover reveals nav below */}
+          <div className="relative group" style={{ lineHeight: 0 }}>
+            <div className="cursor-default opacity-70 hover:opacity-100 transition-opacity">
+              <LogoMark />
+            </div>
+
+            {/* Nav — appears below logo on hover */}
+            <nav
+              aria-label="Primary navigation"
+              className="absolute left-0 top-full mt-2 flex items-center gap-4
+                         opacity-0 pointer-events-none
+                         group-hover:opacity-100 group-hover:pointer-events-auto
+                         transition-opacity duration-150"
+              style={{ whiteSpace: 'nowrap', zIndex: 50 }}
+            >
+              {[
+                { label: 'Projects',       href: '/projects'  },
+                { label: 'Music',          href: '/creations' },
+                { label: 'Visualizations', href: '/creations' },
+                { label: 'Blog',           href: '/creations' },
+                { label: 'About',          href: '/cv'        },
+              ].map(({ label, href }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  className="text-foreground/50 hover:text-foreground transition-colors"
+                  style={f(300, '1rem', { letterSpacing: '0.01em' })}
+                  data-testid={`link-${label.toLowerCase()}`}
+                >
+                  {label}
+                </Link>
+              ))}
+            </nav>
+          </div>
         </div>
         <div style={{ width: '60%' }} />
       </div>
