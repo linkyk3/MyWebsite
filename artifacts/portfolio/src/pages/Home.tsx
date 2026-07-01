@@ -33,18 +33,10 @@ export default function Home() {
   return (
     <div className="w-screen h-screen flex flex-col overflow-hidden bg-background text-foreground" data-testid="home-root">
 
-      {/* Full-page blur overlay — appears when any nav item is hovered */}
-      {hovered && (
-        <div
-          className="fixed inset-0 pointer-events-none"
-          style={{ backdropFilter: 'blur(14px)', WebkitBackdropFilter: 'blur(14px)', background: 'rgba(0,0,0,0.35)', zIndex: 5 }}
-        />
-      )}
-
       {/* ══════════════════════════════════════
           HEADER — name + logo/nav above upper line
       ══════════════════════════════════════ */}
-      <div className="flex flex-shrink-0">
+      <div className="flex flex-shrink-0" style={{ filter: hovered ? 'blur(4px)' : 'none', transition: 'filter 0.25s ease' }}>
         <div className="flex items-center gap-3 px-8 py-3" style={{ width: '40%' }}>
           {/* Name */}
           <span style={f(500, '1.4rem', { letterSpacing: '-0.02em', lineHeight: 1 })}>
@@ -92,7 +84,7 @@ export default function Home() {
       </div>
 
       {/* UPPER HORIZON LINE — 2px, inset left & right */}
-      <div className="flex-shrink-0 bg-foreground" style={{ height: '2px', marginLeft: TEXT_INDENT, marginRight: TEXT_INDENT }} />
+      <div className="flex-shrink-0 bg-foreground" style={{ height: '2px', marginLeft: TEXT_INDENT, marginRight: TEXT_INDENT, filter: hovered ? 'blur(4px)' : 'none', transition: 'filter 0.25s ease' }} />
 
       {/* ══════════════════════════════════════
           MAIN CONTENT
@@ -100,7 +92,7 @@ export default function Home() {
       <div className="flex flex-grow overflow-hidden">
 
         {/* LEFT COLUMN */}
-        <div className="flex flex-col" style={{ width: '40%' }} data-testid="col-left">
+        <div className="flex flex-col" style={{ width: '40%', filter: hovered ? 'blur(4px)' : 'none', transition: 'filter 0.25s ease' }} data-testid="col-left">
 
           {/* Bio */}
           <div className="px-8 pt-5 pb-4">
@@ -119,7 +111,6 @@ export default function Home() {
         {/* RIGHT COLUMN: large typographic nav */}
         <div
           className="flex-grow flex flex-col justify-evenly overflow-hidden"
-          style={{ position: 'relative', zIndex: 10 }}
           style={{ paddingLeft: '3rem', paddingRight: TEXT_INDENT }}
           data-testid="col-right"
         >
@@ -141,8 +132,8 @@ export default function Home() {
                   lineHeight: 1.1,
                   color: 'transparent',
                   WebkitTextStroke: isHovered ? '1.5px #FF0000' : '1px var(--color-foreground)',
-                  filter: isDimmed ? 'blur(3px)' : 'none',
-                  opacity: isDimmed ? 0.25 : 1,
+                  filter: isDimmed ? 'blur(2px)' : 'none',
+                  opacity: isDimmed ? 0.3 : 1,
                   transition: 'opacity 0.2s ease, filter 0.2s ease, -webkit-text-stroke 0.15s ease',
                   cursor: 'pointer',
                   userSelect: 'none',
@@ -157,10 +148,10 @@ export default function Home() {
       </div>
 
       {/* LOWER HORIZON LINE — 2px, inset left & right */}
-      <div className="flex-shrink-0 bg-foreground" style={{ height: '2px', marginLeft: TEXT_INDENT, marginRight: TEXT_INDENT }} />
+      <div className="flex-shrink-0 bg-foreground" style={{ height: '2px', marginLeft: TEXT_INDENT, marginRight: TEXT_INDENT, filter: hovered ? 'blur(4px)' : 'none', transition: 'filter 0.25s ease' }} />
 
       {/* FOOTER — email + links + theme toggle */}
-      <div className="flex flex-shrink-0 items-center gap-5 px-8 py-2.5">
+      <div className="flex flex-shrink-0 items-center gap-5 px-8 py-2.5" style={{ filter: hovered ? 'blur(4px)' : 'none', transition: 'filter 0.25s ease' }}>
         <a
           href="mailto:s.goossens@student.kuleuven.be"
           className="text-foreground/70 hover:text-accent transition-colors"
