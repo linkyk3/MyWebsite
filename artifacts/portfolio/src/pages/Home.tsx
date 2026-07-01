@@ -106,11 +106,15 @@ export default function Home() {
 
         </div>
 
-        {/* RIGHT COLUMN: tiles */}
+        {/* RIGHT COLUMN: tiles — outer carries the right margin, inner is the grid */}
         <div
-          className="flex-grow grid bg-foreground"
-          style={{ gridTemplateColumns: 'repeat(10, 1fr)', gridTemplateRows: '1fr 1fr 44%', gap: '1px' }}
+          className="flex-grow overflow-hidden bg-background"
+          style={{ paddingRight: TEXT_INDENT }}
           data-testid="col-right"
+        >
+        <div
+          className="grid bg-foreground h-full"
+          style={{ gridTemplateColumns: 'repeat(10, 1fr)', gridTemplateRows: '1fr 1fr 44%', gap: '1px' }}
         >
           {/* SELECTED WORKS — top-left 70% */}
           <Link href="/projects"
@@ -154,6 +158,7 @@ export default function Home() {
 
           {/* BLANK — bottom row */}
           <div className="col-span-10 bg-background" data-testid="zone-blank" />
+        </div>
         </div>
       </div>
 
