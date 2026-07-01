@@ -1,5 +1,4 @@
 import { Link } from 'wouter';
-import BelgianInfraSVG from '@/components/BelgianInfraSVG';
 
 const LogoMark = () => (
   <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" style={{ flexShrink: 0 }}>
@@ -151,7 +150,7 @@ export default function Home() {
         {/* ── RIGHT COLUMN: 3/5 canvas ── */}
         <div
           className="flex-grow grid bg-foreground"
-          style={{ gridTemplateColumns: 'repeat(10, 1fr)', gridTemplateRows: '1fr 1fr 44%', gap: '1px' }}
+          style={{ gridTemplateColumns: 'repeat(10, 1fr)', gridTemplateRows: '1fr 1fr', gap: '1px' }}
           data-testid="col-right"
         >
           {/* SELECTED WORKS — top-left 70% */}
@@ -194,15 +193,6 @@ export default function Home() {
             </div>
           </Link>
 
-          {/* SVG — full-width bottom */}
-          <div className="col-span-10 bg-background relative flex items-center justify-center overflow-hidden group" data-testid="zone-svg">
-            <span className="absolute bottom-4 left-5 z-10 select-none uppercase text-foreground/35" style={micro}>
-              BE.INFRA — Diffused Urban Condition
-            </span>
-            <div className="absolute inset-0 flex items-center justify-center p-4 opacity-60 group-hover:opacity-90 transition-opacity">
-              <BelgianInfraSVG />
-            </div>
-          </div>
         </div>
       </div>
 
