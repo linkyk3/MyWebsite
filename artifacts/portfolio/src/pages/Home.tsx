@@ -74,7 +74,7 @@ export default function Home() {
       <div className="flex flex-grow overflow-hidden">
 
         {/* LEFT COLUMN */}
-        <div className="flex flex-col border-r border-foreground" style={{ width: '40%' }} data-testid="col-left">
+        <div className="flex flex-col" style={{ width: '40%' }} data-testid="col-left">
 
           {/* Bio */}
           <div className="px-8 pt-5 pb-4">
