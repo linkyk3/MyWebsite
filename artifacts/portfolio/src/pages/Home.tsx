@@ -74,7 +74,7 @@ export default function Home() {
       <div className="flex flex-grow overflow-hidden">
 
         {/* LEFT COLUMN */}
-        <div className="flex flex-col" style={{ width: '40%' }} data-testid="col-left">
+        <div className="flex flex-col border-r border-foreground" style={{ width: '40%' }} data-testid="col-left">
 
           {/* Bio */}
           <div className="px-8 pt-5 pb-4">
@@ -96,54 +96,57 @@ export default function Home() {
           </div>
         </div>
 
-        {/* RIGHT COLUMN: tiles */}
-        <div
-          className="flex-grow grid bg-foreground"
-          style={{ gridTemplateColumns: 'repeat(10, 1fr)', gridTemplateRows: '1fr 1fr 44%', gap: '1px' }}
-          data-testid="col-right"
-        >
-          {/* SELECTED WORKS — top-left 70% */}
-          <Link href="/projects"
-            className="col-span-7 bg-background flex flex-col justify-end p-6 group relative overflow-hidden cursor-pointer transition-colors hover:bg-foreground/5"
-            data-testid="zone-projects">
-            <div className="absolute top-0 left-0 w-full h-px bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-            <div className="text-foreground group-hover:text-accent transition-colors" style={{ ...tileLabel, fontSize: 'clamp(1.5rem, 2.8vw, 2.6rem)' }}>
-              Selected Works
-            </div>
-          </Link>
+        {/* RIGHT COLUMN: tiles + blank space */}
+        <div className="flex-grow flex flex-col" data-testid="col-right">
 
-          {/* BLOG — top-right 30% */}
-          <Link href="/creations"
-            className="col-span-3 bg-background flex flex-col justify-end p-6 group relative overflow-hidden cursor-pointer transition-colors hover:bg-foreground/5"
-            data-testid="zone-blog">
-            <div className="absolute top-0 left-0 w-full h-px bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-            <div className="text-foreground group-hover:text-accent transition-colors" style={{ ...tileLabel, fontSize: 'clamp(1.1rem, 1.9vw, 1.7rem)' }}>
-              Blog
-            </div>
-          </Link>
+          {/* Tile grid — 2 rows only, no bottom blank row */}
+          <div
+            className="grid bg-foreground"
+            style={{ gridTemplateColumns: 'repeat(10, 1fr)', gridTemplateRows: '1fr 1fr', gap: '1px', flex: '0 0 56%' }}
+          >
+            {/* SELECTED WORKS — top-left 70% */}
+            <Link href="/projects"
+              className="col-span-7 bg-background flex flex-col justify-end p-6 group relative overflow-hidden cursor-pointer transition-colors hover:bg-foreground/5"
+              data-testid="zone-projects">
+              <div className="absolute top-0 left-0 w-full h-px bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
+              <div className="text-foreground group-hover:text-accent transition-colors" style={{ ...tileLabel, fontSize: 'clamp(1.5rem, 2.8vw, 2.6rem)' }}>
+                Selected Works
+              </div>
+            </Link>
 
-          {/* MUSIC — middle-left 50% */}
-          <Link href="/creations"
-            className="col-span-5 bg-background flex flex-col justify-end p-6 group relative overflow-hidden cursor-pointer transition-colors hover:bg-foreground/5"
-            data-testid="zone-music">
-            <div className="absolute top-0 left-0 w-full h-px bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-            <div className="text-foreground group-hover:text-accent transition-colors" style={{ ...tileLabel, fontSize: 'clamp(1.1rem, 1.9vw, 1.7rem)' }}>
-              Music
-            </div>
-          </Link>
+            {/* BLOG — top-right 30% */}
+            <Link href="/creations"
+              className="col-span-3 bg-background flex flex-col justify-end p-6 group relative overflow-hidden cursor-pointer transition-colors hover:bg-foreground/5"
+              data-testid="zone-blog">
+              <div className="absolute top-0 left-0 w-full h-px bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
+              <div className="text-foreground group-hover:text-accent transition-colors" style={{ ...tileLabel, fontSize: 'clamp(1.1rem, 1.9vw, 1.7rem)' }}>
+                Blog
+              </div>
+            </Link>
 
-          {/* VISUALIZATIONS — middle-right 50% */}
-          <Link href="/creations"
-            className="col-span-5 bg-background flex flex-col justify-end p-6 group relative overflow-hidden cursor-pointer transition-colors hover:bg-foreground/5"
-            data-testid="zone-visualizations">
-            <div className="absolute top-0 left-0 w-full h-px bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-            <div className="text-foreground group-hover:text-accent transition-colors" style={{ ...tileLabel, fontSize: 'clamp(1.1rem, 1.9vw, 1.7rem)' }}>
-              Visualizations
-            </div>
-          </Link>
+            {/* MUSIC — middle-left 50% */}
+            <Link href="/creations"
+              className="col-span-5 bg-background flex flex-col justify-end p-6 group relative overflow-hidden cursor-pointer transition-colors hover:bg-foreground/5"
+              data-testid="zone-music">
+              <div className="absolute top-0 left-0 w-full h-px bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
+              <div className="text-foreground group-hover:text-accent transition-colors" style={{ ...tileLabel, fontSize: 'clamp(1.1rem, 1.9vw, 1.7rem)' }}>
+                Music
+              </div>
+            </Link>
 
-          {/* BLANK — bottom row */}
-          <div className="col-span-10 bg-background" data-testid="zone-blank" />
+            {/* VISUALIZATIONS — middle-right 50% */}
+            <Link href="/creations"
+              className="col-span-5 bg-background flex flex-col justify-end p-6 group relative overflow-hidden cursor-pointer transition-colors hover:bg-foreground/5"
+              data-testid="zone-visualizations">
+              <div className="absolute top-0 left-0 w-full h-px bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
+              <div className="text-foreground group-hover:text-accent transition-colors" style={{ ...tileLabel, fontSize: 'clamp(1.1rem, 1.9vw, 1.7rem)' }}>
+                Visualizations
+              </div>
+            </Link>
+          </div>
+
+          {/* Blank space — outside the grid, no borders */}
+          <div className="flex-grow bg-background" data-testid="zone-blank" />
         </div>
       </div>
 
