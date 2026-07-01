@@ -37,7 +37,7 @@ export default function Home() {
       <div className="flex flex-shrink-0">
         <div className="flex flex-col gap-1 px-8 py-3" style={{ width: '40%' }}>
           {/* Name */}
-          <span style={f(500, '1.05rem', { letterSpacing: '-0.01em', lineHeight: 1.1 })}>
+          <span style={f(500, '1.4rem', { letterSpacing: '-0.02em', lineHeight: 1.1 })}>
             Seppe Goossens
           </span>
           {/* Logo + nav */}
@@ -54,7 +54,7 @@ export default function Home() {
                 key={label}
                 href={href}
                 className="text-foreground/50 hover:text-foreground transition-colors"
-                style={f(300, '0.875rem', { letterSpacing: '0.01em' })}
+                style={f(300, '1rem', { letterSpacing: '0.01em' })}
                 data-testid={`link-${label.toLowerCase()}`}
               >
                 {label}
@@ -78,7 +78,7 @@ export default function Home() {
 
           {/* Bio */}
           <div className="px-8 pt-5 pb-4">
-            <p className="text-foreground/65" style={f(350, '0.875rem', { lineHeight: 1.6, letterSpacing: '0.005em' })}>
+            <p className="text-foreground/65" style={f(350, '1rem', { lineHeight: 1.6, letterSpacing: '0.005em' })}>
               Student double-majoring in Urban Planning and Industrial
               Engineering at KU Leuven. Interested in the spatial logic of
               cities, systemic infrastructure flows, and the overlapping
@@ -90,7 +90,7 @@ export default function Home() {
 
           {/* Contact label — above lower line */}
           <div className="px-8 pb-2.5">
-            <span className="text-foreground/50" style={f(400, '0.875rem')}>
+            <span className="text-foreground/50" style={f(400, '1rem')}>
               Contact
             </span>
           </div>
@@ -155,7 +155,7 @@ export default function Home() {
         <a
           href="mailto:s.goossens@student.kuleuven.be"
           className="text-foreground/70 hover:text-accent transition-colors"
-          style={f(350, '0.875rem', { letterSpacing: '0.01em' })}
+          style={f(350, '1rem', { letterSpacing: '0.01em' })}
           data-testid="contact-email"
         >
           s.goossens@student.kuleuven.be
@@ -166,8 +166,8 @@ export default function Home() {
           { label: 'CV',       href: '/cv',                  testId: 'contact-cv',        internal: true  },
         ].map(({ label, href, testId, internal }) =>
           internal
-            ? <Link key={label} href={href} className="text-foreground/50 hover:text-accent transition-colors" style={f(300, '0.875rem')} data-testid={testId}>{label}</Link>
-            : <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="text-foreground/50 hover:text-accent transition-colors" style={f(300, '0.875rem')} data-testid={testId}>{label}</a>
+            ? <Link key={label} href={href} className="text-foreground/50 hover:text-accent transition-colors" style={f(300, '1rem')} data-testid={testId}>{label}</Link>
+            : <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="text-foreground/50 hover:text-accent transition-colors" style={f(300, '1rem')} data-testid={testId}>{label}</a>
         )}
         <div style={{ marginLeft: 'auto' }}>
           <ThemeToggleInline />
