@@ -11,8 +11,8 @@ function useTheme() {
   return { isLight, toggle: () => setIsLight((v) => !v) };
 }
 
-const Icon = ({ isLight }: { isLight: boolean }) => (
-  <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+const Icon = ({ isLight, size = 11 }: { isLight: boolean; size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 12 12" fill="none" aria-hidden="true">
     <circle cx="6" cy="6" r="5" stroke="currentColor" strokeWidth="1" />
     <path d={isLight ? 'M6 1 A5 5 0 0 1 6 11 Z' : 'M6 11 A5 5 0 0 1 6 1 Z'} fill="currentColor" />
   </svg>
@@ -26,11 +26,9 @@ export function ThemeToggleInline() {
       onClick={toggle}
       aria-label={isLight ? 'Switch to dark mode' : 'Switch to light mode'}
       data-testid="theme-toggle"
-      style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: 'inherit', display: 'flex', alignItems: 'center', opacity: 0.5 }}
-      onMouseEnter={(e) => (e.currentTarget.style.opacity = '1')}
-      onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.5')}
+      style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: 'inherit', display: 'flex', alignItems: 'center' }}
     >
-      <Icon isLight={isLight} />
+      <Icon isLight={isLight} size={18} />
     </button>
   );
 }
