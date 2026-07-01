@@ -108,12 +108,12 @@ export default function Home() {
 
         {/* RIGHT COLUMN: tiles — outer carries the right margin, inner is the grid */}
         <div
-          className="flex-grow overflow-hidden bg-background border-r border-foreground"
+          className="flex-grow overflow-hidden bg-background"
           style={{ paddingRight: TEXT_INDENT }}
           data-testid="col-right"
         >
         <div
-          className="grid bg-foreground h-full"
+          className="grid bg-foreground h-full border border-foreground"
           style={{ gridTemplateColumns: 'repeat(10, 1fr)', gridTemplateRows: '1fr 1fr 44%', gap: '1px' }}
         >
           {/* SELECTED WORKS — top-left 70% */}
