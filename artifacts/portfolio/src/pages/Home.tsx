@@ -1,6 +1,5 @@
 import { Link } from 'wouter';
 import { ThemeToggleInline } from '@/components/ThemeToggle';
-import OrbScene from '@/components/OrbScene';
 
 /* Six-pointed asterisk mark */
 const LogoMark = () => (
@@ -17,6 +16,13 @@ const f = (weight: number, size: string, extra?: React.CSSProperties): React.CSS
   fontSize: size,
   ...extra,
 });
+
+const tileLabel: React.CSSProperties = {
+  fontFamily: "'ABC ROM'",
+  fontWeight: 500,
+  letterSpacing: '-0.01em',
+  lineHeight: 1,
+};
 
 // Left-side text starts at px-8 = 2rem from left edge
 const TEXT_INDENT = '2rem';
@@ -103,9 +109,54 @@ export default function Home() {
           </div>
         </div>
 
-        {/* RIGHT COLUMN: orb scene */}
-        <div className="flex-grow bg-background overflow-hidden" data-testid="col-right">
-          <OrbScene />
+        {/* RIGHT COLUMN: tiles */}
+        <div
+          className="flex-grow grid bg-foreground"
+          style={{ gridTemplateColumns: 'repeat(10, 1fr)', gridTemplateRows: '1fr 1fr 44%', gap: '1px' }}
+          data-testid="col-right"
+        >
+          {/* SELECTED WORKS — top-left 70% */}
+          <Link href="/projects"
+            className="col-span-7 bg-background flex flex-col justify-end p-6 group relative overflow-hidden cursor-pointer transition-colors hover:bg-foreground/5"
+            data-testid="zone-projects">
+            <div className="absolute top-0 left-0 w-full h-px bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
+            <div className="text-foreground group-hover:text-accent transition-colors" style={{ ...tileLabel, fontSize: 'clamp(1.5rem, 2.8vw, 2.6rem)' }}>
+              Selected Works
+            </div>
+          </Link>
+
+          {/* BLOG — top-right 30% */}
+          <Link href="/creations"
+            className="col-span-3 bg-background flex flex-col justify-end p-6 group relative overflow-hidden cursor-pointer transition-colors hover:bg-foreground/5"
+            data-testid="zone-blog">
+            <div className="absolute top-0 left-0 w-full h-px bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
+            <div className="text-foreground group-hover:text-accent transition-colors" style={{ ...tileLabel, fontSize: 'clamp(1.1rem, 1.9vw, 1.7rem)' }}>
+              Blog
+            </div>
+          </Link>
+
+          {/* MUSIC — middle-left 50% */}
+          <Link href="/creations"
+            className="col-span-5 bg-background flex flex-col justify-end p-6 group relative overflow-hidden cursor-pointer transition-colors hover:bg-foreground/5"
+            data-testid="zone-music">
+            <div className="absolute top-0 left-0 w-full h-px bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
+            <div className="text-foreground group-hover:text-accent transition-colors" style={{ ...tileLabel, fontSize: 'clamp(1.1rem, 1.9vw, 1.7rem)' }}>
+              Music
+            </div>
+          </Link>
+
+          {/* VISUALIZATIONS — middle-right 50% */}
+          <Link href="/creations"
+            className="col-span-5 bg-background flex flex-col justify-end p-6 group relative overflow-hidden cursor-pointer transition-colors hover:bg-foreground/5"
+            data-testid="zone-visualizations">
+            <div className="absolute top-0 left-0 w-full h-px bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
+            <div className="text-foreground group-hover:text-accent transition-colors" style={{ ...tileLabel, fontSize: 'clamp(1.1rem, 1.9vw, 1.7rem)' }}>
+              Visualizations
+            </div>
+          </Link>
+
+          {/* BLANK — bottom row */}
+          <div className="col-span-10 bg-background" data-testid="zone-blank" />
         </div>
       </div>
 
