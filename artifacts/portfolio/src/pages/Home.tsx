@@ -108,7 +108,7 @@ export default function Home() {
 
         {/* RIGHT COLUMN: tiles — outer carries the right margin, inner is the grid */}
         <div
-          className="flex-grow overflow-hidden bg-background"
+          className="flex-grow overflow-hidden bg-background border-r border-foreground"
           style={{ paddingRight: TEXT_INDENT }}
           data-testid="col-right"
         >
