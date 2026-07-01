@@ -1,5 +1,5 @@
 import { Link } from 'wouter';
-import BelgianInfraSVG from '@/components/BelgianInfraSVG';
+import PerspectiveSVG from '@/components/PerspectiveSVG';
 
 const LogoMark = () => (
   <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" style={{ flexShrink: 0 }}>
@@ -148,61 +148,9 @@ export default function Home() {
           </div>
         </div>
 
-        {/* ── RIGHT COLUMN: 3/5 canvas ── */}
-        <div
-          className="flex-grow grid bg-foreground"
-          style={{ gridTemplateColumns: 'repeat(10, 1fr)', gridTemplateRows: '1fr 1fr 44%', gap: '1px' }}
-          data-testid="col-right"
-        >
-          {/* SELECTED WORKS — top-left 70% */}
-          <Link href="/projects"
-            className="col-span-7 bg-background flex flex-col justify-end p-6 group relative overflow-hidden cursor-pointer transition-colors hover:bg-foreground/5"
-            data-testid="zone-projects">
-            <div className="absolute top-0 left-0 w-full h-px bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-            <div className="text-foreground group-hover:text-accent transition-colors" style={{ ...tileLabel, fontSize: 'clamp(1.5rem, 2.8vw, 2.6rem)' }}>
-              Selected Works
-            </div>
-          </Link>
-
-          {/* BLOG — top-right 30% */}
-          <Link href="/creations"
-            className="col-span-3 bg-background flex flex-col justify-end p-6 group relative overflow-hidden cursor-pointer transition-colors hover:bg-foreground/5"
-            data-testid="zone-blog">
-            <div className="absolute top-0 left-0 w-full h-px bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-            <div className="text-foreground group-hover:text-accent transition-colors" style={{ ...tileLabel, fontSize: 'clamp(1.1rem, 1.9vw, 1.7rem)' }}>
-              Blog
-            </div>
-          </Link>
-
-          {/* MUSIC — middle-left 50% */}
-          <Link href="/creations"
-            className="col-span-5 bg-background flex flex-col justify-end p-6 group relative overflow-hidden cursor-pointer transition-colors hover:bg-foreground/5"
-            data-testid="zone-music">
-            <div className="absolute top-0 left-0 w-full h-px bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-            <div className="text-foreground group-hover:text-accent transition-colors" style={{ ...tileLabel, fontSize: 'clamp(1.1rem, 1.9vw, 1.7rem)' }}>
-              Music
-            </div>
-          </Link>
-
-          {/* VISUALIZATIONS — middle-right 50% */}
-          <Link href="/creations"
-            className="col-span-5 bg-background flex flex-col justify-end p-6 group relative overflow-hidden cursor-pointer transition-colors hover:bg-foreground/5"
-            data-testid="zone-visualizations">
-            <div className="absolute top-0 left-0 w-full h-px bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-            <div className="text-foreground group-hover:text-accent transition-colors" style={{ ...tileLabel, fontSize: 'clamp(1.1rem, 1.9vw, 1.7rem)' }}>
-              Visualizations
-            </div>
-          </Link>
-
-          {/* SVG — full-width bottom */}
-          <div className="col-span-10 bg-background relative flex items-center justify-center overflow-hidden group" data-testid="zone-svg">
-            <span className="absolute bottom-4 left-5 z-10 select-none uppercase text-foreground/35" style={micro}>
-              BE.INFRA — Diffused Urban Condition
-            </span>
-            <div className="absolute inset-0 flex items-center justify-center p-4 opacity-60 group-hover:opacity-90 transition-opacity">
-              <BelgianInfraSVG />
-            </div>
-          </div>
+        {/* ── RIGHT COLUMN: 3/5 — perspective nav canvas ── */}
+        <div className="flex-grow relative overflow-hidden bg-background" data-testid="col-right">
+          <PerspectiveSVG />
         </div>
       </div>
 
