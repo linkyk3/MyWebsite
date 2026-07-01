@@ -4,7 +4,7 @@ import { ThemeToggleInline } from '@/components/ThemeToggle';
 
 /* Six-pointed asterisk mark */
 const LogoMark = () => (
-  <svg width="22" height="22" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" aria-hidden="true" style={{ flexShrink: 0 }}>
+  <svg width="30" height="30" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" aria-hidden="true" style={{ flexShrink: 0 }}>
     <line x1="10" y1="1"   x2="10" y2="19"  />
     <line x1="2"  y1="5.5" x2="18" y2="14.5"/>
     <line x1="18" y1="5.5" x2="2"  y2="14.5"/>
@@ -37,9 +37,9 @@ export default function Home() {
           HEADER — name + logo/nav above upper line
       ══════════════════════════════════════ */}
       <div className="flex flex-shrink-0" style={{ filter: hovered ? 'blur(4px)' : 'none', transition: 'filter 0.25s ease' }}>
-        <div className="flex items-center gap-3 px-8 py-3" style={{ width: '40%' }}>
+        <div className="flex items-center gap-3 px-8 py-4" style={{ width: '40%' }}>
           {/* Name */}
-          <span style={f(500, '1.4rem', { letterSpacing: '-0.02em', lineHeight: 1 })}>
+          <span style={f(500, '1.75rem', { letterSpacing: '-0.02em', lineHeight: 1 })}>
             Seppe Goossens
           </span>
 
@@ -71,7 +71,7 @@ export default function Home() {
                   key={label}
                   href={href}
                   className="text-foreground/50 hover:text-accent transition-colors"
-                  style={f(300, '1rem', { letterSpacing: '0.01em' })}
+                  style={f(300, '1.15rem', { letterSpacing: '0.01em' })}
                   data-testid={`link-${label.toLowerCase()}`}
                 >
                   {label}
