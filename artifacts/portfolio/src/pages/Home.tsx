@@ -41,20 +41,19 @@ export default function Home() {
             Seppe Goossens
           </span>
 
-          {/* Logo — hover reveals nav below */}
-          <div className="relative group" style={{ lineHeight: 0 }}>
-            <div className="cursor-default opacity-70 hover:opacity-100 transition-opacity">
+          {/* Logo + nav — one flex group; mouse can slide from logo into links */}
+          <div className="flex items-center gap-4 group" style={{ lineHeight: 0 }}>
+            <div className="opacity-60 group-hover:opacity-100 transition-opacity" style={{ lineHeight: 0 }}>
               <LogoMark />
             </div>
 
-            {/* Nav — appears to the right of logo on hover */}
             <nav
               aria-label="Primary navigation"
-              className="absolute flex items-center gap-4
+              className="flex items-center gap-4
                          opacity-0 pointer-events-none
                          group-hover:opacity-100 group-hover:pointer-events-auto
                          transition-opacity duration-150"
-              style={{ left: '100%', top: '50%', transform: 'translateY(-50%)', marginLeft: '14px', whiteSpace: 'nowrap', zIndex: 50 }}
+              style={{ whiteSpace: 'nowrap' }}
             >
               {[
                 { label: 'Projects',       href: '/projects'  },
