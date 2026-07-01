@@ -110,7 +110,7 @@ export default function Home() {
 
         {/* RIGHT COLUMN: large typographic nav */}
         <div
-          className="flex-grow flex flex-col justify-center overflow-hidden"
+          className="flex-grow flex flex-col justify-evenly overflow-hidden"
           style={{ paddingLeft: '3rem', paddingRight: TEXT_INDENT }}
           data-testid="col-right"
         >
@@ -137,6 +137,7 @@ export default function Home() {
                   transition: 'opacity 0.2s ease, filter 0.2s ease, -webkit-text-stroke 0.15s ease',
                   cursor: 'pointer',
                   userSelect: 'none',
+                  textAlign: 'right',
                 }}
               >
                 {label}
