@@ -1,12 +1,12 @@
 import { Link } from 'wouter';
 import { ThemeToggleInline } from '@/components/ThemeToggle';
 
-/* Adobe Pathfinder–style logo: three overlapping circles */
+/* Six-pointed asterisk mark */
 const LogoMark = () => (
-  <svg width="26" height="24" viewBox="0 0 26 24" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true" style={{ flexShrink: 0 }}>
-    <circle cx="9"  cy="9"  r="8" />
-    <circle cx="17" cy="9"  r="8" />
-    <circle cx="13" cy="16" r="8" />
+  <svg width="22" height="22" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" aria-hidden="true" style={{ flexShrink: 0 }}>
+    <line x1="10" y1="1"   x2="10" y2="19"  />
+    <line x1="2"  y1="5.5" x2="18" y2="14.5"/>
+    <line x1="18" y1="5.5" x2="2"  y2="14.5"/>
   </svg>
 );
 
@@ -47,14 +47,14 @@ export default function Home() {
               <LogoMark />
             </div>
 
-            {/* Nav — appears below logo on hover */}
+            {/* Nav — appears to the right of logo on hover */}
             <nav
               aria-label="Primary navigation"
-              className="absolute left-0 top-full mt-2 flex items-center gap-4
+              className="absolute flex items-center gap-4
                          opacity-0 pointer-events-none
                          group-hover:opacity-100 group-hover:pointer-events-auto
                          transition-opacity duration-150"
-              style={{ whiteSpace: 'nowrap', zIndex: 50 }}
+              style={{ left: '100%', top: '50%', transform: 'translateY(-50%)', marginLeft: '14px', whiteSpace: 'nowrap', zIndex: 50 }}
             >
               {[
                 { label: 'Projects',       href: '/projects'  },
