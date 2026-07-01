@@ -124,7 +124,8 @@ export default function Home() {
                 onMouseEnter={() => setHovered(label)}
                 onMouseLeave={() => setHovered(null)}
                 style={{
-                  display: 'block',
+                  display: 'inline-block',
+                  marginLeft: 'auto',
                   fontFamily: "'ABC ROM'",
                   fontWeight: 700,
                   fontSize: 'clamp(3.8rem, 7.5vw, 7rem)',
