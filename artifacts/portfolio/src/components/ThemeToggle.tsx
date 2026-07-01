@@ -1,55 +1,56 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'wouter';
 
-export function ThemeToggle() {
-  const [isLight, setIsLight] = useState(() => {
-    return localStorage.getItem('theme') === 'light';
-  });
-
+// Shared hook so both inline + fixed instances share localStorage state
+function useTheme() {
+  const [isLight, setIsLight] = useState(() => localStorage.getItem('theme') === 'light');
   useEffect(() => {
-    const root = document.documentElement;
-    if (isLight) {
-      root.classList.add('light');
-      localStorage.setItem('theme', 'light');
-    } else {
-      root.classList.remove('light');
-      localStorage.setItem('theme', 'dark');
-    }
+    document.documentElement.classList.toggle('light', isLight);
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
   }, [isLight]);
+  return { isLight, toggle: () => setIsLight((v) => !v) };
+}
+
+const Icon = ({ isLight }: { isLight: boolean }) => (
+  <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+    <circle cx="6" cy="6" r="5" stroke="currentColor" strokeWidth="1" />
+    <path d={isLight ? 'M6 1 A5 5 0 0 1 6 11 Z' : 'M6 11 A5 5 0 0 1 6 1 Z'} fill="currentColor" />
+  </svg>
+);
+
+/** Inline variant — used inside the Home footer row */
+export function ThemeToggleInline() {
+  const { isLight, toggle } = useTheme();
+  return (
+    <button
+      onClick={toggle}
+      aria-label={isLight ? 'Switch to dark mode' : 'Switch to light mode'}
+      data-testid="theme-toggle"
+      style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: 'inherit', display: 'flex', alignItems: 'center', opacity: 0.5 }}
+      onMouseEnter={(e) => (e.currentTarget.style.opacity = '1')}
+      onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.5')}
+    >
+      <Icon isLight={isLight} />
+    </button>
+  );
+}
+
+/** Fixed variant — shown on all pages except home (which has the inline version) */
+export function ThemeToggle() {
+  const { isLight, toggle } = useTheme();
+  const [location] = useLocation();
+  if (location === '/') return null;
 
   return (
     <button
-      onClick={() => setIsLight((v) => !v)}
+      onClick={toggle}
       aria-label={isLight ? 'Switch to dark mode' : 'Switch to light mode'}
       data-testid="theme-toggle"
-      style={{
-        position: 'fixed',
-        bottom: '24px',
-        right: '24px',
-        width: '28px',
-        height: '28px',
-        border: 'none',
-        background: 'transparent',
-        cursor: 'pointer',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 9999,
-        color: 'var(--color-foreground, #fff)',
-        transition: 'opacity 0.15s',
-        padding: 0,
-      }}
-      onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.6')}
-      onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
+      style={{ position: 'fixed', bottom: '24px', right: '24px', background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: 'var(--color-foreground, #fff)', display: 'flex', alignItems: 'center', zIndex: 9999, opacity: 0.5 }}
+      onMouseEnter={(e) => (e.currentTarget.style.opacity = '1')}
+      onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.5')}
     >
-      {/* Half-filled circle: ◐ = light, ◑ = dark */}
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <circle cx="6" cy="6" r="5" stroke="currentColor" strokeWidth="1" />
-        {/* Fill right half to indicate opposite mode available */}
-        <path
-          d={isLight ? 'M6 1 A5 5 0 0 1 6 11 Z' : 'M6 11 A5 5 0 0 1 6 1 Z'}
-          fill="currentColor"
-        />
-      </svg>
+      <Icon isLight={isLight} />
     </button>
   );
 }

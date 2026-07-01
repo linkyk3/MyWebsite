@@ -1,4 +1,5 @@
 import { Link } from 'wouter';
+import { ThemeToggleInline } from '@/components/ThemeToggle';
 
 const LogoMark = () => (
   <svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" style={{ flexShrink: 0 }}>
@@ -23,21 +24,23 @@ const tileLabel: React.CSSProperties = {
   lineHeight: 1,
 };
 
+// Left-side text starts at px-8 = 2rem from left edge
+const TEXT_INDENT = '2rem';
+
 export default function Home() {
   return (
     <div className="w-screen h-screen flex flex-col overflow-hidden bg-background text-foreground" data-testid="home-root">
 
       {/* ══════════════════════════════════════
-          HEADER — above upper horizon line
-          Name on row 1, logo + nav on row 2
+          HEADER — name + logo/nav above upper line
       ══════════════════════════════════════ */}
-      <div className="flex flex-shrink-0 border-b border-foreground">
+      <div className="flex flex-shrink-0">
         <div className="flex flex-col gap-1 px-8 py-3" style={{ width: '40%' }}>
-          {/* Row 1: Name */}
-          <span style={f(500, 'clamp(0.78rem, 1.2vw, 0.9rem)', { letterSpacing: '-0.01em', lineHeight: 1 })}>
+          {/* Name */}
+          <span style={f(500, '0.875rem', { letterSpacing: '-0.01em', lineHeight: 1.1 })}>
             Seppe Goossens
           </span>
-          {/* Row 2: logo mark + nav links */}
+          {/* Logo + nav */}
           <nav className="flex items-center gap-3" aria-label="Primary navigation">
             <LogoMark />
             {[
@@ -51,7 +54,7 @@ export default function Home() {
                 key={label}
                 href={href}
                 className="text-foreground/50 hover:text-foreground transition-colors"
-                style={f(300, '0.62rem', { letterSpacing: '0.02em' })}
+                style={f(300, '0.75rem', { letterSpacing: '0.01em' })}
                 data-testid={`link-${label.toLowerCase()}`}
               >
                 {label}
@@ -62,17 +65,20 @@ export default function Home() {
         <div style={{ width: '60%' }} />
       </div>
 
+      {/* UPPER HORIZON LINE — 2px, starts where text starts */}
+      <div className="flex-shrink-0 bg-foreground" style={{ height: '2px', marginLeft: TEXT_INDENT }} />
+
       {/* ══════════════════════════════════════
           MAIN CONTENT
       ══════════════════════════════════════ */}
       <div className="flex flex-grow overflow-hidden">
 
-        {/* ── LEFT COLUMN ── */}
+        {/* LEFT COLUMN */}
         <div className="flex flex-col border-r border-foreground" style={{ width: '40%' }} data-testid="col-left">
 
           {/* Bio */}
-          <div className="px-8 pt-6 pb-4">
-            <p className="text-foreground/65" style={f(350, '0.68rem', { lineHeight: 1.6, letterSpacing: '0.005em' })}>
+          <div className="px-8 pt-5 pb-4">
+            <p className="text-foreground/65" style={f(350, '0.75rem', { lineHeight: 1.6, letterSpacing: '0.005em' })}>
               Student double-majoring in Urban Planning and Industrial
               Engineering at KU Leuven. Interested in the spatial logic of
               cities, systemic infrastructure flows, and the overlapping
@@ -82,15 +88,15 @@ export default function Home() {
 
           <div className="flex-grow" />
 
-          {/* Contact label — sits just above the lower horizon line */}
-          <div className="px-8 pb-3">
-            <span className="text-foreground/50" style={f(300, '0.62rem', { letterSpacing: '0.06em' })}>
+          {/* Contact label — above lower line */}
+          <div className="px-8 pb-2.5">
+            <span className="text-foreground/50" style={f(400, '0.75rem')}>
               Contact
             </span>
           </div>
         </div>
 
-        {/* ── RIGHT COLUMN: tiles ── */}
+        {/* RIGHT COLUMN: tiles */}
         <div
           className="flex-grow grid bg-foreground"
           style={{ gridTemplateColumns: 'repeat(10, 1fr)', gridTemplateRows: '1fr 1fr 44%', gap: '1px' }}
@@ -141,19 +147,15 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ══════════════════════════════════════
-          LOWER HORIZON LINE
-      ══════════════════════════════════════ */}
-      <div className="flex-shrink-0 w-full h-px bg-foreground" />
+      {/* LOWER HORIZON LINE — 2px, starts where text starts */}
+      <div className="flex-shrink-0 bg-foreground" style={{ height: '2px', marginLeft: TEXT_INDENT }} />
 
-      {/* ══════════════════════════════════════
-          FOOTER — email + links below lower line
-      ══════════════════════════════════════ */}
-      <div className="flex flex-shrink-0 px-8 py-2.5 gap-6 items-center">
+      {/* FOOTER — email + links + theme toggle */}
+      <div className="flex flex-shrink-0 items-center gap-5 px-8 py-2.5">
         <a
           href="mailto:s.goossens@student.kuleuven.be"
           className="text-foreground/70 hover:text-accent transition-colors"
-          style={f(350, '0.68rem', { letterSpacing: '0.01em' })}
+          style={f(350, '0.75rem', { letterSpacing: '0.01em' })}
           data-testid="contact-email"
         >
           s.goossens@student.kuleuven.be
@@ -164,9 +166,12 @@ export default function Home() {
           { label: 'CV',       href: '/cv',                  testId: 'contact-cv',        internal: true  },
         ].map(({ label, href, testId, internal }) =>
           internal
-            ? <Link key={label} href={href} className="text-foreground/50 hover:text-accent transition-colors" style={f(300, '0.68rem')} data-testid={testId}>{label}</Link>
-            : <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="text-foreground/50 hover:text-accent transition-colors" style={f(300, '0.68rem')} data-testid={testId}>{label}</a>
+            ? <Link key={label} href={href} className="text-foreground/50 hover:text-accent transition-colors" style={f(300, '0.75rem')} data-testid={testId}>{label}</Link>
+            : <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="text-foreground/50 hover:text-accent transition-colors" style={f(300, '0.75rem')} data-testid={testId}>{label}</a>
         )}
+        <div style={{ marginLeft: 'auto' }}>
+          <ThemeToggleInline />
+        </div>
       </div>
 
     </div>

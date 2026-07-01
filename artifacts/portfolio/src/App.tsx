@@ -10,6 +10,7 @@ import Projects from '@/pages/Projects';
 import Creations from '@/pages/Creations';
 import { GlobalNav } from '@/components/GlobalNav';
 import { ThemeToggle } from '@/components/ThemeToggle';
+// ThemeToggleInline is rendered inside Home.tsx footer; ThemeToggle handles all other pages
 
 const queryClient = new QueryClient();
 
