@@ -56,7 +56,7 @@ export default function Home() {
                          opacity-0 pointer-events-none
                          group-hover:opacity-100 group-hover:pointer-events-auto
                          transition-opacity duration-150"
-              style={{ left: '100%', top: '50%', transform: 'translateY(-50%)', marginLeft: '14px', whiteSpace: 'nowrap' }}
+              style={{ left: '36px', top: '50%', transform: 'translateY(-50%)', whiteSpace: 'nowrap' }}
             >
               {[
                 { label: 'Projects',       href: '/projects'  },
