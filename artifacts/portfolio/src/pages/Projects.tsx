@@ -20,43 +20,72 @@ const f = (weight: number, size: string, extra?: React.CSSProperties): React.CSS
 
 const TEXT_INDENT = '2rem';
 
-/* ── Project data ── */
+// Portrait tiles: 4157×5906 → aspect-ratio ≈ 4157/5906
+// Landscape tiles: 4000×3000 → aspect-ratio = 4/3
+const PORTRAIT  = '4157 / 5906' as const;
+const LANDSCAPE = '4000 / 3000' as const;
+
+/* ── Project data ──
+   Even indices (0,2,4,6) → left tile column
+   Odd  indices (1,3,5,7) → right tile column
+   Column heights balance: 2× portrait + 2× landscape on each side.
+*/
 const PROJECTS = [
   {
     id: '001',
-    title: 'Transit Network Optimization',
-    desc: 'Modelling multimodal transit in a mid-size city using graph theory and GIS.',
-    bg: 'repeating-linear-gradient(45deg,  #0d0d0d 0px, #0d0d0d 18px, #111 18px, #111 19px)',
+    title: 'De buurtspoorwegen in Brabant',
+    desc: 'Een historisch-morfologische lezing van het diffuse verstedelijkingsproces.',
+    img: 'thesisboek.png',
+    ratio: PORTRAIT,
   },
   {
     id: '002',
-    title: 'Zoning Reform Proposal',
-    desc: 'Rezoning study for mixed-use corridors via urban policy and spatial analysis.',
-    bg: 'repeating-linear-gradient(90deg,  #0a0a0a 0px, #0a0a0a 28px, #111 28px, #111 29px)',
+    title: 'Positive Energy Network',
+    desc: 'Design Studio – Positive Energy Districts in Intermediate Territories: the Case of Pajottenland.',
+    img: 'pen-network.png',
+    ratio: LANDSCAPE,
   },
   {
     id: '003',
-    title: 'Pedestrian Flow Simulation',
-    desc: 'Agent-based simulation of pedestrian density in public spaces.',
-    bg: 'repeating-linear-gradient(135deg, #0e0e0e 0px, #0e0e0e 18px, #131313 18px, #131313 19px)',
+    title: 'Is Homeownership Reaching its Limits?',
+    desc: 'A Historical and Contemporary Review of Path Dependency in Belgium\'s Housing Landscape.',
+    img: 'housing-paper.png',
+    ratio: PORTRAIT,
   },
   {
     id: '004',
-    title: 'Supply Chain Resilience',
-    desc: 'Risk mapping and mitigation for mid-tier manufacturing networks.',
-    bg: 'repeating-linear-gradient(0deg,   #090909 0px, #090909 24px, #0f0f0f 24px, #0f0f0f 25px)',
+    title: 'The Landscape as a Unifying Model?',
+    desc: 'The Fietssnelwegen Network and the Friction Between Landscape Urbanism and Engineering.',
+    img: 'lu-paper.png',
+    ratio: PORTRAIT,
   },
   {
     id: '005',
-    title: 'Ergonomics Audit',
-    desc: 'Workstation redesign study using RULA methodology and motion capture data.',
-    bg: 'repeating-linear-gradient(60deg,  #0b0b0b 0px, #0b0b0b 18px, #121212 18px, #121212 19px)',
+    title: 'Methoden en Technieken: Ruimtelijke en Morfologische Analyse',
+    desc: 'Mahatma Gandhi – Master Stedenbouw en Ruimtelijke Planning 2024–2025.',
+    img: 'mt-rm.png',
+    ratio: LANDSCAPE,
   },
   {
     id: '006',
-    title: 'Production Scheduling',
-    desc: 'Integer programming model for a job-shop scheduling problem with OR-Tools.',
-    bg: 'repeating-linear-gradient(120deg, #0c0c0c 0px, #0c0c0c 22px, #111 22px, #111 23px)',
+    title: 'Frictie tussen beleid en beleving',
+    desc: 'Over parkeren en het ruimtelijke spanningsveld op de grens tussen Molenbeek en Koekelberg.',
+    img: 'mt-sr.png',
+    ratio: PORTRAIT,
+  },
+  {
+    id: '007',
+    title: 'Ruimtelijk Ontwerp',
+    desc: 'Masterplan Ossegem Station.',
+    img: 'ruimtelijk-ontwerp.png',
+    ratio: LANDSCAPE,
+  },
+  {
+    id: '008',
+    title: 'Excursion 2026 MILAN',
+    desc: 'VUB MA STeR* – Video by Nette Sneyers and Seppe Goossens.',
+    img: 'excursie.png',
+    ratio: LANDSCAPE,
   },
 ] as const;
 
@@ -68,26 +97,59 @@ const NAV_LINKS = [
   { label: 'About',          href: '/cv'        },
 ];
 
+const BASE = import.meta.env.BASE_URL; // e.g. "/portfolio/"
+
 /* ── Page ── */
 export default function Projects() {
   // hoveredId is set ONLY by text-list hover — never by tile hover
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
-  // dim: applied to both list items and tiles passively
   const dim = (id: string): React.CSSProperties =>
     hoveredId !== null && hoveredId !== id
       ? { filter: 'blur(3px)', opacity: 0.18, transition: 'filter 0.25s ease, opacity 0.25s ease' }
       : { filter: 'none',      opacity: 1,    transition: 'filter 0.25s ease, opacity 0.25s ease' };
 
-  // globalBlur: applied to header / lines / footer — only when text item is hovered
   const globalBlur: React.CSSProperties = hoveredId
     ? { filter: 'blur(4px)', transition: 'filter 0.25s ease' }
     : { filter: 'none',      transition: 'filter 0.25s ease' };
 
-  return (
-    <div className="w-screen h-screen flex justify-center bg-background overflow-hidden">
+  // Split into two tile columns keeping heights balanced
+  const leftTiles  = PROJECTS.filter((_, i) => i % 2 === 0); // 001, 003, 005, 007
+  const rightTiles = PROJECTS.filter((_, i) => i % 2 === 1); // 002, 004, 006, 008
+
+  const renderTile = (p: typeof PROJECTS[number]) => {
+    const isActive = hoveredId === p.id;
+    return (
       <div
-        className="h-full flex flex-col overflow-hidden bg-background text-foreground"
+        key={p.id}
+        aria-label={p.title}
+        style={{
+          aspectRatio: p.ratio,
+          border: '1px solid #FF0000',
+          boxShadow: isActive ? '0 0 0 1px #FF0000, 0 8px 32px rgba(255,0,0,0.3)' : 'none',
+          ...dim(p.id),
+          overflow: 'hidden',
+          flexShrink: 0,
+        }}
+      >
+        <img
+          src={`${BASE}works/${p.img}`}
+          alt={p.title}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          loading="lazy"
+        />
+      </div>
+    );
+  };
+
+  return (
+    /*
+      min-h-screen (not h-screen) so the page grows with content and scrolls
+      naturally. The 4:3 max-width is kept as a layout constraint only.
+    */
+    <div className="w-screen min-h-screen flex justify-center bg-background">
+      <div
+        className="min-h-screen flex flex-col bg-background text-foreground"
         style={{ width: '100%', maxWidth: 'calc(100vh * 4 / 3)' }}
         data-testid="projects-root"
       >
@@ -133,107 +195,76 @@ export default function Projects() {
           style={{ height: '2px', marginLeft: TEXT_INDENT, marginRight: TEXT_INDENT, ...globalBlur }}
         />
 
-        {/* ── MAIN CONTENT ── */}
-        {/*
-          Vertical breathing room: paddingTop / paddingBottom push content
-          away from both horizon lines. The tile grid is given a fixed width
-          (~46%) so it sits inset from the right edge, leaving deliberate
-          whitespace at far right.
+        {/* ── MAIN CONTENT ──
+            Both columns grow with their natural content height.
+            The page scrolls if total height exceeds viewport.
         */}
-        <div
-          className="flex flex-grow overflow-hidden"
-          style={{ paddingTop: '2.5rem', paddingBottom: '2.5rem' }}
-        >
+        <div className="flex" style={{ paddingTop: '2.5rem', paddingBottom: '2.5rem', alignItems: 'flex-start' }}>
 
-          {/* LEFT — project text list
-              paddingRight creates the gap between list/dividers and the tile grid.
-              Dividers stop before the grid because they're constrained by this column width.
-          */}
+          {/* LEFT — project text list (40%) */}
           <div
-            className="flex flex-col flex-shrink-0 overflow-y-auto"
+            className="flex-shrink-0"
             style={{ width: '40%', paddingLeft: TEXT_INDENT, paddingRight: '2.5rem' }}
           >
-            {PROJECTS.map((p, i) => (
-              <div
-                key={p.id}
-                role="button"
-                tabIndex={0}
-                onMouseEnter={() => setHoveredId(p.id)}
-                onMouseLeave={() => setHoveredId(null)}
-                onFocus={() => setHoveredId(p.id)}
-                onBlur={() => setHoveredId(null)}
-                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setHoveredId(p.id); }}
-                style={{
-                  ...dim(p.id),
-                  // Tight vertical rhythm — compact but breathable
-                  padding: '0.6rem 0',
-                  borderBottom: i < PROJECTS.length - 1 ? '1px solid currentColor' : 'none',
-                  cursor: 'pointer',
-                  outline: 'none',
-                }}
-              >
-                {/* Project number + title on one row */}
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.55rem', marginBottom: '0.2rem' }}>
-                  <span style={f(300, '0.62rem', {
-                    opacity: 0.38,
-                    letterSpacing: '0.06em',
-                    flexShrink: 0,
-                    lineHeight: 1,
-                  })}>
-                    {p.id}
-                  </span>
-                  <span style={f(500, '0.9rem', { letterSpacing: '-0.01em', lineHeight: 1.25 })}>
-                    {p.title}
-                  </span>
-                </div>
-                {/* Description */}
-                <div style={f(300, '0.75rem', {
-                  opacity: 0.45,
-                  lineHeight: 1.5,
-                  letterSpacing: '0.005em',
-                  paddingLeft: '1.35rem', // indent to align under title (past the number)
-                })}>
-                  {p.desc}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* RIGHT — image tile grid
-              Fixed width (~46% of the 4:3 box) leaves deliberate right-side whitespace.
-              No mouse handlers — tiles are display-only; glow/dim responds
-              passively to hoveredId set by the text list.
-          */}
-          <div
-            style={{
-              flexShrink: 0,
-              width: '46%',
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gridTemplateRows: 'repeat(2, 1fr)',
-              gap: '3px',
-            }}
-          >
-            {PROJECTS.map((p) => {
-              const isActive = hoveredId === p.id;
-              return (
+            {/*
+              List wrapper: top and bottom borders frame the full list.
+              Internal dividers sit between items.
+            */}
+            <div style={{ borderTop: '1px solid currentColor', borderBottom: '1px solid currentColor' }}>
+              {PROJECTS.map((p, i) => (
                 <div
                   key={p.id}
-                  aria-label={p.title}
+                  role="button"
+                  tabIndex={0}
+                  onMouseEnter={() => setHoveredId(p.id)}
+                  onMouseLeave={() => setHoveredId(null)}
+                  onFocus={() => setHoveredId(p.id)}
+                  onBlur={() => setHoveredId(null)}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setHoveredId(p.id); }}
                   style={{
-                    background: p.bg,
-                    border: '1px solid #FF0000',
-                    boxShadow: isActive
-                      ? '0 0 0 1px #FF0000, 0 8px 32px rgba(255,0,0,0.3)'
-                      : 'none',
-                    // Tiles dim passively but never trigger blur themselves
                     ...dim(p.id),
-                    position: 'relative',
-                    overflow: 'hidden',
+                    padding: '0.6rem 0',
+                    borderBottom: i < PROJECTS.length - 1 ? '1px solid currentColor' : 'none',
+                    cursor: 'pointer',
+                    outline: 'none',
                   }}
-                />
-              );
-            })}
+                >
+                  {/* Number + title on one row */}
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.55rem', marginBottom: '0.2rem' }}>
+                    <span style={f(300, '0.62rem', { opacity: 0.38, letterSpacing: '0.06em', flexShrink: 0, lineHeight: 1 })}>
+                      {p.id}
+                    </span>
+                    <span style={f(500, '0.9rem', { letterSpacing: '-0.01em', lineHeight: 1.25 })}>
+                      {p.title}
+                    </span>
+                  </div>
+                  {/* Description, indented past the number */}
+                  <div style={f(300, '0.75rem', { opacity: 0.45, lineHeight: 1.5, letterSpacing: '0.005em', paddingLeft: '1.35rem' })}>
+                    {p.desc}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* RIGHT — tile grid (flex-grow)
+              Two independent flex-col strips.
+              Even projects → left strip; odd → right strip.
+              Each image is displayed in a container with aspect-ratio matching
+              the source file dimensions — no cropping or distortion.
+          */}
+          <div
+            className="flex-grow"
+            style={{ display: 'flex', gap: '3px', paddingRight: TEXT_INDENT }}
+          >
+            {/* Left tile strip: 001, 003, 005, 007 */}
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '3px' }}>
+              {leftTiles.map(renderTile)}
+            </div>
+            {/* Right tile strip: 002, 004, 006, 008 */}
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '3px' }}>
+              {rightTiles.map(renderTile)}
+            </div>
           </div>
 
         </div>

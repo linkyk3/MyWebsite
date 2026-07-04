@@ -1,0 +1,45 @@
+Please update the "Selected Works" page with a new set of 8 project items using the provided image files. 
+
+Ensure the image aspect ratios are respected within the tile structure so they align cleanly without being unnaturally stretched or distorted. If the height of the layout exceeds the viewport, allow the page to become scrollable naturally, making sure the bottom footer bar stays anchored correctly below all content.
+
+1. Content & Image Updates:
+   Assign the following names, descriptions, and corresponding image assets to the items:
+   
+   - 001: "De buurtspoorwegen in Brabant"
+          Subtext: Een historisch-morfologische lezing van het diffuse verstedelijkingsproces.
+          Image: thesisboek_front_tile.jpg
+          
+   - 002: "Positive Energy Network"
+          Subtext: Design Studio - Positive Energy Districts in Intermediate Territories: the Case of Pajottenland.
+          Image: 5_PEN-network_A1 conv 0_tile.jpg
+          
+   - 003: "Is Homeownership Reaching its Limits?"
+          Subtext: A Historical and Contemporary Review of Path Dependency in Belgium’s Housing Landscape.
+          Image: housing_paper_tile.jpg
+          
+   - 004: "The Landscape as a Unifying Model?"
+          Subtext: The Fietssnelwegen Network and the Friction Between Landscape Urbanism and Engineering.
+          Image: LU_paper_tile.jpg
+          
+   - 005: "Methoden en Technieken: Ruimtelijke en Morfologische Analyse"
+          Subtext: Mahatma Gandhi - Master Stedenbouw en Ruimtelijke Planning 2024-2025.
+          Image: MT-RM_Brochure_tile.jpg
+          
+   - 006: "Frictie tussen beleid en beleving"
+          Subtext: Over parkeren en het ruimtelijke spanningsveld op de grens tussen Molenbeek en Koekelberg.
+          Image: MT-SR_Paper_SeppeGoossens_tile.jpg
+          
+   - 007: "Ruimtelijk Ontwerp"
+          Subtext: Masterplan Ossegem Station.
+          Image: RuimtelijkOntwerp_Brochure_F1_extra_tile.png
+          
+   - 008: "Excursion 2026 MILAN"
+          Subtext: VUB MA STeR* - Video by Nette Sneyers and Seppe Goossens.
+          Image: Screenshot 2026-06-15 174032.png
+
+2. Aspect Ratio & Grid Behavior:
+   - Render each tile using its natural image aspect ratio (respecting whether it is vertical/portrait or horizontal/landscape) so they tile cleanly next to each other in the right-hand container.
+   - If the multi-column or vertical height of these 8 items exceeds the window height, allow the layout container to scroll vertically. The bottom accent line/footer should sit gracefully beneath the final items when scrolled to the very bottom.
+
+3. Left-Side Title List Styling:
+   - Add a solid thin black line directly at the top of the entire title list (above item 001) and another solid thin black line directly at the bottom of the list (below item 008) to frame it beautifully, in addition to the existing dividing lines between individual items.
