@@ -1,0 +1,52 @@
+Please apply the following structural, image asset, alignment, and ordering updates to the "Selected Works" page:
+
+1. New Project Ordering & Asset Mapping:
+   Rearrange the items and tiles into the exact order specified below. Ensure the native image aspect ratios are respected cleanly in the right-side grid container. If necessary to fit them beautifully, a layout with 3 rows of tiles is allowed:
+
+   - 001: "De buurtspoorwegen in Brabant"
+          Subtext: Een historisch-morfologische lezing van het diffuse verstedelijkingsproces.
+          Image: thesisboek_front.jpg
+          
+   - 002: "Positive Energy Network"
+          Subtext: Design Studio - Positive Energy Districts in Intermediate Territories: the Case of Pajottenland.
+          Image: 5_PEN-network_A1 conv 0.jpg
+          
+   - 003: "The Landscape as a Unifying Model?"
+          Subtext: The Fietssnelwegen Network and the Friction Between Landscape Urbanism and Engineering.
+          Image: LU_paper.jpg
+          
+   - 004: "Ruimtelijk Ontwerp"
+          Subtext: Masterplan Ossegem Station.
+          Image: RuimtelijkOntwerp_Brochure_F1_extra.jpg
+          
+   - 005: "Excursion 2026 MILAN"
+          Subtext: VUB MA STeR* - Video by Nette Sneyers and Seppe Goossens.
+          Image: excursie_tile.jpg
+          
+   - 006: "Methoden en Technieken: Ruimtelijke en Morfologische Analyse"
+          Subtext: Mahatma Gandhi - Master Stedenbouw en Ruimtelijke Planning 2024-2025.
+          Image: MT-RM_Brochure.png
+          
+   - 007: "Frictie tussen beleid en beleving"
+          Subtext: Over parkeren en het ruimtelijke spanningsveld op de grens tussen Molenbeek en Koekelberg (Sociaal-ruimtelijke analyse).
+          Image: MT-SR_Paper_SeppeGoossens.jpg
+          
+   - 008: "Is Homeownership Reaching its Limits?"
+          Subtext: A Historical and Contemporary Review of Path Dependency in Belgium’s Housing Landscape.
+          Image: housing_paper.jpg
+
+2. Natural Scrolling Flow:
+   - Allow the left-side text list to scroll naturally along with the page view. When the user scrolls down to see more project tiles, the upper text list items should scroll up and disappear out of view dynamically.
+   - Ensure the bottom page footer bar dynamically stays beneath the total length of the content when scrolled to the absolute bottom.
+
+3. Refined Typography & Centered Layout:
+   - Make the spacing inside each individual list item more compact: minimize the vertical gaps between the Title, the Caption, and the dividing lines.
+   - Perfectly center both the Title text and Caption text vertically between their top and bottom dividing lines.
+   - Fix text alignment: Make sure the Title and the Caption text align perfectly to the same left margin (no horizontal shifting or offsets between them).
+   - Increase the vertical distance *between* different project items in the list to create a clean layout—make this spacing at least 4 times larger than the current setting.
+
+4. Advanced Selective Hover Blur Logic:
+   - When a user hovers over a text list item, update the Gaussian blur targets:
+     1. The active Title text, the active Caption text, AND the top and bottom dividing lines of that specific active item must remain perfectly sharp and unblurred.
+     2. The main site header line at the very top of the page MUST be included in the background blur. 
+     3. Everything else (the other list items, background text, and inactive tiles) should gracefully blur out as before.

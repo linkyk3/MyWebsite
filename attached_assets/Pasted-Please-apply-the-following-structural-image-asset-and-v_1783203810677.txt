@@ -1,0 +1,28 @@
+Please apply the following structural, image asset, and visual alignment updates to the "Selected Works" page:
+
+1. Image Updates (New High-Resolution Files):
+   Replace the previous image files with this updated set. Maintain native image aspect ratios cleanly in the right-side grid container:
+   - 001: thesisboek_front.jpg
+   - 002: 5_PEN-network_A1 conv 0.jpg
+   - 003: housing_paper.jpg
+   - 004: LU_paper.jpg
+   - 005: MT-RM_Brochure.png
+   - 006: MT-SR_Paper_SeppeGoossens.jpg
+   - 007: RuimtelijkOntwerp_Brochure_F1_extra.jpg
+   - 008: Screenshot 2026-06-15 174032.png
+
+2. Natural Scrolling Flow:
+   - Let the left-side text list scroll naturally along with the page view. When the user scrolls down to see more project tiles, the upper text list items should scroll up and disappear out of view dynamically.
+   - Ensure the bottom page footer bar dynamically stays beneath the total length of the content when scrolled to the absolute bottom.
+
+3. Refined Typography & Centered Layout:
+   - Make the spacing inside each individual list item more compact: minimize the vertical gaps between the Title, the Caption, and the dividing lines.
+   - Perfectly center both the Title text and Caption text vertically between their top and bottom dividing lines.
+   - Fix text alignment: Make sure the Title and the Caption text align perfectly to the same left margin (no horizontal shifting or offsets between them).
+   - Increase the vertical distance *between* different project items in the list to create a clean layout—make this spacing at least 4 times larger than the current setting.
+
+4. Advanced Selective Hover Blur Logic:
+   - When a user hovers over a text list item, update the Gaussian blur targets:
+     1. The active Title text, the active Caption text, AND the top and bottom dividing lines of that specific active item must remain perfectly sharp and unblurred.
+     2. The main site header line at the very top of the page MUST be included in the background blur. 
+     3. Everything else (the other list items, background text, and inactive tiles) should gracefully blur out as before.
