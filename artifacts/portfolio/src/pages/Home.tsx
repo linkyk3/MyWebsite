@@ -31,7 +31,12 @@ const NAV_ITEMS = [
 export default function Home() {
   const [hovered, setHovered] = useState<string | null>(null);
   return (
-    <div className="w-screen h-screen flex flex-col overflow-hidden bg-background text-foreground" data-testid="home-root">
+    <div className="w-screen h-screen flex justify-center bg-background overflow-hidden">
+    <div
+      className="h-full flex flex-col overflow-hidden bg-background text-foreground"
+      style={{ width: '100%', maxWidth: 'calc(100vh * 4 / 3)' }}
+      data-testid="home-root"
+    >
 
       {/* ══════════════════════════════════════
           HEADER — name + logo/nav above upper line
@@ -128,7 +133,7 @@ export default function Home() {
                   marginLeft: 'auto',
                   fontFamily: "'ABC ROM'",
                   fontWeight: 700,
-                  fontSize: 'clamp(3.8rem, 7.5vw, 7rem)',
+                  fontSize: 'clamp(3.2rem, 7.5vh, 6.5rem)',
                   letterSpacing: '-0.03em',
                   lineHeight: 1.1,
                   color: 'transparent',
@@ -174,6 +179,7 @@ export default function Home() {
         </div>
       </div>
 
+    </div>
     </div>
   );
 }
