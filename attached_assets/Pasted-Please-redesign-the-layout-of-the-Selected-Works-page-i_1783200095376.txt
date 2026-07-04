@@ -1,0 +1,29 @@
+Please redesign the layout of the "Selected Works" page (image 1) to match the layout rules of the updated 4:3 home page (image 2), taking inspiration from classic minimalist Swiss architectural portfolios (images 3, 4, 5).
+
+Apply the following changes:
+
+1. Page Layout & Grid Structure (4:3 aspect ratio constraint):
+   - Wrap the entire page content in the same centered 4:3 layout container used on the home page.
+   - On wide screens, this page must have identical left and right white borders matching the home page.
+   - Below the header line, split the page into a clean two-column layout: Left side for the text list, Right side for the image tile grid.
+
+2. Header & Footer Consistency:
+   - Header: Implement the exact same top header line. The name "Seppe Goossens" must be clickable and link back to the home page. Include the same logo/dropdown menu trigger.
+   - Footer: Keep the bottom border line and the black/white theme switch button in the bottom right. Remove the email, LinkedIn, and CV links entirely from this page's footer.
+
+3. Right-Side Image Grid:
+   - Create a tight, geometric tile structure of project images (you can use 1:1 square or 4:3 aspect ratios for the tiles).
+   - The tiles should fit neatly together with minimal spacing.
+   - Give each tile a thin, clean red border (`border: 1px solid red;` or similar subtle value).
+
+4. Left-Side Text List:
+   - Create a vertical list corresponding to each project.
+   - Project Titles: Medium font weight, clean sans-serif.
+   - Explanatory Subtext: Displayed directly beneath each title using a smaller, lighter font weight.
+   - Dividers: Place a thin black horizontal line between each item in the list to separate them cleanly.
+
+5. Interactive Focus & Blur Hover Effects (Physical Object Feel):
+   - When a user hovers over a text title OR its corresponding image tile, trigger a synchronized focus state for both:
+     - The active tile gets a light, all-around red drop-shadow (`box-shadow`) to lift it up like a physical object.
+     - The active title remains sharp and clear.
+     - The rest of the page—including all non-hovered tiles, other list items, and background text—should visually recede using a subtle Gaussian blur (`filter: blur(4px); transition: filter 0.3s ease;`).

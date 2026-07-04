@@ -41,7 +41,7 @@ export function ThemeToggleInline() {
 export function ThemeToggle() {
   const { isLight, toggle } = useTheme();
   const [location] = useLocation();
-  if (location === '/') return null;
+  if (location === '/' || location === '/projects') return null;
 
   return (
     <button
