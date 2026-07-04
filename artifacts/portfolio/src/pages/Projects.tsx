@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'wouter';
 import { ThemeToggleInline } from '@/components/ThemeToggle';
 
-/* ── Shared primitives (mirror Home.tsx) ── */
+/* ── Shared primitives ── */
 const LogoMark = () => (
   <svg width="28" height="28" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" aria-hidden="true" style={{ flexShrink: 0 }}>
     <line x1="10" y1="1"   x2="10" y2="19" />
@@ -26,13 +26,13 @@ const PROJECTS = [
     id: '001',
     title: 'Transit Network Optimization',
     desc: 'Modelling multimodal transit in a mid-size city using graph theory and GIS.',
-    bg: 'repeating-linear-gradient(45deg, #0d0d0d 0px, #0d0d0d 18px, #111 18px, #111 19px)',
+    bg: 'repeating-linear-gradient(45deg,  #0d0d0d 0px, #0d0d0d 18px, #111 18px, #111 19px)',
   },
   {
     id: '002',
     title: 'Zoning Reform Proposal',
     desc: 'Rezoning study for mixed-use corridors via urban policy and spatial analysis.',
-    bg: 'repeating-linear-gradient(90deg, #0a0a0a 0px, #0a0a0a 28px, #111 28px, #111 29px)',
+    bg: 'repeating-linear-gradient(90deg,  #0a0a0a 0px, #0a0a0a 28px, #111 28px, #111 29px)',
   },
   {
     id: '003',
@@ -44,13 +44,13 @@ const PROJECTS = [
     id: '004',
     title: 'Supply Chain Resilience',
     desc: 'Risk mapping and mitigation for mid-tier manufacturing networks.',
-    bg: 'repeating-linear-gradient(0deg, #090909 0px, #090909 24px, #0f0f0f 24px, #0f0f0f 25px)',
+    bg: 'repeating-linear-gradient(0deg,   #090909 0px, #090909 24px, #0f0f0f 24px, #0f0f0f 25px)',
   },
   {
     id: '005',
     title: 'Ergonomics Audit',
     desc: 'Workstation redesign study using RULA methodology and motion capture data.',
-    bg: 'repeating-linear-gradient(60deg, #0b0b0b 0px, #0b0b0b 18px, #121212 18px, #121212 19px)',
+    bg: 'repeating-linear-gradient(60deg,  #0b0b0b 0px, #0b0b0b 18px, #121212 18px, #121212 19px)',
   },
   {
     id: '006',
@@ -70,13 +70,16 @@ const NAV_LINKS = [
 
 /* ── Page ── */
 export default function Projects() {
+  // hoveredId is set ONLY by text-list hover — never by tile hover
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
+  // dim: applied to both list items and tiles passively
   const dim = (id: string): React.CSSProperties =>
     hoveredId !== null && hoveredId !== id
-      ? { filter: 'blur(3px)', opacity: 0.2, transition: 'filter 0.25s ease, opacity 0.25s ease' }
-      : { filter: 'none',      opacity: 1,   transition: 'filter 0.25s ease, opacity 0.25s ease' };
+      ? { filter: 'blur(3px)', opacity: 0.18, transition: 'filter 0.25s ease, opacity 0.25s ease' }
+      : { filter: 'none',      opacity: 1,    transition: 'filter 0.25s ease, opacity 0.25s ease' };
 
+  // globalBlur: applied to header / lines / footer — only when text item is hovered
   const globalBlur: React.CSSProperties = hoveredId
     ? { filter: 'blur(4px)', transition: 'filter 0.25s ease' }
     : { filter: 'none',      transition: 'filter 0.25s ease' };
@@ -92,12 +95,10 @@ export default function Projects() {
         {/* ── HEADER ── */}
         <div className="flex flex-shrink-0" style={globalBlur}>
           <div className="flex items-center gap-3 px-8 py-4" style={{ width: '40%' }}>
-            {/* Name → home */}
             <Link href="/" style={f(500, '1.75rem', { letterSpacing: '-0.02em', lineHeight: 1, color: 'inherit', textDecoration: 'none' })}>
               Seppe Goossens
             </Link>
 
-            {/* Logo + flyout nav */}
             <div
               className="relative group flex items-center"
               style={{ lineHeight: 0, paddingRight: '320px', marginRight: '-320px' }}
@@ -133,12 +134,24 @@ export default function Projects() {
         />
 
         {/* ── MAIN CONTENT ── */}
-        <div className="flex flex-grow overflow-hidden">
+        {/*
+          Vertical breathing room: paddingTop / paddingBottom push content
+          away from both horizon lines. The tile grid is given a fixed width
+          (~46%) so it sits inset from the right edge, leaving deliberate
+          whitespace at far right.
+        */}
+        <div
+          className="flex flex-grow overflow-hidden"
+          style={{ paddingTop: '2.5rem', paddingBottom: '2.5rem' }}
+        >
 
-          {/* LEFT — project list */}
+          {/* LEFT — project text list
+              paddingRight creates the gap between list/dividers and the tile grid.
+              Dividers stop before the grid because they're constrained by this column width.
+          */}
           <div
             className="flex flex-col flex-shrink-0 overflow-y-auto"
-            style={{ width: '40%', paddingLeft: TEXT_INDENT }}
+            style={{ width: '40%', paddingLeft: TEXT_INDENT, paddingRight: '2.5rem' }}
           >
             {PROJECTS.map((p, i) => (
               <div
@@ -152,31 +165,53 @@ export default function Projects() {
                 onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setHoveredId(p.id); }}
                 style={{
                   ...dim(p.id),
-                  padding: '1.1rem 1rem 1.1rem 0',
+                  // Tight vertical rhythm — compact but breathable
+                  padding: '0.6rem 0',
                   borderBottom: i < PROJECTS.length - 1 ? '1px solid currentColor' : 'none',
                   cursor: 'pointer',
                   outline: 'none',
                 }}
               >
-                <div style={f(500, '0.95rem', { letterSpacing: '-0.01em', lineHeight: 1.3, marginBottom: '0.3rem' })}>
-                  {p.title}
+                {/* Project number + title on one row */}
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.55rem', marginBottom: '0.2rem' }}>
+                  <span style={f(300, '0.62rem', {
+                    opacity: 0.38,
+                    letterSpacing: '0.06em',
+                    flexShrink: 0,
+                    lineHeight: 1,
+                  })}>
+                    {p.id}
+                  </span>
+                  <span style={f(500, '0.9rem', { letterSpacing: '-0.01em', lineHeight: 1.25 })}>
+                    {p.title}
+                  </span>
                 </div>
-                <div style={f(300, '0.78rem', { opacity: 0.5, lineHeight: 1.55, letterSpacing: '0.01em' })}>
+                {/* Description */}
+                <div style={f(300, '0.75rem', {
+                  opacity: 0.45,
+                  lineHeight: 1.5,
+                  letterSpacing: '0.005em',
+                  paddingLeft: '1.35rem', // indent to align under title (past the number)
+                })}>
                   {p.desc}
                 </div>
               </div>
             ))}
           </div>
 
-          {/* RIGHT — image tile grid */}
+          {/* RIGHT — image tile grid
+              Fixed width (~46% of the 4:3 box) leaves deliberate right-side whitespace.
+              No mouse handlers — tiles are display-only; glow/dim responds
+              passively to hoveredId set by the text list.
+          */}
           <div
-            className="flex-grow"
             style={{
+              flexShrink: 0,
+              width: '46%',
               display: 'grid',
               gridTemplateColumns: 'repeat(3, 1fr)',
               gridTemplateRows: 'repeat(2, 1fr)',
               gap: '3px',
-              padding: `0 ${TEXT_INDENT} 0 0`,
             }}
           >
             {PROJECTS.map((p) => {
@@ -184,43 +219,19 @@ export default function Projects() {
               return (
                 <div
                   key={p.id}
-                  role="button"
-                  tabIndex={0}
                   aria-label={p.title}
-                  onMouseEnter={() => setHoveredId(p.id)}
-                  onMouseLeave={() => setHoveredId(null)}
-                  onFocus={() => setHoveredId(p.id)}
-                  onBlur={() => setHoveredId(null)}
-                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setHoveredId(p.id); }}
                   style={{
                     background: p.bg,
                     border: '1px solid #FF0000',
                     boxShadow: isActive
                       ? '0 0 0 1px #FF0000, 0 8px 32px rgba(255,0,0,0.3)'
                       : 'none',
+                    // Tiles dim passively but never trigger blur themselves
                     ...dim(p.id),
-                    cursor: 'pointer',
                     position: 'relative',
                     overflow: 'hidden',
-                    outline: 'none',
                   }}
-                >
-                  <span
-                    style={{
-                      position: 'absolute',
-                      bottom: '7px',
-                      left: '8px',
-                      fontFamily: "'ABC ROM'",
-                      fontSize: '0.55rem',
-                      fontWeight: 300,
-                      color: 'rgba(255,255,255,0.25)',
-                      letterSpacing: '0.06em',
-                      userSelect: 'none',
-                    }}
-                  >
-                    {p.id}
-                  </span>
-                </div>
+                />
               );
             })}
           </div>
