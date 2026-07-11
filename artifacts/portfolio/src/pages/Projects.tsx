@@ -18,78 +18,81 @@ const f = (weight: number, size: string, extra?: React.CSSProperties): React.CSS
   ...extra,
 });
 
-const TEXT_INDENT = '2rem';
-const BASE = import.meta.env.BASE_URL; // e.g. "/portfolio/"
+const INDENT = '2rem';
+const BASE   = import.meta.env.BASE_URL;
 
-/* ── Project data (new order) ──
-   Aspect ratios measured from source files:
-     Portrait  thesisboek / LU_paper:       4157×5906  (ar 0.7039)
-     Portrait  MT-SR / housing_paper:        4961×7016  (ar 0.7071)
-     Landscape pen-network (tile):           4000×3000  (ar 1.3333)
-     Landscape RuimtelijkOntwerp:            9921×7016  (ar 1.4141)
-     Landscape MT-RM_Brochure:               5906×4157  (ar 1.4207)
-     Landscape excursie (Screenshot 16:9):   2560×1440  (ar 1.7778)
+/* ── Project data ──────────────────────────────────────────────────────────
+   ratioN: numeric aspect-ratio (width÷height) used to compute card width.
+   IMAGE HEIGHT is fixed at IMG_H vh; card width = IMG_H × ratioN.
 */
+const IMG_H = 26; // vh — fixed image height for every card
+
 const PROJECTS = [
   {
-    id: '001',
-    title: 'De buurtspoorwegen in Brabant',
-    desc:  'Een historisch-morfologische lezing van het diffuse verstedelijkingsproces.',
-    img:   'thesisboek.png',
-    ratio: '4157 / 5906',   // portrait
+    id:     '001',
+    title:  'De buurtspoorwegen in Brabant',
+    desc:   'Een historisch-morfologische lezing van het diffuse verstedelijkingsproces.',
+    img:    'thesisboek.png',
+    ratio:  '4157 / 5906',
+    ratioN: 4157 / 5906,   // ≈ 0.7039  portrait
   },
   {
-    id: '002',
-    title: 'Positive Energy Network',
-    desc:  'Design Studio – Positive Energy Districts in Intermediate Territories: the Case of Pajottenland.',
-    img:   'pen-network.png',
-    ratio: '4000 / 3000',   // landscape
+    id:     '002',
+    title:  'Positive Energy Network',
+    desc:   'Design Studio – Positive Energy Districts in Intermediate Territories: the Case of Pajottenland.',
+    img:    'pen-network.png',
+    ratio:  '4000 / 3000',
+    ratioN: 4000 / 3000,   // ≈ 1.3333  landscape
   },
   {
-    id: '003',
-    title: 'The Landscape as a Unifying Model?',
-    desc:  'The Fietssnelwegen Network and the Friction Between Landscape Urbanism and Engineering.',
-    img:   'lu-paper.png',
-    ratio: '4157 / 5906',   // portrait
+    id:     '003',
+    title:  'The Landscape as a Unifying Model?',
+    desc:   'The Fietssnelwegen Network and the Friction Between Landscape Urbanism and Engineering.',
+    img:    'lu-paper.png',
+    ratio:  '4157 / 5906',
+    ratioN: 4157 / 5906,
   },
   {
-    id: '004',
-    title: 'Ruimtelijk Ontwerp',
-    desc:  'Masterplan Ossegem Station.',
-    img:   'ruimtelijk-ontwerp.png',
-    ratio: '9921 / 7016',   // landscape
+    id:     '004',
+    title:  'Ruimtelijk Ontwerp',
+    desc:   'Masterplan Ossegem Station.',
+    img:    'ruimtelijk-ontwerp.png',
+    ratio:  '9921 / 7016',
+    ratioN: 9921 / 7016,   // ≈ 1.4141
   },
   {
-    id: '005',
-    title: 'Excursion 2026 MILAN',
-    desc:  'VUB MA STeR* – Video by Nette Sneyers and Seppe Goossens.',
-    img:   'excursie.png',
-    ratio: '2560 / 1440',   // landscape 16:9
+    id:     '005',
+    title:  'Excursion 2026 MILAN',
+    desc:   'VUB MA STeR* – Video by Nette Sneyers and Seppe Goossens.',
+    img:    'excursie.png',
+    ratio:  '2560 / 1440',
+    ratioN: 2560 / 1440,   // ≈ 1.7778  16:9
   },
   {
-    id: '006',
-    title: 'Methoden en Technieken: Ruimtelijke en Morfologische Analyse',
-    desc:  'Mahatma Gandhi – Master Stedenbouw en Ruimtelijke Planning 2024–2025.',
-    img:   'mt-rm.png',
-    ratio: '5906 / 4157',   // landscape
+    id:     '006',
+    title:  'Methoden en Technieken: Ruimtelijke en Morfologische Analyse',
+    desc:   'Mahatma Gandhi – Master Stedenbouw en Ruimtelijke Planning 2024–2025.',
+    img:    'mt-rm.png',
+    ratio:  '5906 / 4157',
+    ratioN: 5906 / 4157,   // ≈ 1.4207
   },
   {
-    id: '007',
-    title: 'Frictie tussen beleid en beleving',
-    desc:  'Over parkeren en het ruimtelijke spanningsveld op de grens tussen Molenbeek en Koekelberg (Sociaal-ruimtelijke analyse).',
-    img:   'mt-sr.png',
-    ratio: '4961 / 7016',   // portrait
+    id:     '007',
+    title:  'Frictie tussen beleid en beleving',
+    desc:   'Over parkeren en het ruimtelijke spanningsveld op de grens tussen Molenbeek en Koekelberg (Sociaal-ruimtelijke analyse).',
+    img:    'mt-sr.png',
+    ratio:  '4961 / 7016',
+    ratioN: 4961 / 7016,   // ≈ 0.7071  portrait
   },
   {
-    id: '008',
-    title: 'Is Homeownership Reaching its Limits?',
-    desc:  'A Historical and Contemporary Review of Path Dependency in Belgium\'s Housing Landscape.',
-    img:   'housing-paper.png',
-    ratio: '4961 / 7016',   // portrait
+    id:     '008',
+    title:  'Is Homeownership Reaching its Limits?',
+    desc:   "A Historical and Contemporary Review of Path Dependency in Belgium's Housing Landscape.",
+    img:    'housing-paper.png',
+    ratio:  '4961 / 7016',
+    ratioN: 4961 / 7016,
   },
 ] as const;
-
-type Project = typeof PROJECTS[number];
 
 const NAV_LINKS = [
   { label: 'Projects',       href: '/projects'  },
@@ -99,85 +102,56 @@ const NAV_LINKS = [
   { label: 'About',          href: '/cv'        },
 ];
 
-/* ── Page ── */
+/* ── Page ─────────────────────────────────────────────────────────────────── */
 export default function Projects() {
-  // Set ONLY from text-list hover — never from tile hover
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
-  /* ─── Blur helpers ───────────────────────────────────────────────────────
-     keepSharpForIds: array of project IDs that stay unblurred.
-     Everything else dims when any item is hovered.
-  */
-  const dimStyle = (keepSharpForIds: string[]): React.CSSProperties =>
-    hoveredId !== null && !keepSharpForIds.includes(hoveredId)
+  /* dimStyle: everything blurs except the hovered card */
+  const dimStyle = (id: string): React.CSSProperties =>
+    hoveredId !== null && hoveredId !== id
       ? { filter: 'blur(3px)', opacity: 0.18, transition: 'filter 0.25s ease, opacity 0.25s ease' }
       : { filter: 'none',      opacity: 1,    transition: 'filter 0.25s ease, opacity 0.25s ease' };
 
-  // Global blur: applied to site header, both horizon lines, footer
+  /* globalBlur: header, lines, footer blur on any hover */
   const globalBlur: React.CSSProperties = hoveredId
     ? { filter: 'blur(4px)', transition: 'filter 0.25s ease' }
     : { filter: 'none',      transition: 'filter 0.25s ease' };
 
-  /* ─── List divider helpers ───────────────────────────────────────────────
-     topBorder:              sharp only when PROJECTS[0] is active
-     divider between [i,i+1]: sharp when either neighbour is active
-     bottomBorder:           sharp only when PROJECTS[n-1] is active
-  */
-  const borderStyle = (keepForIds: string[]) => ({
-    ...dimStyle(keepForIds),
-    height: '1px',
-    background: 'currentColor',
-    flexShrink: 0,
-  });
-
-  /* ─── Tile columns ───────────────────────────────────────────────────────
-     Natural reading order: row-major left→right.
-     Left col: indices 0,2,4,6  (001,003,005,007)
-     Right col: indices 1,3,5,7 (002,004,006,008)
-  */
-  const leftTiles  = PROJECTS.filter((_, i) => i % 2 === 0);
-  const rightTiles = PROJECTS.filter((_, i) => i % 2 === 1);
-
-  const renderTile = (p: Project) => {
-    const isActive = hoveredId === p.id;
-    return (
-      <div
-        key={p.id}
-        aria-label={p.title}
-        style={{
-          aspectRatio: p.ratio,
-          border: '1px solid #FF0000',
-          boxShadow: isActive ? '0 0 0 1px #FF0000, 0 8px 32px rgba(255,0,0,0.3)' : 'none',
-          // Tiles passively dim — no mouse events on them
-          ...dimStyle([p.id]),
-          overflow: 'hidden',
-          flexShrink: 0,
-        }}
-      >
-        <img
-          src={`${BASE}works/${p.img}`}
-          alt={p.title}
-          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-          loading="lazy"
-        />
-      </div>
-    );
-  };
-
   return (
-    <div className="w-screen min-h-screen flex justify-center bg-background">
+    /* Outer centering shell — fixed to viewport */
+    <div style={{
+      width: '100vw',
+      height: '100vh',
+      overflow: 'hidden',
+      display: 'flex',
+      justifyContent: 'center',
+      background: 'var(--background)',
+    }}>
+      {/* 4:3 column */}
       <div
-        className="min-h-screen flex flex-col bg-background text-foreground"
-        style={{ width: '100%', maxWidth: 'calc(100vh * 4 / 3)' }}
+        style={{
+          width: '100%',
+          maxWidth: 'calc(100vh * 4 / 3)',
+          height: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          background: 'var(--background)',
+          color: 'var(--foreground)',
+        }}
         data-testid="projects-root"
       >
 
-        {/* ── HEADER ──────────────────────────────────────────────────────── */}
+        {/* ── HEADER ──────────────────────────────────────────────────── */}
         <div className="flex flex-shrink-0" style={globalBlur}>
-          <div className="flex items-center gap-3 px-8 py-4" style={{ width: '40%' }}>
-            <Link href="/" style={f(500, '1.75rem', { letterSpacing: '-0.02em', lineHeight: 1, color: 'inherit', textDecoration: 'none' })}>
+          <div className="flex items-center gap-3 px-8 py-4">
+            <Link
+              href="/"
+              style={f(500, '1.75rem', { letterSpacing: '-0.02em', lineHeight: 1, color: 'inherit', textDecoration: 'none' })}
+            >
               Seppe Goossens
             </Link>
+
+            {/* Logo flyout */}
             <div
               className="relative group flex items-center"
               style={{ lineHeight: 0, paddingRight: '320px', marginRight: '-320px' }}
@@ -191,131 +165,154 @@ export default function Projects() {
                 style={{ left: '44px', top: '50%', transform: 'translateY(-50%)', whiteSpace: 'nowrap' }}
               >
                 {NAV_LINKS.map(({ label, href }) => (
-                  <Link key={label} href={href} className="text-foreground hover:text-accent transition-colors" style={f(300, '1.15rem', { letterSpacing: '0.01em' })}>
+                  <Link
+                    key={label}
+                    href={href}
+                    className="text-foreground hover:text-accent transition-colors"
+                    style={f(300, '1.15rem', { letterSpacing: '0.01em' })}
+                  >
                     {label}
                   </Link>
                 ))}
               </nav>
             </div>
           </div>
-          <div style={{ width: '60%' }} />
         </div>
 
-        {/* ── UPPER HORIZON LINE ─ blurs on any hover ─────────────────────── */}
+        {/* ── UPPER HORIZON LINE ──────────────────────────────────────── */}
         <div
           className="flex-shrink-0 bg-foreground"
-          style={{ height: '2px', marginLeft: TEXT_INDENT, marginRight: TEXT_INDENT, ...globalBlur }}
+          style={{ height: '2px', marginLeft: INDENT, marginRight: INDENT, ...globalBlur }}
         />
 
-        {/* ── MAIN CONTENT ────────────────────────────────────────────────── */}
-        <div className="flex" style={{ paddingTop: '2.5rem', paddingBottom: '2.5rem', alignItems: 'flex-start' }}>
+        {/* ── PAGE TITLE ──────────────────────────────────────────────── */}
+        <div
+          style={{
+            ...globalBlur,
+            flexShrink: 0,
+            paddingLeft: INDENT,
+            paddingTop: '1.4rem',
+            paddingBottom: '1.2rem',
+          }}
+        >
+          <div style={f(700, 'clamp(3.5rem, 8.5vh, 7rem)', {
+            letterSpacing: '-0.03em',
+            lineHeight: 1,
+            textTransform: 'uppercase',
+          })}>
+            Selected Works
+          </div>
+        </div>
 
-          {/* ── LEFT — project text list (40%) ──────────────────────────── */}
-          <div
-            className="flex-shrink-0 flex flex-col"
-            style={{ width: '40%', paddingLeft: TEXT_INDENT, paddingRight: '2.5rem' }}
-          >
-            {/*
-              FRAMING BORDER ABOVE 001
-              Sharp only when item 001 is active (its top line stays unblurred).
-            */}
-            <div style={borderStyle([PROJECTS[0].id])} />
+        {/* ── HORIZONTAL GALLERY ──────────────────────────────────────── */}
+        {/*
+          Each card has:
+            • fixed width = IMG_H vh × ratioN  (matches the image's natural width at IMG_H height)
+            • flex-col: text block on top, image on bottom
+            • hover on either child activates the card
+        */}
+        <div
+          style={{
+            flex: 1,
+            overflowX: 'auto',
+            overflowY: 'hidden',
+            display: 'flex',
+            alignItems: 'flex-end',
+            paddingLeft: INDENT,
+            paddingRight: INDENT,
+            paddingBottom: 0,
+            gap: 0,
+            /* thin custom scrollbar */
+            scrollbarWidth: 'thin',
+            scrollbarColor: 'currentColor transparent',
+          }}
+        >
+          {PROJECTS.map((p, i) => {
+            const isActive = hoveredId === p.id;
+            const cardW    = `calc(${IMG_H}vh * ${p.ratioN.toFixed(6)})`;
+            const isLast   = i === PROJECTS.length - 1;
 
-            {PROJECTS.map((p, i) => (
-              <div key={p.id}>
-                {/*
-                  ITEM — interactive hover target.
-                  Only the item itself stays sharp; dimStyle([p.id]) handles that.
-                  Padding creates the 4× larger between-item breathing room.
-                  Text is vertically centred by equal top/bottom padding.
-                */}
-                <div
-                  role="button"
-                  tabIndex={0}
-                  onMouseEnter={() => setHoveredId(p.id)}
-                  onMouseLeave={() => setHoveredId(null)}
-                  onFocus={() => setHoveredId(p.id)}
-                  onBlur={() => setHoveredId(null)}
-                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setHoveredId(p.id); }}
-                  style={{
-                    ...dimStyle([p.id]),
-                    paddingTop: '2.4rem',
-                    paddingBottom: '2.4rem',
-                    cursor: 'pointer',
-                    outline: 'none',
-                  }}
-                >
-                  {/* Project number — flush left, dim, tight above title */}
-                  <div style={f(300, '0.58rem', {
-                    opacity: 0.35,
-                    letterSpacing: '0.07em',
+            return (
+              <div
+                key={p.id}
+                onMouseEnter={() => setHoveredId(p.id)}
+                onMouseLeave={() => setHoveredId(null)}
+                style={{
+                  flexShrink: 0,
+                  width: cardW,
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'flex-end',
+                  /* right border divider between cards */
+                  borderRight: isLast ? 'none' : '1px solid currentColor',
+                  paddingRight: isLast ? 0 : '1.2rem',
+                  paddingLeft: i === 0 ? 0 : '1.2rem',
+                  ...dimStyle(p.id),
+                }}
+              >
+                {/* ── Text block ───────────────────────────────────────── */}
+                <div style={{ paddingBottom: '1rem', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+                  {/* Number */}
+                  <div style={f(300, '0.55rem', {
+                    opacity: 0.38,
+                    letterSpacing: '0.08em',
                     lineHeight: 1,
-                    marginBottom: '0.15rem',
+                    marginBottom: '0.45rem',
                   })}>
                     {p.id}
                   </div>
 
-                  {/* Title — flush left, same margin as caption */}
-                  <div style={f(500, '0.9rem', {
+                  {/* Title */}
+                  <div style={f(500, '0.82rem', {
                     letterSpacing: '-0.01em',
-                    lineHeight: 1.2,
-                    marginBottom: '0.12rem',
+                    lineHeight: 1.25,
+                    marginBottom: '0.35rem',
                   })}>
                     {p.title}
                   </div>
 
-                  {/* Caption — flush left (NO indent), same left margin as title */}
-                  <div style={f(300, '0.75rem', {
-                    opacity: 0.45,
+                  {/* Caption */}
+                  <div style={f(300, '0.68rem', {
+                    opacity: 0.42,
                     lineHeight: 1.45,
-                    letterSpacing: '0.005em',
+                    letterSpacing: '0.004em',
                   })}>
                     {p.desc}
                   </div>
                 </div>
 
-                {/*
-                  DIVIDER after each item.
-                  Between items i and i+1: stays sharp if either neighbour is active.
-                  Final item (i = n-1): this is the FRAMING BORDER BELOW 008.
-                */}
-                {i < PROJECTS.length - 1 ? (
-                  <div style={borderStyle([p.id, PROJECTS[i + 1].id])} />
-                ) : (
-                  /* Bottom framing border — sharp only when 008 is active */
-                  <div style={borderStyle([p.id])} />
-                )}
+                {/* ── Image ────────────────────────────────────────────── */}
+                <div
+                  style={{
+                    flexShrink: 0,
+                    width: '100%',
+                    height: `${IMG_H}vh`,
+                    overflow: 'hidden',
+                    outline: isActive ? '1px solid #FF0000' : '1px solid transparent',
+                    boxShadow: isActive ? '0 0 28px rgba(255,0,0,0.25)' : 'none',
+                    transition: 'outline-color 0.25s ease, box-shadow 0.25s ease',
+                  }}
+                >
+                  <img
+                    src={`${BASE}works/${p.img}`}
+                    alt={p.title}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    loading="lazy"
+                  />
+                </div>
               </div>
-            ))}
-          </div>
-
-          {/* ── RIGHT — image tile grid ──────────────────────────────────── */}
-          {/*
-            Two flex-col strips, tiles sized by native aspect-ratio.
-            No mouse handlers — tiles are display-only; glow/dim responds
-            passively to hoveredId set by the text list only.
-          */}
-          <div
-            className="flex-grow"
-            style={{ display: 'flex', gap: '3px', paddingRight: TEXT_INDENT }}
-          >
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '3px' }}>
-              {leftTiles.map(renderTile)}
-            </div>
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '3px' }}>
-              {rightTiles.map(renderTile)}
-            </div>
-          </div>
-
+            );
+          })}
         </div>
 
-        {/* ── LOWER HORIZON LINE ─ blurs on any hover ─────────────────────── */}
+        {/* ── LOWER HORIZON LINE ──────────────────────────────────────── */}
         <div
           className="flex-shrink-0 bg-foreground"
-          style={{ height: '2px', marginLeft: TEXT_INDENT, marginRight: TEXT_INDENT, ...globalBlur }}
+          style={{ height: '2px', marginLeft: INDENT, marginRight: INDENT, ...globalBlur }}
         />
 
-        {/* ── FOOTER ──────────────────────────────────────────────────────── */}
+        {/* ── FOOTER ──────────────────────────────────────────────────── */}
         <div
           className="flex flex-shrink-0 items-center px-8 py-2.5"
           style={globalBlur}
