@@ -19,8 +19,16 @@ const f = (weight: number, size: string, extra?: React.CSSProperties): React.CSS
   ...extra,
 });
 
-const INDENT = '2rem';
+const INDENT = '2.5rem';
 const BASE   = import.meta.env.BASE_URL;
+
+/*
+  IMAGE_W_PCT: image container takes this % of the row width.
+  Text column always starts at IMAGE_W_PCT + gap → uniform left axis.
+  object-fit: cover fills the box regardless of native aspect ratio.
+*/
+const IMAGE_W_PCT = 46; // %
+const IMAGE_H_VH  = 64; // vh  →  ~1–1.5 rows visible at a time
 
 /* ── Project data ─────────────────────────────────────────────────────────── */
 const PROJECTS = [
@@ -29,7 +37,6 @@ const PROJECTS = [
     title: 'De buurtspoorwegen in Brabant',
     desc:  'Een historisch-morfologische lezing van het diffuse verstedelijkingsproces.',
     img:   'thesisboek.png',
-    ratio: '4157 / 5906',
     date:  '2024–2025',
   },
   {
@@ -37,7 +44,6 @@ const PROJECTS = [
     title: 'Positive Energy Network',
     desc:  'Design Studio – Positive Energy Districts in Intermediate Territories: the Case of Pajottenland.',
     img:   'pen-network.png',
-    ratio: '4000 / 3000',
     date:  '2024–2025',
   },
   {
@@ -45,7 +51,6 @@ const PROJECTS = [
     title: 'The Landscape as a Unifying Model?',
     desc:  'The Fietssnelwegen Network and the Friction Between Landscape Urbanism and Engineering.',
     img:   'lu-paper.png',
-    ratio: '4157 / 5906',
     date:  '2023–2024',
   },
   {
@@ -53,7 +58,6 @@ const PROJECTS = [
     title: 'Ruimtelijk Ontwerp',
     desc:  'Masterplan Ossegem Station.',
     img:   'ruimtelijk-ontwerp.png',
-    ratio: '9921 / 7016',
     date:  '2024',
   },
   {
@@ -61,7 +65,6 @@ const PROJECTS = [
     title: 'Excursion 2026 MILAN',
     desc:  'VUB MA STeR* – Video by Nette Sneyers and Seppe Goossens.',
     img:   'excursie.png',
-    ratio: '2560 / 1440',
     date:  '2026',
   },
   {
@@ -69,7 +72,6 @@ const PROJECTS = [
     title: 'Methoden en Technieken: Ruimtelijke en Morfologische Analyse',
     desc:  'Mahatma Gandhi – Master Stedenbouw en Ruimtelijke Planning.',
     img:   'mt-rm.png',
-    ratio: '5906 / 4157',
     date:  '2024–2025',
   },
   {
@@ -77,7 +79,6 @@ const PROJECTS = [
     title: 'Frictie tussen beleid en beleving',
     desc:  'Over parkeren en het ruimtelijke spanningsveld op de grens tussen Molenbeek en Koekelberg.',
     img:   'mt-sr.png',
-    ratio: '4961 / 7016',
     date:  '2024–2025',
   },
   {
@@ -85,7 +86,6 @@ const PROJECTS = [
     title: 'Is Homeownership Reaching its Limits?',
     desc:  "A Historical and Contemporary Review of Path Dependency in Belgium's Housing Landscape.",
     img:   'housing-paper.png',
-    ratio: '4961 / 7016',
     date:  '2024',
   },
 ] as const;
@@ -98,33 +98,18 @@ const NAV_LINKS = [
   { label: 'About',          href: '/cv'        },
 ];
 
-/* ── Fixed image height (px).  Width is driven by aspect-ratio per card. ── */
-const IMG_H = 140; // px
-
 /* ── Page ─────────────────────────────────────────────────────────────────── */
 export default function Projects() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
-  /* dimStyle — called with the row's own id */
   const dimStyle = (id: string): React.CSSProperties =>
     hoveredId !== null && hoveredId !== id
-      ? { filter: 'blur(3px)', opacity: 0.14, transition: 'filter 0.25s ease, opacity 0.25s ease' }
+      ? { filter: 'blur(3px)', opacity: 0.12, transition: 'filter 0.25s ease, opacity 0.25s ease' }
       : { filter: 'none',      opacity: 1,    transition: 'filter 0.25s ease, opacity 0.25s ease' };
 
-  /* globalBlur — header, lines, footer */
   const globalBlur: React.CSSProperties = hoveredId
-    ? { filter: 'blur(4px)', opacity: 0.35, transition: 'filter 0.25s ease, opacity 0.25s ease' }
-    : { filter: 'none',      opacity: 1,    transition: 'filter 0.25s ease, opacity 0.25s ease' };
-
-  /* borderStyle — for divider lines between rows */
-  const borderStyle = (keepForIds: string[]) => ({
-    ...(hoveredId !== null && !keepForIds.includes(hoveredId)
-      ? { filter: 'blur(3px)', opacity: 0.14, transition: 'filter 0.25s ease, opacity 0.25s ease' }
-      : { filter: 'none',      opacity: 1,    transition: 'filter 0.25s ease, opacity 0.25s ease' }),
-    height: '1px',
-    background: 'currentColor',
-    flexShrink: 0 as const,
-  });
+    ? { filter: 'blur(4px)', opacity: 0.3, transition: 'filter 0.25s ease, opacity 0.25s ease' }
+    : { filter: 'none',      opacity: 1,   transition: 'filter 0.25s ease, opacity 0.25s ease' };
 
   return (
     /* Centering shell */
@@ -144,21 +129,24 @@ export default function Projects() {
       >
 
         {/* ── HEADER ──────────────────────────────────────────────────── */}
-        {/*
-          Left: name + logo flyout (same as always).
-          Right: "SELECTED WORKS" in outlined text — mirrors the
-          homepage typographic nav style (transparent fill, stroke outline).
-        */}
         <div
-          className="flex items-center flex-shrink-0"
-          style={{ ...globalBlur, justifyContent: 'space-between', paddingLeft: INDENT, paddingRight: INDENT, paddingTop: '1rem', paddingBottom: '1rem' }}
+          style={{
+            ...globalBlur,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            paddingLeft: INDENT,
+            paddingRight: INDENT,
+            paddingTop: '1rem',
+            paddingBottom: '1rem',
+            flexShrink: 0,
+          }}
         >
-          {/* Name + logo */}
+          {/* Name + logo flyout */}
           <div className="flex items-center gap-3">
             <Link href="/" style={f(500, '1.75rem', { letterSpacing: '-0.02em', lineHeight: 1, color: 'inherit', textDecoration: 'none' })}>
               Seppe Goossens
             </Link>
-
             <div className="relative group flex items-center"
                  style={{ lineHeight: 0, paddingRight: '320px', marginRight: '-320px' }}>
               <div className="hover:text-accent transition-colors" style={{ lineHeight: 0 }}>
@@ -179,10 +167,7 @@ export default function Projects() {
             </div>
           </div>
 
-          {/* "SELECTED WORKS" — outlined, right side of header.
-              Use CSS var for stroke so it works in both light + dark mode.
-              color:transparent + WebkitTextStroke with an explicit var() avoids
-              the currentColor-is-transparent trap. */}
+          {/* "SELECTED WORKS" — outlined, right-aligned */}
           <div style={f(500, 'clamp(1.4rem, 3.2vh, 2.2rem)', {
             letterSpacing: '-0.02em',
             lineHeight: 1,
@@ -202,72 +187,81 @@ export default function Projects() {
 
         {/* ── PROJECT LIST ────────────────────────────────────────────── */}
         {/*
-          One row per project.
-          Left: image (fixed height IMG_H px, width from aspect-ratio).
-          Right: title, description, date.
-          Divider lines between rows get their own dimStyle so the
-          active row's top and bottom lines stay crisp (mirrors previous logic).
+          No divider lines — vertical padding alone separates rows.
+          Image column: fixed % width + fixed vh height → object-fit cover.
+          Text column: always starts at the same x position (uniform axis).
+          Both row halves receive dimStyle so the whole row dims together.
         */}
         <div
-          className="flex flex-col flex-grow"
-          style={{ paddingLeft: INDENT, paddingRight: INDENT }}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            paddingLeft: INDENT,
+            paddingRight: INDENT,
+            paddingBottom: '6vh',
+          }}
         >
-          {/* Framing border above first row */}
-          <div style={borderStyle([PROJECTS[0].id])} />
-
-          {PROJECTS.map((p, i) => (
-            <div key={p.id}>
-              {/* ── Row ────────────────────────────────────────────────── */}
+          {PROJECTS.map((p) => (
+            <div
+              key={p.id}
+              onMouseEnter={() => setHoveredId(p.id)}
+              onMouseLeave={() => setHoveredId(null)}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '3.5rem',
+                paddingTop: '5vh',
+                paddingBottom: '5vh',
+                ...dimStyle(p.id),
+              }}
+            >
+              {/* ── Image ────────────────────────────────────────────── */}
+              {/*
+                Fixed % width + fixed vh height.  object-fit cover crops
+                gracefully.  Box-shadow gives the physical print depth.
+              */}
               <div
-                onMouseEnter={() => setHoveredId(p.id)}
-                onMouseLeave={() => setHoveredId(null)}
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '3rem',
-                  paddingTop: '1.6rem',
-                  paddingBottom: '1.6rem',
-                  cursor: 'default',
-                  ...dimStyle(p.id),
+                  flexShrink: 0,
+                  width: `${IMAGE_W_PCT}%`,
+                  height: `${IMAGE_H_VH}vh`,
+                  overflow: 'hidden',
+                  boxShadow: '0 6px 32px rgba(0,0,0,0.6), 0 1px 6px rgba(0,0,0,0.35)',
                 }}
               >
-                {/* Image — fixed height, width from aspect-ratio */}
-                <div
-                  style={{
-                    flexShrink: 0,
-                    height: `${IMG_H}px`,
-                    aspectRatio: p.ratio,
-                    overflow: 'hidden',
-                  }}
-                >
-                  <img
-                    src={`${BASE}works/${p.img}`}
-                    alt={p.title}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                    loading="lazy"
-                  />
-                </div>
-
-                {/* Text block */}
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={f(500, '1rem', { letterSpacing: '-0.015em', lineHeight: 1.3, marginBottom: '0.3rem' })}>
-                    {p.title}
-                  </div>
-                  <div style={f(300, '0.8rem', { opacity: 0.45, lineHeight: 1.5, letterSpacing: '0.004em', marginBottom: '0.5rem' })}>
-                    {p.desc}
-                  </div>
-                  <div style={f(300, '0.72rem', { opacity: 0.3, letterSpacing: '0.04em', lineHeight: 1 })}>
-                    {p.date}
-                  </div>
-                </div>
+                <img
+                  src={`${BASE}works/${p.img}`}
+                  alt={p.title}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  loading="lazy"
+                />
               </div>
 
-              {/* Divider — sharp for active row and its neighbour */}
-              {i < PROJECTS.length - 1 ? (
-                <div style={borderStyle([p.id, PROJECTS[i + 1].id])} />
-              ) : (
-                <div style={borderStyle([p.id])} />
-              )}
+              {/* ── Text — always starts at the same left axis ───────── */}
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={f(500, 'clamp(1rem, 2vh, 1.5rem)', {
+                  letterSpacing: '-0.02em',
+                  lineHeight: 1.25,
+                  marginBottom: '0.6rem',
+                })}>
+                  {p.title}
+                </div>
+                <div style={f(300, 'clamp(0.75rem, 1.5vh, 1rem)', {
+                  opacity: 0.45,
+                  lineHeight: 1.55,
+                  letterSpacing: '0.004em',
+                  marginBottom: '0.8rem',
+                })}>
+                  {p.desc}
+                </div>
+                <div style={f(300, 'clamp(0.65rem, 1.2vh, 0.85rem)', {
+                  opacity: 0.28,
+                  letterSpacing: '0.06em',
+                  lineHeight: 1,
+                })}>
+                  {p.date}
+                </div>
+              </div>
             </div>
           ))}
         </div>
