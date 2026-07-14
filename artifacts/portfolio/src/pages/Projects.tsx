@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import { Link } from 'wouter';
 import { ThemeToggleInline } from '@/components/ThemeToggle';
+import { BookScene } from '@/components/Book3D';
+import thesisPdfUrl from '@assets/thesisboek_omslag.pdf';
+import thesisFront from '@assets/thesisboek_front.png';
+import thesisBack from '@assets/thesisboek_back.png';
+import thesisSide from '@assets/thesisboek_side.png';
 
 /* ── Shared primitives ── */
 const LogoMark = () => (
@@ -99,8 +104,8 @@ const NAV_LINKS = [
 ];
 
 /* ── Fixed image height (px).  Width is driven by aspect-ratio per card. ── */
-const IMG_H = 140; // px
-
+const DEFAULT_IMG_H = 420; // px for standard images
+const BOOK_IMG_H = 680;    // A larger height specifically for the 3D book
 /* ── Page ─────────────────────────────────────────────────────────────────── */
 export default function Projects() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -115,16 +120,6 @@ export default function Projects() {
   const globalBlur: React.CSSProperties = hoveredId
     ? { filter: 'blur(4px)', opacity: 0.35, transition: 'filter 0.25s ease, opacity 0.25s ease' }
     : { filter: 'none',      opacity: 1,    transition: 'filter 0.25s ease, opacity 0.25s ease' };
-
-  /* borderStyle — for divider lines between rows */
-  const borderStyle = (keepForIds: string[]) => ({
-    ...(hoveredId !== null && !keepForIds.includes(hoveredId)
-      ? { filter: 'blur(3px)', opacity: 0.14, transition: 'filter 0.25s ease, opacity 0.25s ease' }
-      : { filter: 'none',      opacity: 1,    transition: 'filter 0.25s ease, opacity 0.25s ease' }),
-    height: '1px',
-    background: 'currentColor',
-    flexShrink: 0 as const,
-  });
 
   return (
     /* Centering shell */
@@ -213,47 +208,75 @@ export default function Projects() {
           style={{ paddingLeft: INDENT, paddingRight: INDENT }}
         >
           {/* Framing border above first row */}
-          <div style={borderStyle([PROJECTS[0].id])} />
 
           {PROJECTS.map((p, i) => (
             <div key={p.id}>
-              {/* ── Row ────────────────────────────────────────────────── */}
               <div
-                onMouseEnter={() => setHoveredId(p.id)}
-                onMouseLeave={() => setHoveredId(null)}
                 style={{
                   display: 'flex',
+                  flexDirection: 'row',
                   alignItems: 'center',
-                  gap: '3rem',
-                  paddingTop: '1.6rem',
-                  paddingBottom: '1.6rem',
+                  padding: '5rem 0',
+                  justifyContent: 'space-between', // Push image left and text right
                   cursor: 'default',
                   ...dimStyle(p.id),
                 }}
               >
                 {/* Image — fixed height, width from aspect-ratio */}
                 <div
+                  onMouseEnter={() => setHoveredId(p.id)}
+                  onMouseLeave={() => setHoveredId(null)}
                   style={{
-                    flexShrink: 0,
-                    height: `${IMG_H}px`,
-                    aspectRatio: p.ratio,
-                    overflow: 'hidden',
+                    // Give the book a wider container (60%) to prevent clipping during rotation
+                    flex: p.id === 'p001' ? '0 0 60%' : '0 0 50%',
+                    height: p.id === 'p001' ? `${BOOK_IMG_H}px` : `${DEFAULT_IMG_H}px`,
+                    aspectRatio: p.id === 'p001' ? undefined : p.ratio,
                   }}
                 >
-                  <img
-                    src={`${BASE}works/${p.img}`}
-                    alt={p.title}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                    loading="lazy"
-                  />
+                  {p.id === 'p001' ? (
+                    <Link
+                      href={`/projects/${p.id}`}
+                      aria-label="Download thesis PDF"
+                      style={{ display: 'block', width: '100%', height: '100%' }}
+                    >
+                      <div style={{
+                        transform: hoveredId === p.id ? 'scale(1.03)' : 'scale(1)',
+                        transition: 'transform 0.3s ease',
+                        width: '100%',
+                        height: '100%',
+                    }}
+                    >
+                      <BookScene frontImg={thesisFront}
+                                 backImg={thesisBack}
+                                 spineImg={thesisSide} />
+                      </div>
+                    </Link>
+                  ) : (
+                    <img
+                      src={`${BASE}works/${p.img}`}
+                      alt={p.title}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'contain',
+                        display: 'block',
+                        transition: 'filter 0.3s ease, transform 0.3s ease',
+                        transform: hoveredId === p.id ? 'scale(1.03)' : 'scale(1)',
+                        filter: hoveredId === p.id
+                          ? 'drop-shadow(0 20px 25px rgb(0 0 0 / 0.2))'
+                          : 'drop-shadow(0 8px 10px rgb(0 0 0 / 0.1))',
+                      }}
+                      loading="lazy"
+                    />
+                  )}
                 </div>
 
                 {/* Text block */}
-                <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ flexShrink: 0, textAlign: 'right' }}>
                   <div style={f(500, '1rem', { letterSpacing: '-0.015em', lineHeight: 1.3, marginBottom: '0.3rem' })}>
                     {p.title}
                   </div>
-                  <div style={f(300, '0.8rem', { opacity: 0.45, lineHeight: 1.5, letterSpacing: '0.004em', marginBottom: '0.5rem' })}>
+                  <div style={f(300, '0.8rem', { opacity: 0.6, lineHeight: 1.5, letterSpacing: '0.004em', marginBottom: '0.5rem' })}>
                     {p.desc}
                   </div>
                   <div style={f(300, '0.72rem', { opacity: 0.3, letterSpacing: '0.04em', lineHeight: 1 })}>
@@ -261,13 +284,6 @@ export default function Projects() {
                   </div>
                 </div>
               </div>
-
-              {/* Divider — sharp for active row and its neighbour */}
-              {i < PROJECTS.length - 1 ? (
-                <div style={borderStyle([p.id, PROJECTS[i + 1].id])} />
-              ) : (
-                <div style={borderStyle([p.id])} />
-              )}
             </div>
           ))}
         </div>
@@ -287,3 +303,6 @@ export default function Projects() {
     </div>
   );
 }
+
+// Exporting shared constants for the detail page
+export { PROJECTS, NAV_LINKS, f, INDENT };
