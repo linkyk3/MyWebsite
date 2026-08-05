@@ -1,11 +1,11 @@
-import { useRef, Suspense } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import React, { useRef, Suspense } from 'react';
+import { Canvas, useFrame, ThreeElements } from '@react-three/fiber';
 import { useTexture, ContactShadows } from '@react-three/drei';
 import * as THREE from 'three';
 
 const lerp = THREE.MathUtils.lerp;
 
-type BookProps = JSX.IntrinsicElements['group'] & {
+type BookProps = ThreeElements['group'] & {
   frontImg: string;
   backImg: string;
   spineImg: string;

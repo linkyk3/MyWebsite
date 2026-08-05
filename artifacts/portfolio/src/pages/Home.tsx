@@ -66,7 +66,7 @@ export default function Home() {
               style={{ left: '44px', top: '50%', transform: 'translateY(-50%)', whiteSpace: 'nowrap' }}
             >
               {[
-                { label: 'Projects',       href: '/projects'  },
+                { label: 'Selected Works',       href: '/projects'  },
                 { label: 'Music',          href: '/creations' },
                 { label: 'Visualizations', href: '/creations' },
                 { label: 'Blog',           href: '/creations' },
@@ -101,11 +101,8 @@ export default function Home() {
 
           {/* Bio */}
           <div className="px-8 pt-5 pb-4">
-            <p className="text-foreground/65" style={f(350, '1rem', { lineHeight: 1.6, letterSpacing: '0.005em' })}>
-              Student double-majoring in Urban Planning and Industrial
-              Engineering at KU Leuven. Interested in the spatial logic of
-              cities, systemic infrastructure flows, and the overlapping
-              territories between urban design and industrial systems thinking.
+            <p className="text-foreground/80" style={f(400, '1.125rem', { lineHeight: 1.5, letterSpacing: '0.01em' })}>
+              Urban Planner & Industrial Engineer
             </p>
           </div>
 
@@ -159,16 +156,16 @@ export default function Home() {
       {/* FOOTER — email + links + theme toggle */}
       <div className="flex flex-shrink-0 items-center gap-5 px-8 py-2.5" style={{ filter: hovered ? 'blur(4px)' : 'none', transition: 'filter 0.25s ease' }}>
         <a
-          href="mailto:s.goossens@student.kuleuven.be"
+          href="mailto:seppe.goossens123@gmail.com"
           className="text-foreground/70 hover:text-accent transition-colors"
           style={f(350, '1rem', { letterSpacing: '0.01em' })}
           data-testid="contact-email"
         >
-          s.goossens@student.kuleuven.be
+          seppe.goossens123@gmail.com
         </a>
         {[
-          { label: 'LinkedIn', href: 'https://linkedin.com', testId: 'contact-linkedin', internal: false },
-          { label: 'CV',       href: '/cv',                  testId: 'contact-cv',        internal: true  },
+          { label: 'LinkedIn', href: 'https://www.linkedin.com/in/seppe-goossens-75a8671b4/', testId: 'contact-linkedin', internal: false },
+          { label: 'CV',       href: '/cv/cv.pdf',                                  testId: 'contact-cv',        internal: false },
         ].map(({ label, href, testId, internal }) =>
           internal
             ? <Link key={label} href={href} className="text-foreground/50 hover:text-accent transition-colors" style={f(300, '1rem')} data-testid={testId}>{label}</Link>

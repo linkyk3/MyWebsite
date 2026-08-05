@@ -35,23 +35,15 @@ const PROJECTS = [
     desc:  'Een historisch-morfologische lezing van het diffuse verstedelijkingsproces.',
     img:   'thesisboek.png',
     ratio: '4157 / 5906',
-    date:  '2024–2025',
+    date:  '2025–2026',
   },
   {
     id:    'p002',
-    title: 'Positive Energy Network',
-    desc:  'Design Studio – Positive Energy Districts in Intermediate Territories: the Case of Pajottenland.',
+    title: 'Design Studio',
+    desc:  'Positive Energy Districts in Intermediate Territories: the Case of Pajottenland.',
     img:   'pen-network.png',
     ratio: '4000 / 3000',
-    date:  '2024–2025',
-  },
-  {
-    id:    'p003',
-    title: 'The Landscape as a Unifying Model?',
-    desc:  'The Fietssnelwegen Network and the Friction Between Landscape Urbanism and Engineering.',
-    img:   'lu-paper.png',
-    ratio: '4157 / 5906',
-    date:  '2023–2024',
+    date:  '2026',
   },
   {
     id:    'p004',
@@ -59,7 +51,16 @@ const PROJECTS = [
     desc:  'Masterplan Ossegem Station.',
     img:   'ruimtelijk-ontwerp.png',
     ratio: '9921 / 7016',
-    date:  '2024',
+    date:  '2025',
+    pdf:   'works/',
+  },
+  {
+    id:    'p003',
+    title: 'The Landscape as a Unifying Model?',
+    desc:  'The Fietssnelwegen Network and the Friction Between Landscape Urbanism and Engineering.',
+    img:   'lu-paper.png',
+    ratio: '4157 / 5906',
+    date:  '2026',
   },
   {
     id:    'p005',
@@ -68,6 +69,15 @@ const PROJECTS = [
     img:   'excursie.png',
     ratio: '2560 / 1440',
     date:  '2026',
+    externalUrl: 'https://youtu.be/NPc29MOOhgc?si=uw_RoZn2H2unnMWN',
+  },
+  {
+    id:    'p008',
+    title: 'Is Homeownership Reaching its Limits?',
+    desc:  "A Historical and Contemporary Review of Path Dependency in Belgium's Housing Landscape.",
+    img:   'housing-paper.png',
+    ratio: '4961 / 7016',
+    date:  '2025',
   },
   {
     id:    'p006',
@@ -75,7 +85,7 @@ const PROJECTS = [
     desc:  'Mahatma Gandhi – Master Stedenbouw en Ruimtelijke Planning.',
     img:   'mt-rm.png',
     ratio: '5906 / 4157',
-    date:  '2024–2025',
+    date:  '2024',
   },
   {
     id:    'p007',
@@ -85,22 +95,19 @@ const PROJECTS = [
     ratio: '4961 / 7016',
     date:  '2024–2025',
   },
-  {
-    id:    'p008',
-    title: 'Is Homeownership Reaching its Limits?',
-    desc:  "A Historical and Contemporary Review of Path Dependency in Belgium's Housing Landscape.",
-    img:   'housing-paper.png',
-    ratio: '4961 / 7016',
-    date:  '2024',
-  },
 ] as const;
 
 const NAV_LINKS = [
-  { label: 'Projects',       href: '/projects'  },
+  { label: 'Selected Works',       href: '/projects'  },
   { label: 'Music',          href: '/creations' },
   { label: 'Visualizations', href: '/creations' },
   { label: 'Blog',           href: '/creations' },
   { label: 'About',          href: '/cv'        },
+];
+
+const PROJECTS_WITH_DETAIL_PAGE = [
+  'p001', // ThesisDetail
+  'p002', // DesignStudioDetail
 ];
 
 /* ── Fixed image height (px).  Width is driven by aspect-ratio per card. ── */
@@ -233,42 +240,45 @@ export default function Projects() {
                     aspectRatio: p.id === 'p001' ? undefined : p.ratio,
                   }}
                 >
-                  {p.id === 'p001' ? (
-                    <Link
-                      href={`/projects/${p.id}`}
-                      aria-label="Download thesis PDF"
-                      style={{ display: 'block', width: '100%', height: '100%' }}
-                    >
-                      <div style={{
-                        transform: hoveredId === p.id ? 'scale(1.03)' : 'scale(1)',
-                        transition: 'transform 0.3s ease',
-                        width: '100%',
-                        height: '100%',
-                    }}
-                    >
-                      <BookScene frontImg={thesisFront}
-                                 backImg={thesisBack}
-                                 spineImg={thesisSide} />
+                  {(() => {
+                    const hasDetailPage = PROJECTS_WITH_DETAIL_PAGE.includes(p.id);
+                    const pdfPath = 'pdf' in p ? `${BASE}${(p as {pdf: string}).pdf}` : undefined;
+                    const externalUrl = 'externalUrl' in p ? (p as {externalUrl: string}).externalUrl : undefined;
+                    const linkHref = hasDetailPage ? `/projects/${p.id}` : (pdfPath || externalUrl);
+                    const isExternal = !hasDetailPage && !!linkHref;
+
+                    const content = p.id === 'p001' ? (
+                      <div style={{ transform: hoveredId === p.id ? 'scale(1.03)' : 'scale(1)', transition: 'transform 0.3s ease', width: '100%', height: '100%' }}>
+                        <BookScene frontImg={thesisFront} backImg={thesisBack} spineImg={thesisSide} />
                       </div>
-                    </Link>
-                  ) : (
-                    <img
-                      src={`${BASE}works/${p.img}`}
-                      alt={p.title}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'contain',
-                        display: 'block',
-                        transition: 'filter 0.3s ease, transform 0.3s ease',
-                        transform: hoveredId === p.id ? 'scale(1.03)' : 'scale(1)',
-                        filter: hoveredId === p.id
-                          ? 'drop-shadow(0 20px 25px rgb(0 0 0 / 0.2))'
-                          : 'drop-shadow(0 8px 10px rgb(0 0 0 / 0.1))',
-                      }}
-                      loading="lazy"
-                    />
-                  )}
+                    ) : (
+                      <img src={`${BASE}works/${p.img}`} alt={p.title} style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'contain',
+                          display: 'block',
+                          transition: 'filter 0.3s ease, transform 0.3s ease',
+                          transform: hoveredId === p.id ? 'scale(1.03)' : 'scale(1)',
+                          filter: hoveredId === p.id ? 'drop-shadow(0 20px 25px rgb(0 0 0 / 0.2))' : 'drop-shadow(0 8px 10px rgb(0 0 0 / 0.1))',
+                      }} loading="lazy" />
+                    );
+
+                    if (!linkHref) {
+                      return <div style={{ width: '100%', height: '100%' }}>{content}</div>;
+                    }
+
+                    if (isExternal) {
+                      return (
+                        <a href={linkHref} target="_blank" rel="noopener noreferrer" style={{ display: 'block', width: '100%', height: '100%' }}>
+                          {content}
+                        </a>
+                      );
+                    }
+
+                    return (
+                      <Link href={linkHref} style={{ display: 'block', width: '100%', height: '100%' }}>{content}</Link>
+                    );
+                  })()}
                 </div>
 
                 {/* Text block */}
