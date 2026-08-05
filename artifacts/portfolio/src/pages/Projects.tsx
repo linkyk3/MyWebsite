@@ -24,8 +24,16 @@ const f = (weight: number, size: string, extra?: React.CSSProperties): React.CSS
   ...extra,
 });
 
-const INDENT = '2rem';
+const INDENT = '2.5rem';
 const BASE   = import.meta.env.BASE_URL;
+
+/*
+  IMAGE_W_PCT: image container takes this % of the row width.
+  Text column always starts at IMAGE_W_PCT + gap → uniform left axis.
+  object-fit: cover fills the box regardless of native aspect ratio.
+*/
+const IMAGE_W_PCT = 46; // %
+const IMAGE_H_VH  = 64; // vh  →  ~1–1.5 rows visible at a time
 
 /* ── Project data ─────────────────────────────────────────────────────────── */
 const PROJECTS = [
@@ -34,42 +42,34 @@ const PROJECTS = [
     title: 'De buurtspoorwegen in Brabant',
     desc:  'Een historisch-morfologische lezing van het diffuse verstedelijkingsproces.',
     img:   'thesisboek.png',
-    ratio: '4157 / 5906',
-    date:  '2025–2026',
+    date:  '2024–2025',
   },
   {
     id:    'p002',
     title: 'Design Studio',
     desc:  'Positive Energy Districts in Intermediate Territories: the Case of Pajottenland.',
     img:   'pen-network.png',
-    ratio: '4000 / 3000',
-    date:  '2026',
-  },
-  {
-    id:    'p004',
-    title: 'Ruimtelijk Ontwerp',
-    desc:  'Masterplan Ossegem Station.',
-    img:   'ruimtelijk-ontwerp.png',
-    ratio: '9921 / 7016',
-    date:  '2025',
-    pdf:   'cv/cv.pdf',
-    externalUrl: 'https://github.com/linkyk3/MyWebsite/releases/download/untagged-6408ed826c8bfb0cb61d/ruimtelijk-ontwerp.pdf',
+    date:  '2024–2025',
   },
   {
     id:    'p003',
     title: 'The Landscape as a Unifying Model?',
     desc:  'The Fietssnelwegen Network and the Friction Between Landscape Urbanism and Engineering.',
     img:   'lu-paper.png',
-    ratio: '4157 / 5906',
-    date:  '2026',
-    externalUrl: 'https://github.com/linkyk3/MyWebsite/releases/download/untagged-6408ed826c8bfb0cb61d/lu-paper.pdf',
+    date:  '2023–2024',
+  },
+  {
+    id:    'p004',
+    title: 'Ruimtelijk Ontwerp',
+    desc:  'Masterplan Ossegem Station.',
+    img:   'ruimtelijk-ontwerp.png',
+    date:  '2024',
   },
   {
     id:    'p005',
     title: 'Excursion 2026 MILAN',
     desc:  'VUB MA STeR* – Video by Nette Sneyers and Seppe Goossens.',
     img:   'excursie.png',
-    ratio: '2560 / 1440',
     date:  '2026',
     externalUrl: 'https://youtu.be/NPc29MOOhgc?si=uw_RoZn2H2unnMWN',
   },
@@ -96,7 +96,6 @@ const PROJECTS = [
     title: 'Frictie tussen beleid en beleving',
     desc:  'Over parkeren en het ruimtelijke spanningsveld op de grens tussen Molenbeek en Koekelberg.',
     img:   'mt-sr.png',
-    ratio: '4961 / 7016',
     date:  '2024–2025',
     externalUrl: 'https://github.com/linkyk3/MyWebsite/releases/download/untagged-6408ed826c8bfb0cb61d/mt-sr.pdf',
   },
@@ -122,13 +121,11 @@ const BOOK_IMG_H = 680;    // A larger height specifically for the 3D book
 export default function Projects() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
-  /* dimStyle — called with the row's own id */
   const dimStyle = (id: string): React.CSSProperties =>
     hoveredId !== null && hoveredId !== id
-      ? { filter: 'blur(3px)', opacity: 0.14, transition: 'filter 0.25s ease, opacity 0.25s ease' }
+      ? { filter: 'blur(3px)', opacity: 0.12, transition: 'filter 0.25s ease, opacity 0.25s ease' }
       : { filter: 'none',      opacity: 1,    transition: 'filter 0.25s ease, opacity 0.25s ease' };
 
-  /* globalBlur — header, lines, footer */
   const globalBlur: React.CSSProperties = hoveredId
     ? { filter: 'blur(4px)', opacity: 0.35, transition: 'filter 0.25s ease, opacity 0.25s ease' }
     : { filter: 'none',      opacity: 1,    transition: 'filter 0.25s ease, opacity 0.25s ease' };
@@ -151,21 +148,24 @@ export default function Projects() {
       >
 
         {/* ── HEADER ──────────────────────────────────────────────────── */}
-        {/*
-          Left: name + logo flyout (same as always).
-          Right: "SELECTED WORKS" in outlined text — mirrors the
-          homepage typographic nav style (transparent fill, stroke outline).
-        */}
         <div
-          className="flex items-center flex-shrink-0"
-          style={{ ...globalBlur, justifyContent: 'space-between', paddingLeft: INDENT, paddingRight: INDENT, paddingTop: '1rem', paddingBottom: '1rem' }}
+          style={{
+            ...globalBlur,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            paddingLeft: INDENT,
+            paddingRight: INDENT,
+            paddingTop: '1rem',
+            paddingBottom: '1rem',
+            flexShrink: 0,
+          }}
         >
-          {/* Name + logo */}
+          {/* Name + logo flyout */}
           <div className="flex items-center gap-3">
             <Link href="/" style={f(500, '1.75rem', { letterSpacing: '-0.02em', lineHeight: 1, color: 'inherit', textDecoration: 'none' })}>
               Seppe Goossens
             </Link>
-
             <div className="relative group flex items-center"
                  style={{ lineHeight: 0, paddingRight: '320px', marginRight: '-320px' }}>
               <div className="hover:text-accent transition-colors" style={{ lineHeight: 0 }}>
@@ -186,10 +186,7 @@ export default function Projects() {
             </div>
           </div>
 
-          {/* "SELECTED WORKS" — outlined, right side of header.
-              Use CSS var for stroke so it works in both light + dark mode.
-              color:transparent + WebkitTextStroke with an explicit var() avoids
-              the currentColor-is-transparent trap. */}
+          {/* "SELECTED WORKS" — outlined, right-aligned */}
           <div style={f(500, 'clamp(1.4rem, 3.2vh, 2.2rem)', {
             letterSpacing: '-0.02em',
             lineHeight: 1,
@@ -209,15 +206,19 @@ export default function Projects() {
 
         {/* ── PROJECT LIST ────────────────────────────────────────────── */}
         {/*
-          One row per project.
-          Left: image (fixed height IMG_H px, width from aspect-ratio).
-          Right: title, description, date.
-          Divider lines between rows get their own dimStyle so the
-          active row's top and bottom lines stay crisp (mirrors previous logic).
+          No divider lines — vertical padding alone separates rows.
+          Image column: fixed % width + fixed vh height → object-fit cover.
+          Text column: always starts at the same x position (uniform axis).
+          Both row halves receive dimStyle so the whole row dims together.
         */}
         <div
-          className="flex flex-col flex-grow"
-          style={{ paddingLeft: INDENT, paddingRight: INDENT }}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            paddingLeft: INDENT,
+            paddingRight: INDENT,
+            paddingBottom: '6vh',
+          }}
         >
           {/* Framing border above first row */}
 
