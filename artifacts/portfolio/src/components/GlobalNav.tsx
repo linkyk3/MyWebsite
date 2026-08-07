@@ -31,18 +31,6 @@ export function GlobalNav() {
         onMouseLeave={() => setIsHovered(false)}
         data-testid="nav-container"
       >
-        {/* Geometric Logo */}
-        <Link href="/" aria-label="Home" data-testid="logo-home" className="relative z-10 w-8 h-8 cursor-pointer flex items-center justify-center bg-foreground text-background shrink-0 transition-colors hover:bg-destructive">
-          <div className="flex items-center justify-center select-none">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <rect x="1" y="1" width="5" height="5" />
-              <rect x="8" y="1" width="5" height="5" />
-              <rect x="1" y="8" width="5" height="5" />
-              <rect x="8" y="8" width="5" height="5" />
-            </svg>
-          </div>
-        </Link>
-
         {/* Expanding Links */}
         <div 
           className="overflow-hidden transition-[max-width] duration-200 ease-linear flex items-center h-8"

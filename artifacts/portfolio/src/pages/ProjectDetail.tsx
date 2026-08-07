@@ -65,16 +65,16 @@ export default function ProjectDetail() {
       >
         {/* Header */}
         <div
-          className="flex items-center flex-shrink-0"
-          style={{ justifyContent: 'space-between', paddingLeft: INDENT, paddingRight: INDENT, paddingTop: '1rem', paddingBottom: '1rem' }}
+          className="mobile-project-detail-header flex items-center flex-shrink-0 flex-col gap-3 px-5 py-4 md:flex-row md:justify-between md:px-8 md:py-4"
+          style={{ paddingLeft: INDENT, paddingRight: INDENT, paddingTop: '1rem', paddingBottom: '1rem' }}
         >
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col items-start gap-3 md:flex-row md:items-center">
             <Link href="/" style={f(500, '1.75rem', { letterSpacing: '-0.02em', lineHeight: 1, color: 'inherit', textDecoration: 'none' })}>
               Seppe Goossens
             </Link>
-            <div className="relative group flex items-center" style={{ lineHeight: 0, paddingRight: '320px', marginRight: '-320px' }}>
+            <div className="mobile-project-detail-nav-group relative group flex flex-col items-start md:flex-row md:items-center" style={{ lineHeight: 0, paddingRight: 0, marginRight: 0 }}>
               <div className="hover:text-accent transition-colors" style={{ lineHeight: 0 }}><LogoMark /></div>
-              <nav aria-label="Primary navigation" className="absolute flex items-center gap-4 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-150" style={{ left: '44px', top: '50%', transform: 'translateY(-50%)', whiteSpace: 'nowrap' }}>
+              <nav aria-label="Primary navigation" className="mobile-project-detail-nav absolute flex items-center gap-4 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-150 md:opacity-0 md:pointer-events-none" style={{ left: '44px', top: '50%', transform: 'translateY(-50%)', whiteSpace: 'nowrap' }}>
                 {NAV_LINKS.map(({ label, href }) => (
                   <Link key={label} href={href} className="text-foreground hover:text-accent transition-colors" style={f(300, '1.15rem', { letterSpacing: '0.01em' })}>{label}</Link>
                 ))}
@@ -90,7 +90,7 @@ export default function ProjectDetail() {
         <div className="flex-shrink-0 bg-foreground" style={{ height: '2px', marginLeft: INDENT, marginRight: INDENT }} />
 
         {/* Main Content */}
-        <main className="flex-grow flex flex-col" style={{ marginLeft: INDENT, marginRight: INDENT, marginTop: '2rem', marginBottom: '2rem' }}>
+        <main className="mobile-project-detail-main flex-grow flex flex-col" style={{ marginLeft: INDENT, marginRight: INDENT, marginTop: '2rem', marginBottom: '2rem' }}>
           <Suspense fallback={<div className="p-8">Loading project...</div>}>
             {ProjectComponent ? <ProjectComponent /> :
              pdfPath ? <PdfDetail pdfPath={pdfPath} downloadPath={pdfPath} /> : <NotFound />}
@@ -101,7 +101,7 @@ export default function ProjectDetail() {
         <div className="flex-shrink-0 bg-foreground" style={{ height: '2px', marginLeft: INDENT, marginRight: INDENT }} />
 
         {/* Footer */}
-        <div className="flex flex-shrink-0 items-center px-8 py-2.5">
+        <div className="mobile-project-detail-footer flex flex-shrink-0 items-center px-5 py-2.5 md:px-8">
           <div style={{ marginLeft: 'auto', marginRight: '0.5rem' }}>
             <ThemeToggleInline />
           </div>

@@ -157,23 +157,23 @@ export default function Projects() {
           homepage typographic nav style (transparent fill, stroke outline).
         */}
         <div
-          className="flex items-center flex-shrink-0"
-          style={{ ...globalBlur, justifyContent: 'space-between', paddingLeft: INDENT, paddingRight: INDENT, paddingTop: '1rem', paddingBottom: '1rem' }}
+          className="mobile-projects-header flex items-center flex-shrink-0 flex-col gap-3 px-5 py-4 md:flex-row md:justify-between md:px-8 md:py-4"
+          style={{ ...globalBlur, paddingLeft: INDENT, paddingRight: INDENT, paddingTop: '1rem', paddingBottom: '1rem' }}
         >
           {/* Name + logo */}
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col items-start gap-3 md:flex-row md:items-center">
             <Link href="/" style={f(500, '1.75rem', { letterSpacing: '-0.02em', lineHeight: 1, color: 'inherit', textDecoration: 'none' })}>
               Seppe Goossens
             </Link>
 
-            <div className="relative group flex items-center"
-                 style={{ lineHeight: 0, paddingRight: '320px', marginRight: '-320px' }}>
+            <div className="mobile-projects-nav-group relative group flex flex-col items-start md:flex-row md:items-center"
+                 style={{ lineHeight: 0, paddingRight: 0, marginRight: 0 }}>
               <div className="hover:text-accent transition-colors" style={{ lineHeight: 0 }}>
                 <LogoMark />
               </div>
               <nav
                 aria-label="Primary navigation"
-                className="absolute flex items-center gap-4 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-150"
+                className="mobile-projects-nav absolute flex items-center gap-4 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-150 md:opacity-0 md:pointer-events-none"
                 style={{ left: '44px', top: '50%', transform: 'translateY(-50%)', whiteSpace: 'nowrap' }}
               >
                 {NAV_LINKS.map(({ label, href }) => (
@@ -190,7 +190,7 @@ export default function Projects() {
               Use CSS var for stroke so it works in both light + dark mode.
               color:transparent + WebkitTextStroke with an explicit var() avoids
               the currentColor-is-transparent trap. */}
-          <div style={f(500, 'clamp(1.4rem, 3.2vh, 2.2rem)', {
+          <div className="mobile-projects-title" style={f(500, 'clamp(1.4rem, 3.2vh, 2.2rem)', {
             letterSpacing: '-0.02em',
             lineHeight: 1,
             color: 'transparent',
@@ -216,7 +216,7 @@ export default function Projects() {
           active row's top and bottom lines stay crisp (mirrors previous logic).
         */}
         <div
-          className="flex flex-col flex-grow"
+          className="mobile-projects-list flex flex-col flex-grow"
           style={{ paddingLeft: INDENT, paddingRight: INDENT }}
         >
           {/* Framing border above first row */}
@@ -224,6 +224,7 @@ export default function Projects() {
           {PROJECTS.map((p, i) => (
             <div key={p.id}>
               <div
+                className="mobile-project-row"
                 style={{
                   display: 'flex',
                   flexDirection: 'row',
@@ -236,6 +237,7 @@ export default function Projects() {
               >
                 {/* Image — fixed height, width from aspect-ratio */}
                 <div
+                  className="mobile-project-media"
                   onMouseEnter={() => setHoveredId(p.id)}
                   onMouseLeave={() => setHoveredId(null)}
                   style={{
@@ -287,7 +289,7 @@ export default function Projects() {
                 </div>
 
                 {/* Text block */}
-                <div style={{ flexShrink: 0, textAlign: 'right' }}>
+                <div className="mobile-project-text" style={{ flexShrink: 0, textAlign: 'right' }}>
                   <div style={f(500, '1rem', { letterSpacing: '-0.015em', lineHeight: 1.3, marginBottom: '0.3rem' })}>
                     {p.title}
                   </div>
@@ -308,7 +310,7 @@ export default function Projects() {
              style={{ height: '2px', marginLeft: INDENT, marginRight: INDENT, ...globalBlur }} />
 
         {/* ── FOOTER ──────────────────────────────────────────────────── */}
-        <div className="flex flex-shrink-0 items-center px-8 py-2.5" style={globalBlur}>
+        <div className="mobile-projects-footer flex flex-shrink-0 items-center px-5 py-2.5 md:px-8" style={globalBlur}>
           <div style={{ marginLeft: 'auto', marginRight: '0.5rem' }}>
             <ThemeToggleInline />
           </div>
