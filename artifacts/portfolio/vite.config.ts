@@ -8,10 +8,9 @@ import runtimeErrorOverlay from '@replit/vite-plugin-runtime-error-modal';
 // Use environment variables if available (for Replit), otherwise use local defaults.
 const port = Number(process.env.PORT || '5173');
 // const basePath = process.env.BASE_PATH || '/';
-const basePath = '/';
 
 export default defineConfig({
-  base: basePath,
+  base: '/',
   plugins: [
     react(),
     tailwindcss(),
@@ -44,9 +43,10 @@ export default defineConfig({
   },
   root: path.resolve(import.meta.dirname),
   build: {
-    outDir: path.resolve(import.meta.dirname, 'dist/public'),
-    emptyOutDir: true,
-  },
+	// Change 'dist/public' to 'dist'
+	outDir: path.resolve(import.meta.dirname, 'dist'),
+	emptyOutDir: true,
+	},
   server: {
     port,
     strictPort: true,
