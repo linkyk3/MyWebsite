@@ -7,7 +7,8 @@ import runtimeErrorOverlay from '@replit/vite-plugin-runtime-error-modal';
 
 // Use environment variables if available (for Replit), otherwise use local defaults.
 const port = Number(process.env.PORT || '5173');
-const basePath = process.env.BASE_PATH || '/';
+// const basePath = process.env.BASE_PATH || '/';
+const basePath = '/';
 
 export default defineConfig({
   base: basePath,
