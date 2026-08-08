@@ -22,10 +22,10 @@ const f = (weight: number, size: string, extra?: React.CSSProperties): React.CSS
 const TEXT_INDENT = '2rem';
 
 const NAV_ITEMS = [
-  { label: 'Selected Works', href: '/projects'  },
-  { label: 'Music',          href: '/creations' },
-  { label: 'Visualizations', href: '/creations' },
-  { label: 'Blog',           href: '/creations' },
+  { label: 'Selected Works', href: '/projects' },
+  { label: 'Music', href: '/music' },
+  { label: 'Visualizations', href: '/visualizations' },
+  { label: 'Blog', href: '/blog' },
 ] as const;
 
 export default function Home() {
@@ -67,9 +67,9 @@ export default function Home() {
             >
               {[
                 { label: 'Selected Works',       href: '/projects'  },
-                { label: 'Music',          href: '/creations' },
-                { label: 'Visualizations', href: '/creations' },
-                { label: 'Blog',           href: '/creations' },
+                { label: 'Music', href: '/music' },
+                { label: 'Visualizations', href: '/visualizations' },
+                { label: 'Blog', href: '/blog' },
                 { label: 'About',          href: '/cv'        },
               ].map(({ label, href }) => (
                 <Link

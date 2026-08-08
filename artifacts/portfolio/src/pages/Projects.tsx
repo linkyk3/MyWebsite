@@ -52,8 +52,7 @@ const PROJECTS = [
     img:   'ruimtelijk-ontwerp.png',
     ratio: '9921 / 7016',
     date:  '2025',
-    pdf:   'cv/cv.pdf',
-    externalUrl: 'https://github.com/linkyk3/MyWebsite/releases/download/untagged-6408ed826c8bfb0cb61d/ruimtelijk-ontwerp.pdf',
+    externalUrl: 'https://github.com/linkyk3/MyWebsite/releases/download/alpha/ruimtelijk-ontwerp.pdf',
   },
   {
     id:    'p003',
@@ -62,7 +61,7 @@ const PROJECTS = [
     img:   'lu-paper.png',
     ratio: '4157 / 5906',
     date:  '2026',
-    externalUrl: 'https://github.com/linkyk3/MyWebsite/releases/download/untagged-6408ed826c8bfb0cb61d/lu-paper.pdf',
+    externalUrl: 'https://github.com/linkyk3/MyWebsite/releases/download/alpha/lu-paper.pdf',
   },
   {
     id:    'p005',
@@ -80,7 +79,7 @@ const PROJECTS = [
     img:   'housing-paper.png',
     ratio: '4961 / 7016',
     date:  '2025',
-    externalUrl: 'https://github.com/linkyk3/MyWebsite/releases/download/untagged-6408ed826c8bfb0cb61d/housing-paper.pdf',
+    externalUrl: 'https://github.com/linkyk3/MyWebsite/releases/download/alpha/housing-paper.pdf',
   },
   {
     id:    'p006',
@@ -89,7 +88,7 @@ const PROJECTS = [
     img:   'mt-rm.png',
     ratio: '5906 / 4157',
     date:  '2024',
-    externalUrl: 'https://github.com/linkyk3/MyWebsite/releases/download/untagged-6408ed826c8bfb0cb61d/mt-rm.pdf',
+    externalUrl: 'https://github.com/linkyk3/MyWebsite/releases/download/alpha/mt-rm.pdf',
   },
   {
     id:    'p007',
@@ -98,16 +97,16 @@ const PROJECTS = [
     img:   'mt-sr.png',
     ratio: '4961 / 7016',
     date:  '2024–2025',
-    externalUrl: 'https://github.com/linkyk3/MyWebsite/releases/download/untagged-6408ed826c8bfb0cb61d/mt-sr.pdf',
+    externalUrl: 'https://github.com/linkyk3/MyWebsite/releases/download/alpha/mt-sr.pdf',
   },
 ] as const;
 
 const NAV_LINKS = [
-  { label: 'Selected Works',       href: '/projects'  },
-  { label: 'Music',          href: '/creations' },
-  { label: 'Visualizations', href: '/creations' },
-  { label: 'Blog',           href: '/creations' },
-  { label: 'About',          href: '/cv'        },
+  { label: 'Selected Works', href: '/projects' },
+  { label: 'Music', href: '/music' },
+  { label: 'Visualizations', href: '/visualizations' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'About', href: '/cv' },
 ];
 
 const PROJECTS_WITH_DETAIL_PAGE = [

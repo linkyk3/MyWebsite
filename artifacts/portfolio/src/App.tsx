@@ -9,6 +9,7 @@ import CV from '@/pages/CV';
 import Projects from '@/pages/Projects';
 import ProjectDetail from '@/pages/ProjectDetail';
 import Creations from '@/pages/Creations';
+import WorkInProgress from '@/pages/WorkInProgress';
 import { GlobalNav } from '@/components/GlobalNav';
 import { ThemeToggle } from '@/components/ThemeToggle';
 // ThemeToggleInline is rendered inside Home.tsx footer; ThemeToggle handles all other pages
@@ -23,6 +24,9 @@ function Router() {
       <Route path="/projects" component={Projects} />
       <Route path="/projects/:id" component={ProjectDetail} />
       <Route path="/creations" component={Creations} />
+      <Route path="/music" component={() => <WorkInProgress title="Music" />} />
+      <Route path="/visualizations" component={() => <WorkInProgress title="Visualizations" />} />
+      <Route path="/blog" component={() => <WorkInProgress title="Blog" />} />
       <Route component={NotFound} />
     </Switch>
   );

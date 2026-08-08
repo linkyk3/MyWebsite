@@ -49,7 +49,9 @@ export default function ProjectDetail() {
   }
 
   const ProjectComponent = params?.id ? projectComponentMap[params.id] : null;
-  const pdfPath = 'pdf' in project ? project.pdf : undefined;
+  const pdfPath = typeof project !== 'undefined' && 'pdf' in project && typeof project.pdf === 'string'
+    ? project.pdf
+    : '';
   return (
     <div style={{ width: '100vw', display: 'flex', justifyContent: 'center', background: 'var(--background)' }}>
       <div
