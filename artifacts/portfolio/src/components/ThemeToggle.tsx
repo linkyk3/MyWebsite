@@ -3,7 +3,10 @@ import { useLocation } from 'wouter';
 
 // Shared hook so both inline + fixed instances share localStorage state
 function useTheme() {
-  const [isLight, setIsLight] = useState(() => localStorage.getItem('theme') === 'light');
+  const [isLight, setIsLight] = useState(() => {
+    const storedTheme = localStorage.getItem('theme');
+    return storedTheme === 'dark' ? false : true;
+  });
   useEffect(() => {
     document.documentElement.classList.toggle('light', isLight);
     localStorage.setItem('theme', isLight ? 'light' : 'dark');

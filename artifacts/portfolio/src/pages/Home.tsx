@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'wouter';
 import { ThemeToggleInline } from '@/components/ThemeToggle';
 
@@ -30,6 +30,27 @@ const NAV_ITEMS = [
 
 export default function Home() {
   const [hovered, setHovered] = useState<string | null>(null);
+  const [topNavHovered, setTopNavHovered] = useState(false);
+  const hideNavTimeout = useRef<number | null>(null);
+
+  const showTopNav = () => {
+    if (hideNavTimeout.current !== null) {
+      window.clearTimeout(hideNavTimeout.current);
+      hideNavTimeout.current = null;
+    }
+    setTopNavHovered(true);
+  };
+
+  const hideTopNav = () => {
+    if (hideNavTimeout.current !== null) {
+      window.clearTimeout(hideNavTimeout.current);
+    }
+    hideNavTimeout.current = window.setTimeout(() => {
+      setTopNavHovered(false);
+      hideNavTimeout.current = null;
+    }, 150);
+  };
+
   return (
     <div className="w-screen h-screen flex justify-center bg-background overflow-hidden">
     <div
@@ -50,20 +71,21 @@ export default function Home() {
 
           {/* Logo + nav — group has extended right hit-area so mouse can slide into links */}
           <div
-            className="relative group flex items-center"
-            style={{ lineHeight: 0, paddingRight: '320px', marginRight: '-320px' }}
+            className="relative flex items-center"
+            style={{ lineHeight: 0, paddingRight: '42rem', marginRight: '-42rem' }}
+            onMouseEnter={showTopNav}
+            onMouseLeave={hideTopNav}
           >
-            <div className="hover:text-accent transition-colors" style={{ lineHeight: 0 }}>
+            <div className="hover:text-accent transition-colors" style={{ lineHeight: 0, paddingRight: '0.75rem' }}>
               <LogoMark />
             </div>
 
             <nav
               aria-label="Primary navigation"
-              className="absolute flex items-center gap-4
-                         opacity-0 pointer-events-none
-                         group-hover:opacity-100 group-hover:pointer-events-auto
-                         transition-opacity duration-150"
-              style={{ left: '44px', top: '50%', transform: 'translateY(-50%)', whiteSpace: 'nowrap' }}
+              className="absolute flex items-center gap-4 opacity-0 pointer-events-none transition-opacity duration-150"
+              style={{ left: '44px', top: '50%', transform: 'translateY(-50%)', whiteSpace: 'nowrap', opacity: topNavHovered ? 1 : 0, pointerEvents: topNavHovered ? 'auto' : 'none', paddingRight: '6rem' }}
+              onMouseEnter={showTopNav}
+              onMouseLeave={hideTopNav}
             >
               {[
                 { label: 'Selected Works',       href: '/projects'  },
